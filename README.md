@@ -48,7 +48,7 @@ If you use Conda, run `conda deactivate` before ROS2 build/launch.
 cd ~/comp0250_S26_labs
 source /opt/ros/humble/setup.bash
 export PATH=/usr/bin:$PATH
-colcon build --cmake-clean-cache
+colcon build --mixin release
 source install/setup.bash
 ```
 
