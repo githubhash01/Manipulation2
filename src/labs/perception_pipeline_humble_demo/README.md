@@ -19,11 +19,11 @@ Install and initialize Git LFS:
    sudo apt-get install -y git-lfs
    git lfs install
 
-If you still need to clone the benchmark resource repository:
+If you still need to clone the benchmark resource repository somewhere
+(not needed on the CS servers, it is part of /cs/student/msc/rai/comp0250/ws_moveit2) :
 
 .. code-block:: bash
 
-   cd /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/src
    gh repo clone moveit/moveit_benchmark_resources
 
 Before each procedure:
@@ -68,9 +68,7 @@ Getting Started first is recommended for background context.
 
 Workspace paths used in this adaptation:
 
-* Project root: ``/home/ziwen/ros2_humble_perception_pipeline``
-* ROS 2 workspace: ``/home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws``
-* Demo package: ``ros2_pp_ws/src/perception_pipeline_humble_demo``
+* Demo package: ``comp0250_s26_labs/src/labs/perception_pipeline_humble_demo``
 
 Connecting to the Storage Backend
 ---------------------------------
@@ -85,7 +83,15 @@ Verify the bag is readable:
    conda deactivate || true
    source /opt/ros/humble/setup.bash
    ros2 bag info \
-     /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/src/moveit_benchmark_resources/moveit_benchmark_resources/bag_files/depth_camera_bag/depth_camera_datas.mcap
+     ..path..to../moveit_benchmark_resources/moveit_benchmark_resources/bag_files/depth_camera_bag/depth_camera_datas.mcap
+
+On the CS servers:
+
+.. code-block:: bash
+
+   ros2 bag info \
+      /cs/student/msc/rai/comp0250/ws_moveit2/src/moveit_benchmark_resources/moveit_benchmark_resources/bag_files/depth_camera_bag/depth_camera_datas.mcap
+
 
 How to Create 3D Pointcloud Data for Octomap Creation (Optional)
 -----------------------------------------------------------------
@@ -97,7 +103,8 @@ Shell 1:
 
    conda deactivate || true
    source /opt/ros/humble/setup.bash
-   source /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/install/setup.bash
+   cd comp0250_s26_labs
+   source install/setup.bash
    ros2 launch perception_pipeline_humble_demo depth_camera_environment.launch.py
 
 Shell 2:
@@ -118,7 +125,7 @@ To visualize camera point clouds during recording:
 
 .. code-block:: bash
 
-   rviz2 -d /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/src/perception_pipeline_humble_demo/rviz2/depth_camera_environment.rviz
+   rviz2 -d src/labs/perception_pipeline_humble_demo/rviz2/depth_camera_environment.rviz
 
 Configuration
 -------------
@@ -281,7 +288,8 @@ Shell 1 (MoveIt perception demo):
 
    conda deactivate || true
    source /opt/ros/humble/setup.bash
-   source /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/install/setup.bash
+   cd comp0250_s26_labs
+   source install/setup.bash
    ros2 launch perception_pipeline_humble_demo perception_pipeline_demo.launch.py \
      use_retimed_pointclouds:=true
 
@@ -293,7 +301,7 @@ Shell 2 (play benchmark bag):
    source /opt/ros/humble/setup.bash
    source /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/install/setup.bash
    ros2 bag play -r 1 \
-     /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/src/moveit_benchmark_resources/moveit_benchmark_resources/bag_files/depth_camera_bag/depth_camera_datas.mcap \
+     ..path..to../moveit_benchmark_resources/moveit_benchmark_resources/bag_files/depth_camera_bag/depth_camera_datas.mcap \
      --loop
 
 Headless option:
@@ -302,44 +310,6 @@ Headless option:
 
    ros2 launch perception_pipeline_humble_demo perception_pipeline_demo.launch.py use_rviz:=false
 
-Raw timestamp mode (fallback):
-
-.. code-block:: bash
-
-   ros2 launch perception_pipeline_humble_demo perception_pipeline_demo.launch.py \
-     use_retimed_pointclouds:=false
-
-Intermediate Launch Setups
---------------------------
-These are useful for isolated checks:
-
-* Camera simulation only:
-
-  .. code-block:: bash
-
-     conda deactivate || true
-     source /opt/ros/humble/setup.bash
-     source /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/install/setup.bash
-     ros2 launch perception_pipeline_humble_demo depth_camera_environment.launch.py
-
-* MoveIt stack only (no RViz):
-
-  .. code-block:: bash
-
-     conda deactivate || true
-     source /opt/ros/humble/setup.bash
-     source /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/install/setup.bash
-     ros2 launch perception_pipeline_humble_demo perception_pipeline_demo.launch.py use_rviz:=false
-
-* Bag playback only:
-
-  .. code-block:: bash
-
-     conda deactivate || true
-     source /opt/ros/humble/setup.bash
-     ros2 bag play -r 1 \
-       /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/src/moveit_benchmark_resources/moveit_benchmark_resources/bag_files/depth_camera_bag/depth_camera_datas.mcap \
-       --loop
 
 RViz Display Controls
 ---------------------
@@ -396,152 +366,3 @@ Run B (raw fallback):
 These results confirm that retimed mode is the stable default for the short
 benchmark bag under looped playback.
 
-Legacy Parity Track (ROS1/Galactic/Humble, Non-Main)
------------------------------------------------------
-This section is intentionally separated from the rolling-style flow above. It
-tracks ROS1/Humble parity for obstacle avoidance and cylinder collision object
-insertion.
-
-Reference tutorials:
-
-* ROS 1 tutorial page:
-  https://moveit.github.io/moveit_tutorials/doc/perception_pipeline/perception_pipeline_tutorial.html
-* ROS 1 tutorial source:
-  https://github.com/moveit/moveit_tutorials/tree/master/doc/perception_pipeline
-* ROS 2 Humble tutorial page:
-  https://moveit.picknik.ai/humble/doc/examples/perception_pipeline/perception_pipeline_tutorial.html
-* ROS 2 Humble tutorial source:
-  https://github.com/moveit/moveit2_tutorials/tree/humble/doc/examples/perception_pipeline
-
-Obstacle Avoidance
-^^^^^^^^^^^^^^^^^^
-Running the Interface
-"""""""""""""""""""""
-
-.. code-block:: bash
-
-   conda deactivate || true
-   source /opt/ros/humble/setup.bash
-   source /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/install/setup.bash
-   ros2 launch perception_pipeline_legacy_humble obstacle_avoidance_demo.launch.py
-
-Detecting and Adding Object as Collision Object
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Running the Code
-""""""""""""""""
-
-.. code-block:: bash
-
-   conda deactivate || true
-   source /opt/ros/humble/setup.bash
-   source /home/ziwen/ros2_humble_perception_pipeline/ros2_pp_ws/install/setup.bash
-   ros2 launch perception_pipeline_legacy_humble detect_and_add_cylinder_collision_object_demo.launch.py
-
-Expected success log line:
-
-.. code-block:: text
-
-   Added cylinder collision object id=cylinder ...
-
-Relevant Code
-"""""""""""""
-Perception Related
-~~~~~~~~~~~~~~~~~~
-Legacy cylinder detection in
-``ros2_pp_ws/src/perception_pipeline_legacy_humble/src/cylinder_segment.cpp``
-performs these stages:
-
-* pass-through filter on ``z`` (default ``0.3`` to ``1.1`` meters)
-* normal estimation (k-nearest neighbors)
-* dominant plane removal with RANSAC
-* cylinder extraction with ``SACSegmentationFromNormals``
-
-Storing Relevant Cylinder Values
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-``AddCylinderParams`` stores:
-
-* radius
-* axis direction vector
-* center point
-* computed height
-
-After one valid detection, ``points_not_found_`` is set to ``false`` so the
-node does not repeatedly re-add objects.
-
-Extracting Location and Height
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-``extractLocationHeight()`` computes two extreme points from the segmented
-cylinder cloud (using angle in the YZ plane), then:
-
-* center = midpoint of those extremes
-* height = Euclidean distance between those extremes
-
-Adding Cylinder to Planning Scene
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-``addCylinder()`` converts detected parameters into a
-``moveit_msgs::msg::CollisionObject``:
-
-* primitive type ``CYLINDER``
-* height/radius from extracted parameters
-* orientation from ``Eigen::Quaterniond::FromTwoVectors(UnitZ, axis)``
-* insertion via ``planning_scene_interface_.applyCollisionObject(...)``
-
-Legacy launch notes:
-
-* maintain-time bag publisher republishes benchmark pointcloud to both:
-  * ``/camera_1/points`` (used by this workspace MoveIt config)
-  * ``/camera/depth_registered/points`` (legacy-compatible topic)
-* bag-native frame alignment defaults:
-  * ``frame_id_override:=`` (empty)
-  * ``publish_tf_static:=true``
-  * ``publish_camera_tf:=false``
-* arm-only controller startup default in legacy launches:
-  * ``spawn_hand_controller:=false``
-
-Relevant Code and Repositories
-------------------------------
-Local package paths:
-
-* ``ros2_pp_ws/src/perception_pipeline_humble_demo/launch/perception_pipeline_demo.launch.py``
-* ``ros2_pp_ws/src/perception_pipeline_humble_demo/launch/depth_camera_environment.launch.py``
-* ``ros2_pp_ws/src/perception_pipeline_humble_demo/config/sensors_3d.yaml``
-* ``ros2_pp_ws/src/perception_pipeline_humble_demo/config/sensors_3d_raw.yaml``
-* ``ros2_pp_ws/src/perception_pipeline_humble_demo/scripts/retime_pointclouds.py``
-* ``ros2_pp_ws/src/perception_pipeline_humble_demo/rviz2/perception_pipeline.rviz``
-* ``ros2_pp_ws/src/perception_pipeline_legacy_humble/launch/obstacle_avoidance_demo.launch.py``
-* ``ros2_pp_ws/src/perception_pipeline_legacy_humble/launch/detect_and_add_cylinder_collision_object_demo.launch.py``
-* ``ros2_pp_ws/src/perception_pipeline_legacy_humble/scripts/bag_publisher_maintain_time.py``
-* ``ros2_pp_ws/src/perception_pipeline_legacy_humble/src/cylinder_segment.cpp``
-
-Repository links:
-
-* Adapted package directory:
-  https://github.com/Dkaka/ros2_humble_perception_pipeline/tree/main/ros2_pp_ws/src/perception_pipeline_humble_demo
-* Legacy parity package directory:
-  https://github.com/Dkaka/ros2_humble_perception_pipeline/tree/main/ros2_pp_ws/src/perception_pipeline_legacy_humble
-* Upstream main perception tutorial source:
-  https://github.com/moveit/moveit2_tutorials/tree/main/doc/examples/perception_pipeline
-* Upstream Humble tutorial source:
-  https://github.com/moveit/moveit2_tutorials/tree/humble/doc/examples/perception_pipeline
-
-Adaptation Changelog
---------------------
-* Step 1: Created project git repository at ``/home/ziwen/ros2_humble_perception_pipeline`` and initialized documentation scaffold.
-* Step 2: Added repository baseline files (``README.md`` and ``.gitignore``).
-* Step 3: Registered ``ros2_pp_ws/src/moveit_benchmark_resources`` as a git submodule.
-* Step 4: Created private remote repository and pushed ``main``.
-* Step 5: Added top-level prerequisite install command block.
-* Step 6: Verified packages and confirmed MCAP readability.
-* Step 7: Created ``perception_pipeline_humble_demo`` package and imported/adapted assets.
-* Step 8: Added headless launch mode and validated end-to-end smoke tests.
-* Step 9: Rewrote this file into a full main-style Humble-adapted guide with code and repo pointers.
-* Step 10: Added contributor workflow documentation in ``docs/CONTRIBUTING_WORKFLOW.md``.
-* Step 11: Updated ``AGENTS.md`` to require sharing exact apt install commands with the user whenever apt packages are needed.
-* Step 12: Added default-enabled camera point cloud displays to ``rviz2/perception_pipeline.rviz`` and made it the default RViz config in demo launch.
-* Step 13: Enabled ``use_sim_time`` in perception demo launch and updated bag playback instructions to use ``--clock`` for timestamp alignment.
-* Step 14: Replaced depth-image updater with pointcloud-only retimed topics and stabilized looped bag playback without ``--clock`` time-jump errors.
-* Step 15: Added explicit launch option ``use_retimed_pointclouds`` to switch between retimed/default and raw pointcloud sensor configs.
-* Step 16: Added a dated validation matrix (retimed vs raw) and recorded default-stability test evidence.
-* Step 17: Added a clearly separated legacy parity section for ROS1/Humble obstacle-avoidance material and Foxy availability notes.
-* Step 18: Implemented legacy obstacle-avoidance parity package with ROS2 launch files, maintain-time bag publisher, and ROS2 cylinder segmentation node.
-* Step 19: Switched legacy defaults to bag-native TF/frame alignment and added explicit hand-controller spawn control for more stable startup.
