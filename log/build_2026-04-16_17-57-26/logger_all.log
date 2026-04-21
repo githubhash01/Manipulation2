@@ -1,0 +1,880 @@
+[0.090s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--mixin', 'release']
+[0.090s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=20, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=['-DCMAKE_BUILD_TYPE=Release'], cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=['release'], verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x78e9056b9cc0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x78e9056b9630>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x78e9056b9630>>, mixin_verb=('build',))
+[0.258s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.258s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.258s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.258s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.258s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.258s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.258s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/hashim/Desktop/comp0250_s26_labs'
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.275s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ignore_ament_install'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_pkg']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_pkg'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['colcon_meta']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'colcon_meta'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['ros']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'ros'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['cmake', 'python']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'cmake'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python'
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extensions ['python_setup_py']
+[0.276s] Level 1:colcon.colcon_core.package_identification:_identify(scripts) by extension 'python_setup_py'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extensions ['ignore', 'ignore_ament_install']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extension 'ignore'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extension 'ignore_ament_install'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extensions ['colcon_pkg']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extension 'colcon_pkg'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extensions ['colcon_meta']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extension 'colcon_meta'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extensions ['ros']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extension 'ros'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extensions ['cmake', 'python']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extension 'cmake'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extension 'python'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extensions ['python_setup_py']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks) by extension 'python_setup_py'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extensions ['ignore', 'ignore_ament_install']
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extension 'ignore'
+[0.277s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extension 'ignore_ament_install'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extensions ['colcon_pkg']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extension 'colcon_pkg'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extensions ['colcon_meta']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extension 'colcon_meta'
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extensions ['ros']
+[0.278s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_team_13) by extension 'ros'
+[0.280s] DEBUG:colcon.colcon_core.package_identification:Package 'src/courseworks/cw1_team_13' with type 'ros.ament_cmake' and name 'cw1_team_13'
+[0.280s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extensions ['ignore', 'ignore_ament_install']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extension 'ignore'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extension 'ignore_ament_install'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extensions ['colcon_pkg']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extension 'colcon_pkg'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extensions ['colcon_meta']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extension 'colcon_meta'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extensions ['ros']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw1_world_spawner) by extension 'ros'
+[0.281s] DEBUG:colcon.colcon_core.package_identification:Package 'src/courseworks/cw1_world_spawner' with type 'ros.ament_cmake' and name 'cw1_world_spawner'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extensions ['ignore', 'ignore_ament_install']
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extension 'ignore'
+[0.281s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extension 'ignore_ament_install'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extensions ['colcon_pkg']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extension 'colcon_pkg'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extensions ['colcon_meta']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extension 'colcon_meta'
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extensions ['ros']
+[0.282s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_team_13) by extension 'ros'
+[0.283s] DEBUG:colcon.colcon_core.package_identification:Package 'src/courseworks/cw2_team_13' with type 'ros.ament_cmake' and name 'cw2_team_13'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extensions ['ignore', 'ignore_ament_install']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extension 'ignore'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extension 'ignore_ament_install'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extensions ['colcon_pkg']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extension 'colcon_pkg'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extensions ['colcon_meta']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extension 'colcon_meta'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extensions ['ros']
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/cw2_world_spawner) by extension 'ros'
+[0.284s] DEBUG:colcon.colcon_core.package_identification:Package 'src/courseworks/cw2_world_spawner' with type 'ros.ament_cmake' and name 'cw2_world_spawner'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extensions ['ignore', 'ignore_ament_install']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extension 'ignore'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extension 'ignore_ament_install'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extensions ['colcon_pkg']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extension 'colcon_pkg'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extensions ['colcon_meta']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extension 'colcon_meta'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extensions ['ros']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_description) by extension 'ros'
+[0.285s] DEBUG:colcon.colcon_core.package_identification:Package 'src/courseworks/panda_description' with type 'ros.ament_cmake' and name 'panda_description'
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extensions ['ignore', 'ignore_ament_install']
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extension 'ignore'
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extension 'ignore_ament_install'
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extensions ['colcon_pkg']
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extension 'colcon_pkg'
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extensions ['colcon_meta']
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extension 'colcon_meta'
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extensions ['ros']
+[0.285s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/panda_moveit_config) by extension 'ros'
+[0.286s] DEBUG:colcon.colcon_core.package_identification:Package 'src/courseworks/panda_moveit_config' with type 'ros.ament_cmake' and name 'panda_moveit_config'
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extensions ['ignore', 'ignore_ament_install']
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extension 'ignore'
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extension 'ignore_ament_install'
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extensions ['colcon_pkg']
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extension 'colcon_pkg'
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extensions ['colcon_meta']
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extension 'colcon_meta'
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extensions ['ros']
+[0.286s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/realsense_gazebo_plugin) by extension 'ros'
+[0.287s] DEBUG:colcon.colcon_core.package_identification:Package 'src/courseworks/realsense_gazebo_plugin' with type 'ros.ament_cmake' and name 'realsense_gazebo_plugin'
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extensions ['ignore', 'ignore_ament_install']
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extension 'ignore'
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extension 'ignore_ament_install'
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extensions ['colcon_pkg']
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extension 'colcon_pkg'
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extensions ['colcon_meta']
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extension 'colcon_meta'
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extensions ['ros']
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(src/courseworks/rpl_panda_with_rs) by extension 'ros'
+[0.288s] DEBUG:colcon.colcon_core.package_identification:Package 'src/courseworks/rpl_panda_with_rs' with type 'ros.ament_cmake' and name 'rpl_panda_with_rs'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extensions ['ignore', 'ignore_ament_install']
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extension 'ignore'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extension 'ignore_ament_install'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extensions ['colcon_pkg']
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extension 'colcon_pkg'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extensions ['colcon_meta']
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extension 'colcon_meta'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extensions ['ros']
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extension 'ros'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extensions ['cmake', 'python']
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extension 'cmake'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extension 'python'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extensions ['python_setup_py']
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs) by extension 'python_setup_py'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extensions ['ignore', 'ignore_ament_install']
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extension 'ignore'
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extension 'ignore_ament_install'
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extensions ['colcon_pkg']
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extension 'colcon_pkg'
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extensions ['colcon_meta']
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extension 'colcon_meta'
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extensions ['ros']
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_demo) by extension 'ros'
+[0.289s] DEBUG:colcon.colcon_core.package_identification:Package 'src/labs/pcl_demo' with type 'ros.ament_cmake' and name 'pcl_demo'
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extensions ['ignore', 'ignore_ament_install']
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extension 'ignore'
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extension 'ignore_ament_install'
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extensions ['colcon_pkg']
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extension 'colcon_pkg'
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extensions ['colcon_meta']
+[0.289s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extension 'colcon_meta'
+[0.290s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extensions ['ros']
+[0.290s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/pcl_tutorial) by extension 'ros'
+[0.290s] DEBUG:colcon.colcon_core.package_identification:Package 'src/labs/pcl_tutorial' with type 'ros.ament_cmake' and name 'pcl_tutorial'
+[0.290s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extensions ['ignore', 'ignore_ament_install']
+[0.290s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extension 'ignore'
+[0.290s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extension 'ignore_ament_install'
+[0.290s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extensions ['colcon_pkg']
+[0.291s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extension 'colcon_pkg'
+[0.291s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extensions ['colcon_meta']
+[0.291s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extension 'colcon_meta'
+[0.291s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extensions ['ros']
+[0.291s] Level 1:colcon.colcon_core.package_identification:_identify(src/labs/perception_pipeline_humble_demo) by extension 'ros'
+[0.291s] DEBUG:colcon.colcon_core.package_identification:Package 'src/labs/perception_pipeline_humble_demo' with type 'ros.ament_cmake' and name 'perception_pipeline_humble_demo'
+[0.291s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.291s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.291s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.291s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.291s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.311s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 403 installed packages in /opt/ros/humble
+[0.313s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'cmake_target' from command line to 'None'
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'cmake_clean_cache' from command line to 'False'
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'cmake_clean_first' from command line to 'False'
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'cmake_force_configure' from command line to 'False'
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'ament_cmake_args' from command line to 'None'
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'catkin_cmake_args' from command line to 'None'
+[0.348s] Level 5:colcon.colcon_core.verb:set package 'cw1_world_spawner' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.348s] DEBUG:colcon.colcon_core.verb:Building package 'cw1_world_spawner' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_world_spawner', 'symlink_install': False, 'test_result_base': None}
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'cmake_target' from command line to 'None'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'cmake_clean_cache' from command line to 'False'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'cmake_clean_first' from command line to 'False'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'cmake_force_configure' from command line to 'False'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'ament_cmake_args' from command line to 'None'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'catkin_cmake_args' from command line to 'None'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'cw2_world_spawner' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.349s] DEBUG:colcon.colcon_core.verb:Building package 'cw2_world_spawner' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_world_spawner', 'symlink_install': False, 'test_result_base': None}
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'cmake_target' from command line to 'None'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.349s] DEBUG:colcon.colcon_core.verb:Building package 'panda_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/panda_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_description', 'symlink_install': False, 'test_result_base': None}
+[0.349s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'cmake_target' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'cmake_clean_cache' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'cmake_clean_first' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'cmake_force_configure' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'ament_cmake_args' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'catkin_cmake_args' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'panda_moveit_config' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.350s] DEBUG:colcon.colcon_core.verb:Building package 'panda_moveit_config' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_moveit_config', 'symlink_install': False, 'test_result_base': None}
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'cmake_target' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'cmake_clean_cache' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'cmake_clean_first' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'cmake_force_configure' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'ament_cmake_args' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'catkin_cmake_args' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_demo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.350s] DEBUG:colcon.colcon_core.verb:Building package 'pcl_demo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_demo', 'symlink_install': False, 'test_result_base': None}
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'cmake_target' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'cmake_clean_cache' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'cmake_clean_first' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'cmake_force_configure' from command line to 'False'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'ament_cmake_args' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'catkin_cmake_args' from command line to 'None'
+[0.350s] Level 5:colcon.colcon_core.verb:set package 'pcl_tutorial' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.350s] DEBUG:colcon.colcon_core.verb:Building package 'pcl_tutorial' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_tutorial', 'symlink_install': False, 'test_result_base': None}
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'cmake_target' from command line to 'None'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'cmake_clean_cache' from command line to 'False'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'cmake_clean_first' from command line to 'False'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'cmake_force_configure' from command line to 'False'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'ament_cmake_args' from command line to 'None'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'catkin_cmake_args' from command line to 'None'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'perception_pipeline_humble_demo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.351s] DEBUG:colcon.colcon_core.verb:Building package 'perception_pipeline_humble_demo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/labs/perception_pipeline_humble_demo', 'symlink_install': False, 'test_result_base': None}
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'cmake_target' from command line to 'None'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'cmake_clean_cache' from command line to 'False'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'cmake_clean_first' from command line to 'False'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'cmake_force_configure' from command line to 'False'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'ament_cmake_args' from command line to 'None'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'catkin_cmake_args' from command line to 'None'
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'realsense_gazebo_plugin' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.351s] DEBUG:colcon.colcon_core.verb:Building package 'realsense_gazebo_plugin' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/realsense_gazebo_plugin', 'symlink_install': False, 'test_result_base': None}
+[0.351s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'cmake_target' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'cmake_clean_cache' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'cmake_clean_first' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'cmake_force_configure' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'ament_cmake_args' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'catkin_cmake_args' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw1_team_13' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.352s] DEBUG:colcon.colcon_core.verb:Building package 'cw1_team_13' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_team_13', 'symlink_install': False, 'test_result_base': None}
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'cmake_target' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'cmake_clean_cache' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'cmake_clean_first' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'cmake_force_configure' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'ament_cmake_args' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'catkin_cmake_args' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'cw2_team_13' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.352s] DEBUG:colcon.colcon_core.verb:Building package 'cw2_team_13' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13', 'symlink_install': False, 'test_result_base': None}
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'cmake_args' from command line to '['-DCMAKE_BUILD_TYPE=Release']'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'cmake_target' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'cmake_clean_first' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'cmake_force_configure' from command line to 'False'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'ament_cmake_args' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.352s] Level 5:colcon.colcon_core.verb:set package 'rpl_panda_with_rs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.352s] DEBUG:colcon.colcon_core.verb:Building package 'rpl_panda_with_rs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': ['-DCMAKE_BUILD_TYPE=Release'], 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs', 'merge_install': False, 'path': '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/rpl_panda_with_rs', 'symlink_install': False, 'test_result_base': None}
+[0.353s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.353s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.354s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_world_spawner' with build type 'ament_cmake'
+[0.354s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_world_spawner'
+[0.356s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.356s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.356s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.358s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_world_spawner' with build type 'ament_cmake'
+[0.358s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_world_spawner'
+[0.359s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.359s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.361s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_moveit_config' with build type 'ament_cmake'
+[0.361s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_moveit_config'
+[0.361s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.361s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.364s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/realsense_gazebo_plugin' with build type 'ament_cmake'
+[0.364s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/realsense_gazebo_plugin'
+[0.364s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.364s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.366s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_description' with build type 'ament_cmake'
+[0.366s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_description'
+[0.367s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.367s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.369s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_demo' with build type 'ament_cmake'
+[0.369s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_demo'
+[0.369s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.369s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.371s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_tutorial' with build type 'ament_cmake'
+[0.371s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_tutorial'
+[0.371s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.371s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.374s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/labs/perception_pipeline_humble_demo' with build type 'ament_cmake'
+[0.374s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/labs/perception_pipeline_humble_demo'
+[0.374s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.374s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.380s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_world_spawner -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner
+[0.381s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_world_spawner -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner
+[0.382s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_moveit_config -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config
+[0.384s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/realsense_gazebo_plugin -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin
+[0.385s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_description -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/panda_description
+[0.387s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_demo -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo
+[0.390s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_tutorial -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial
+[0.395s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/labs/perception_pipeline_humble_demo -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo
+[1.500s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_moveit_config -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config
+[1.504s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config -- -j20 -l20
+[1.505s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/labs/perception_pipeline_humble_demo -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo
+[1.507s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo -- -j20 -l20
+[1.538s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/panda_description -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/panda_description
+[1.542s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/panda_description -- -j20 -l20
+[1.571s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo -- -j20 -l20
+[1.590s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo
+[1.594s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config -- -j20 -l20
+[1.600s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config
+[1.622s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/panda_description -- -j20 -l20
+[1.628s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/panda_description
+[1.631s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(panda_moveit_config)
+[1.632s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/panda_moveit_config
+[1.641s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config' for CMake module files
+[1.641s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config' for CMake config files
+[1.642s] Level 1:colcon.colcon_core.shell:create_environment_hook('panda_moveit_config', 'cmake_prefix_path')
+[1.642s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/hook/cmake_prefix_path.ps1'
+[1.643s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/hook/cmake_prefix_path.dsv'
+[1.644s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/hook/cmake_prefix_path.sh'
+[1.647s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/bin'
+[1.647s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/lib/pkgconfig/panda_moveit_config.pc'
+[1.648s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/lib/python3.10/site-packages'
+[1.648s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/bin'
+[1.649s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.ps1'
+[1.651s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.dsv'
+[1.653s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.sh'
+[1.654s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.bash'
+[1.656s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.zsh'
+[1.657s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/colcon-core/packages/panda_moveit_config)
+[1.659s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(panda_moveit_config)
+[1.659s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config' for CMake module files
+[1.664s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config' for CMake config files
+[1.666s] Level 1:colcon.colcon_core.shell:create_environment_hook('panda_moveit_config', 'cmake_prefix_path')
+[1.667s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/hook/cmake_prefix_path.ps1'
+[1.668s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/hook/cmake_prefix_path.dsv'
+[1.668s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/hook/cmake_prefix_path.sh'
+[1.669s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/bin'
+[1.669s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/lib/pkgconfig/panda_moveit_config.pc'
+[1.670s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/lib/python3.10/site-packages'
+[1.670s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/bin'
+[1.671s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.ps1'
+[1.672s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.dsv'
+[1.673s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.sh'
+[1.673s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.bash'
+[1.674s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/panda_moveit_config/package.zsh'
+[1.675s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config/share/colcon-core/packages/panda_moveit_config)
+[1.678s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(perception_pipeline_humble_demo)
+[1.679s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo' for CMake module files
+[1.681s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo
+[1.683s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo' for CMake config files
+[1.685s] Level 1:colcon.colcon_core.shell:create_environment_hook('perception_pipeline_humble_demo', 'cmake_prefix_path')
+[1.686s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/hook/cmake_prefix_path.ps1'
+[1.687s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/hook/cmake_prefix_path.dsv'
+[1.689s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/hook/cmake_prefix_path.sh'
+[1.691s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/lib'
+[1.692s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/bin'
+[1.692s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/lib/pkgconfig/perception_pipeline_humble_demo.pc'
+[1.693s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/lib/python3.10/site-packages'
+[1.694s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/bin'
+[1.696s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.ps1'
+[1.697s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.dsv'
+[1.698s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.sh'
+[1.699s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.bash'
+[1.699s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.zsh'
+[1.700s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/colcon-core/packages/perception_pipeline_humble_demo)
+[1.701s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(perception_pipeline_humble_demo)
+[1.702s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo' for CMake module files
+[1.703s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo' for CMake config files
+[1.703s] Level 1:colcon.colcon_core.shell:create_environment_hook('perception_pipeline_humble_demo', 'cmake_prefix_path')
+[1.703s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/hook/cmake_prefix_path.ps1'
+[1.704s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/hook/cmake_prefix_path.dsv'
+[1.704s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/hook/cmake_prefix_path.sh'
+[1.705s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/lib'
+[1.705s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/bin'
+[1.706s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/lib/pkgconfig/perception_pipeline_humble_demo.pc'
+[1.706s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/lib/python3.10/site-packages'
+[1.707s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/bin'
+[1.707s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.ps1'
+[1.708s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.dsv'
+[1.709s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.sh'
+[1.710s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.bash'
+[1.710s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.zsh'
+[1.711s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/colcon-core/packages/perception_pipeline_humble_demo)
+[1.711s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(panda_description)
+[1.712s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description' for CMake module files
+[1.714s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/panda_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/panda_description
+[1.715s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description' for CMake config files
+[1.716s] Level 1:colcon.colcon_core.shell:create_environment_hook('panda_description', 'cmake_prefix_path')
+[1.717s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/hook/cmake_prefix_path.ps1'
+[1.719s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/hook/cmake_prefix_path.dsv'
+[1.721s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/hook/cmake_prefix_path.sh'
+[1.723s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/bin'
+[1.724s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/lib/pkgconfig/panda_description.pc'
+[1.725s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/lib/python3.10/site-packages'
+[1.727s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/bin'
+[1.728s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.ps1'
+[1.731s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.dsv'
+[1.733s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.sh'
+[1.734s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.bash'
+[1.736s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.zsh'
+[1.737s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/colcon-core/packages/panda_description)
+[1.739s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(panda_description)
+[1.740s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description' for CMake module files
+[1.742s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description' for CMake config files
+[1.744s] Level 1:colcon.colcon_core.shell:create_environment_hook('panda_description', 'cmake_prefix_path')
+[1.744s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/hook/cmake_prefix_path.ps1'
+[1.746s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/hook/cmake_prefix_path.dsv'
+[1.748s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/hook/cmake_prefix_path.sh'
+[1.750s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/bin'
+[1.750s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/lib/pkgconfig/panda_description.pc'
+[1.751s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/lib/python3.10/site-packages'
+[1.752s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/bin'
+[1.754s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.ps1'
+[1.757s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.dsv'
+[1.759s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.sh'
+[1.762s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.bash'
+[1.764s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/panda_description/package.zsh'
+[1.765s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/panda_description/share/colcon-core/packages/panda_description)
+[3.889s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_world_spawner -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner
+[3.893s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner -- -j20 -l20
+[4.148s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_world_spawner -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner
+[4.155s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner -- -j20 -l20
+[4.743s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/realsense_gazebo_plugin -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin
+[4.749s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin -- -j20 -l20
+[9.615s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_demo -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo
+[9.617s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo -- -j20 -l20
+[10.504s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_tutorial -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial
+[10.506s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial -- -j20 -l20
+[15.218s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner -- -j20 -l20
+[15.221s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner
+[15.265s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner -- -j20 -l20
+[15.268s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner
+[15.455s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cw2_world_spawner)
+[15.456s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw2_world_spawner
+[15.457s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner' for CMake module files
+[15.460s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner' for CMake config files
+[15.465s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw2_world_spawner', 'cmake_prefix_path')
+[15.466s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/cmake_prefix_path.ps1'
+[15.468s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/cmake_prefix_path.dsv'
+[15.469s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/cmake_prefix_path.sh'
+[15.471s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib'
+[15.471s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw2_world_spawner', 'ld_library_path_lib')
+[15.472s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/ld_library_path_lib.ps1'
+[15.473s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/ld_library_path_lib.dsv'
+[15.474s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/ld_library_path_lib.sh'
+[15.475s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/bin'
+[15.476s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib/pkgconfig/cw2_world_spawner.pc'
+[15.476s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib/python3.10/site-packages'
+[15.477s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/bin'
+[15.477s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.ps1'
+[15.478s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.dsv'
+[15.479s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.sh'
+[15.480s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.bash'
+[15.480s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.zsh'
+[15.480s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/colcon-core/packages/cw2_world_spawner)
+[15.481s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cw2_world_spawner)
+[15.482s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner' for CMake module files
+[15.482s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner' for CMake config files
+[15.483s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw2_world_spawner', 'cmake_prefix_path')
+[15.484s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/cmake_prefix_path.ps1'
+[15.484s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/cmake_prefix_path.dsv'
+[15.485s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/cmake_prefix_path.sh'
+[15.486s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib'
+[15.486s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw2_world_spawner', 'ld_library_path_lib')
+[15.486s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/ld_library_path_lib.ps1'
+[15.486s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/ld_library_path_lib.dsv'
+[15.487s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/hook/ld_library_path_lib.sh'
+[15.487s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/bin'
+[15.487s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib/pkgconfig/cw2_world_spawner.pc'
+[15.488s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib/python3.10/site-packages'
+[15.488s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/bin'
+[15.489s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.ps1'
+[15.490s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.dsv'
+[15.490s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.sh'
+[15.491s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.bash'
+[15.491s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/package.zsh'
+[15.492s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/colcon-core/packages/cw2_world_spawner)
+[15.493s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13' with build type 'ament_cmake'
+[15.493s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13'
+[15.493s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[15.493s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[15.500s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cw1_world_spawner)
+[15.501s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner' for CMake module files
+[15.502s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner
+[15.503s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner' for CMake config files
+[15.504s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw1_world_spawner', 'cmake_prefix_path')
+[15.504s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/cmake_prefix_path.ps1'
+[15.505s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/cmake_prefix_path.dsv'
+[15.505s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/cmake_prefix_path.sh'
+[15.506s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib'
+[15.506s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw1_world_spawner', 'ld_library_path_lib')
+[15.506s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/ld_library_path_lib.ps1'
+[15.507s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/ld_library_path_lib.dsv'
+[15.507s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/ld_library_path_lib.sh'
+[15.508s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/bin'
+[15.508s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib/pkgconfig/cw1_world_spawner.pc'
+[15.508s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib/python3.10/site-packages'
+[15.509s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/bin'
+[15.509s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.ps1'
+[15.510s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.dsv'
+[15.511s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.sh'
+[15.511s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.bash'
+[15.512s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.zsh'
+[15.512s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/colcon-core/packages/cw1_world_spawner)
+[15.513s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cw1_world_spawner)
+[15.513s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner' for CMake module files
+[15.514s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner' for CMake config files
+[15.515s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw1_world_spawner', 'cmake_prefix_path')
+[15.515s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/cmake_prefix_path.ps1'
+[15.516s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/cmake_prefix_path.dsv'
+[15.516s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/cmake_prefix_path.sh'
+[15.517s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib'
+[15.517s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw1_world_spawner', 'ld_library_path_lib')
+[15.517s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/ld_library_path_lib.ps1'
+[15.518s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/ld_library_path_lib.dsv'
+[15.518s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/hook/ld_library_path_lib.sh'
+[15.519s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/bin'
+[15.519s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib/pkgconfig/cw1_world_spawner.pc'
+[15.519s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib/python3.10/site-packages'
+[15.519s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/bin'
+[15.520s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.ps1'
+[15.521s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.dsv'
+[15.521s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.sh'
+[15.522s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.bash'
+[15.522s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/package.zsh'
+[15.523s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/colcon-core/packages/cw1_world_spawner)
+[15.524s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_team_13' with build type 'ament_cmake'
+[15.524s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_team_13'
+[15.524s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[15.524s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[15.534s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13
+[15.542s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_team_13 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13
+[25.050s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_team_13 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13
+[25.055s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13 -- -j20 -l20
+[25.155s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13
+[25.157s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13 -- -j20 -l20
+[40.260s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo -- -j20 -l20
+[40.268s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo
+[40.289s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(pcl_demo)
+[40.300s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo' for CMake module files
+[40.301s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo
+[40.303s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo' for CMake config files
+[40.305s] Level 1:colcon.colcon_core.shell:create_environment_hook('pcl_demo', 'cmake_prefix_path')
+[40.307s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/hook/cmake_prefix_path.ps1'
+[40.319s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/hook/cmake_prefix_path.dsv'
+[40.320s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/hook/cmake_prefix_path.sh'
+[40.325s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/lib'
+[40.325s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/bin'
+[40.326s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/lib/pkgconfig/pcl_demo.pc'
+[40.329s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/lib/python3.10/site-packages'
+[40.330s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/bin'
+[40.331s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.ps1'
+[40.334s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.dsv'
+[40.335s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.sh'
+[40.337s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.bash'
+[40.338s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.zsh'
+[40.339s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/colcon-core/packages/pcl_demo)
+[40.342s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(pcl_demo)
+[40.342s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo' for CMake module files
+[40.343s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo' for CMake config files
+[40.343s] Level 1:colcon.colcon_core.shell:create_environment_hook('pcl_demo', 'cmake_prefix_path')
+[40.344s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/hook/cmake_prefix_path.ps1'
+[40.345s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/hook/cmake_prefix_path.dsv'
+[40.345s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/hook/cmake_prefix_path.sh'
+[40.347s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/lib'
+[40.347s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/bin'
+[40.347s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/lib/pkgconfig/pcl_demo.pc'
+[40.348s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/lib/python3.10/site-packages'
+[40.348s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/bin'
+[40.349s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.ps1'
+[40.351s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.dsv'
+[40.352s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.sh'
+[40.353s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.bash'
+[40.354s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.zsh'
+[40.355s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/colcon-core/packages/pcl_demo)
+[43.828s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial -- -j20 -l20
+[43.831s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial
+[43.847s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(pcl_tutorial)
+[43.847s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial' for CMake module files
+[43.848s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/pcl_tutorial
+[43.848s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial' for CMake config files
+[43.849s] Level 1:colcon.colcon_core.shell:create_environment_hook('pcl_tutorial', 'cmake_prefix_path')
+[43.850s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/hook/cmake_prefix_path.ps1'
+[43.851s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/hook/cmake_prefix_path.dsv'
+[43.851s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/hook/cmake_prefix_path.sh'
+[43.852s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/lib'
+[43.852s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/bin'
+[43.852s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/lib/pkgconfig/pcl_tutorial.pc'
+[43.852s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/lib/python3.10/site-packages'
+[43.853s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/bin'
+[43.853s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.ps1'
+[43.854s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.dsv'
+[43.854s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.sh'
+[43.854s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.bash'
+[43.855s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.zsh'
+[43.855s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/colcon-core/packages/pcl_tutorial)
+[43.856s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(pcl_tutorial)
+[43.856s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial' for CMake module files
+[43.857s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial' for CMake config files
+[43.857s] Level 1:colcon.colcon_core.shell:create_environment_hook('pcl_tutorial', 'cmake_prefix_path')
+[43.857s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/hook/cmake_prefix_path.ps1'
+[43.857s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/hook/cmake_prefix_path.dsv'
+[43.858s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/hook/cmake_prefix_path.sh'
+[43.858s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/lib'
+[43.859s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/bin'
+[43.859s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/lib/pkgconfig/pcl_tutorial.pc'
+[43.859s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/lib/python3.10/site-packages'
+[43.859s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/bin'
+[43.860s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.ps1'
+[43.860s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.dsv'
+[43.861s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.sh'
+[43.861s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.bash'
+[43.862s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/pcl_tutorial/package.zsh'
+[43.862s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial/share/colcon-core/packages/pcl_tutorial)
+[47.324s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin -- -j20 -l20
+[47.325s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin
+[47.343s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(realsense_gazebo_plugin)
+[47.343s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin
+[47.344s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin' for CMake module files
+[47.345s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin' for CMake config files
+[47.345s] Level 1:colcon.colcon_core.shell:create_environment_hook('realsense_gazebo_plugin', 'cmake_prefix_path')
+[47.345s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/cmake_prefix_path.ps1'
+[47.346s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/cmake_prefix_path.dsv'
+[47.347s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/cmake_prefix_path.sh'
+[47.347s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib'
+[47.348s] Level 1:colcon.colcon_core.shell:create_environment_hook('realsense_gazebo_plugin', 'ld_library_path_lib')
+[47.348s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/ld_library_path_lib.ps1'
+[47.349s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/ld_library_path_lib.dsv'
+[47.349s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/ld_library_path_lib.sh'
+[47.349s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/bin'
+[47.350s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib/pkgconfig/realsense_gazebo_plugin.pc'
+[47.350s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib/python3.10/site-packages'
+[47.350s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/bin'
+[47.351s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.ps1'
+[47.351s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.dsv'
+[47.352s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.sh'
+[47.352s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.bash'
+[47.352s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.zsh'
+[47.353s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/colcon-core/packages/realsense_gazebo_plugin)
+[47.353s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(realsense_gazebo_plugin)
+[47.353s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin' for CMake module files
+[47.354s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin' for CMake config files
+[47.354s] Level 1:colcon.colcon_core.shell:create_environment_hook('realsense_gazebo_plugin', 'cmake_prefix_path')
+[47.354s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/cmake_prefix_path.ps1'
+[47.354s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/cmake_prefix_path.dsv'
+[47.355s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/cmake_prefix_path.sh'
+[47.355s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib'
+[47.355s] Level 1:colcon.colcon_core.shell:create_environment_hook('realsense_gazebo_plugin', 'ld_library_path_lib')
+[47.355s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/ld_library_path_lib.ps1'
+[47.356s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/ld_library_path_lib.dsv'
+[47.356s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/hook/ld_library_path_lib.sh'
+[47.356s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/bin'
+[47.356s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib/pkgconfig/realsense_gazebo_plugin.pc'
+[47.357s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib/python3.10/site-packages'
+[47.357s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/bin'
+[47.357s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.ps1'
+[47.358s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.dsv'
+[47.358s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.sh'
+[47.358s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.bash'
+[47.359s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.zsh'
+[47.359s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/colcon-core/packages/realsense_gazebo_plugin)
+[47.360s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/rpl_panda_with_rs' with build type 'ament_cmake'
+[47.361s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/rpl_panda_with_rs'
+[47.361s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[47.361s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[47.376s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/rpl_panda_with_rs -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs
+[48.100s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/rpl_panda_with_rs -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs
+[48.100s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs -- -j20 -l20
+[48.142s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs -- -j20 -l20
+[48.143s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs
+[48.156s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rpl_panda_with_rs)
+[48.157s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs' for CMake module files
+[48.157s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs
+[48.158s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs' for CMake config files
+[48.158s] Level 1:colcon.colcon_core.shell:create_environment_hook('rpl_panda_with_rs', 'cmake_prefix_path')
+[48.158s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/hook/cmake_prefix_path.ps1'
+[48.158s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/hook/cmake_prefix_path.dsv'
+[48.159s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/hook/cmake_prefix_path.sh'
+[48.159s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/lib'
+[48.159s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/bin'
+[48.159s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/lib/pkgconfig/rpl_panda_with_rs.pc'
+[48.160s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/lib/python3.10/site-packages'
+[48.160s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/bin'
+[48.160s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.ps1'
+[48.161s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.dsv'
+[48.161s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.sh'
+[48.161s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.bash'
+[48.161s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.zsh'
+[48.162s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/colcon-core/packages/rpl_panda_with_rs)
+[48.162s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rpl_panda_with_rs)
+[48.163s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs' for CMake module files
+[48.163s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs' for CMake config files
+[48.163s] Level 1:colcon.colcon_core.shell:create_environment_hook('rpl_panda_with_rs', 'cmake_prefix_path')
+[48.163s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/hook/cmake_prefix_path.ps1'
+[48.164s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/hook/cmake_prefix_path.dsv'
+[48.164s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/hook/cmake_prefix_path.sh'
+[48.164s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/lib'
+[48.164s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/bin'
+[48.165s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/lib/pkgconfig/rpl_panda_with_rs.pc'
+[48.165s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/lib/python3.10/site-packages'
+[48.165s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/bin'
+[48.165s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.ps1'
+[48.166s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.dsv'
+[48.166s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.sh'
+[48.166s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.bash'
+[48.167s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.zsh'
+[48.167s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/colcon-core/packages/rpl_panda_with_rs)
+[65.074s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13 -- -j20 -l20
+[65.075s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13
+[65.155s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cw2_team_13)
+[65.156s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13' for CMake module files
+[65.157s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13
+[65.157s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13' for CMake config files
+[65.158s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw2_team_13', 'cmake_prefix_path')
+[65.158s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/cmake_prefix_path.ps1'
+[65.158s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/cmake_prefix_path.dsv'
+[65.159s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/cmake_prefix_path.sh'
+[65.159s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib'
+[65.159s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw2_team_13', 'ld_library_path_lib')
+[65.160s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/ld_library_path_lib.ps1'
+[65.160s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/ld_library_path_lib.dsv'
+[65.160s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/ld_library_path_lib.sh'
+[65.161s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/bin'
+[65.161s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/pkgconfig/cw2_team_13.pc'
+[65.161s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/python3.10/site-packages'
+[65.161s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/bin'
+[65.162s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.ps1'
+[65.162s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.dsv'
+[65.163s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.sh'
+[65.163s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.bash'
+[65.163s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.zsh'
+[65.164s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/colcon-core/packages/cw2_team_13)
+[65.164s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cw2_team_13)
+[65.164s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13' for CMake module files
+[65.165s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13' for CMake config files
+[65.165s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw2_team_13', 'cmake_prefix_path')
+[65.166s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/cmake_prefix_path.ps1'
+[65.166s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/cmake_prefix_path.dsv'
+[65.166s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/cmake_prefix_path.sh'
+[65.167s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib'
+[65.167s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw2_team_13', 'ld_library_path_lib')
+[65.167s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/ld_library_path_lib.ps1'
+[65.168s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/ld_library_path_lib.dsv'
+[65.168s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/hook/ld_library_path_lib.sh'
+[65.168s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/bin'
+[65.169s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/pkgconfig/cw2_team_13.pc'
+[65.169s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/python3.10/site-packages'
+[65.169s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/bin'
+[65.169s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.ps1'
+[65.170s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.dsv'
+[65.170s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.sh'
+[65.171s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.bash'
+[65.171s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.zsh'
+[65.171s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/colcon-core/packages/cw2_team_13)
+[69.772s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13 -- -j20 -l20
+[69.775s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13
+[69.862s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cw1_team_13)
+[69.862s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13' for CMake module files
+[69.863s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib PYTHONPATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13
+[69.864s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13' for CMake config files
+[69.864s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw1_team_13', 'cmake_prefix_path')
+[69.865s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/cmake_prefix_path.ps1'
+[69.865s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/cmake_prefix_path.dsv'
+[69.866s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/cmake_prefix_path.sh'
+[69.866s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib'
+[69.866s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw1_team_13', 'ld_library_path_lib')
+[69.867s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/ld_library_path_lib.ps1'
+[69.867s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/ld_library_path_lib.dsv'
+[69.867s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/ld_library_path_lib.sh'
+[69.868s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/bin'
+[69.868s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/pkgconfig/cw1_team_13.pc'
+[69.869s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/python3.10/site-packages'
+[69.870s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/bin'
+[69.870s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.ps1'
+[69.871s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.dsv'
+[69.872s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.sh'
+[69.872s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.bash'
+[69.872s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.zsh'
+[69.873s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/colcon-core/packages/cw1_team_13)
+[69.874s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cw1_team_13)
+[69.874s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13' for CMake module files
+[69.875s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13' for CMake config files
+[69.875s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw1_team_13', 'cmake_prefix_path')
+[69.875s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/cmake_prefix_path.ps1'
+[69.876s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/cmake_prefix_path.dsv'
+[69.876s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/cmake_prefix_path.sh'
+[69.877s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib'
+[69.877s] Level 1:colcon.colcon_core.shell:create_environment_hook('cw1_team_13', 'ld_library_path_lib')
+[69.878s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/ld_library_path_lib.ps1'
+[69.878s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/ld_library_path_lib.dsv'
+[69.878s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/hook/ld_library_path_lib.sh'
+[69.879s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/bin'
+[69.879s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/pkgconfig/cw1_team_13.pc'
+[69.879s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/python3.10/site-packages'
+[69.880s] Level 1:colcon.colcon_core.environment:checking '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/bin'
+[69.880s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.ps1'
+[69.881s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.dsv'
+[69.881s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.sh'
+[69.882s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.bash'
+[69.882s] INFO:colcon.colcon_core.shell:Creating package script '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.zsh'
+[69.883s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/colcon-core/packages/cw1_team_13)
+[69.884s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[69.885s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[69.885s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[69.886s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[69.916s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[69.916s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[69.916s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[69.939s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[69.940s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/hashim/Desktop/comp0250_s26_labs/install/local_setup.ps1'
+[69.942s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/hashim/Desktop/comp0250_s26_labs/install/_local_setup_util_ps1.py'
+[69.945s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/hashim/Desktop/comp0250_s26_labs/install/setup.ps1'
+[69.946s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/hashim/Desktop/comp0250_s26_labs/install/local_setup.sh'
+[69.947s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/hashim/Desktop/comp0250_s26_labs/install/_local_setup_util_sh.py'
+[69.948s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/hashim/Desktop/comp0250_s26_labs/install/setup.sh'
+[69.950s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/hashim/Desktop/comp0250_s26_labs/install/local_setup.bash'
+[69.950s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/hashim/Desktop/comp0250_s26_labs/install/setup.bash'
+[69.952s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/hashim/Desktop/comp0250_s26_labs/install/local_setup.zsh'
+[69.952s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/hashim/Desktop/comp0250_s26_labs/install/setup.zsh'

@@ -1,0 +1,276 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-f3627363ed18f160fb2f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						19,
+						20
+					]
+				},
+				{
+					"build" : "cw1_world_spawner__py",
+					"jsonFile" : "directory-cw1_world_spawner__py-Release-363c4a984e5b68518cf1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner/cw1_world_spawner__py",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "cw1_world_spawner__rs",
+					"jsonFile" : "directory-cw1_world_spawner__rs-Release-a942d2ab0edd6dae7c43.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner/cw1_world_spawner__rs",
+					"targetIndexes" : 
+					[
+						18
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "cw1_world_spawner",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_coursework_world_spawner_lib_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_coursework_world_spawner_lib_egg-Release-d9c3c119a8f8692b9520.json",
+					"name" : "ament_cmake_python_build_coursework_world_spawner_lib_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_cw1_world_spawner_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_cw1_world_spawner_egg-Release-a7ad3ec67c411cb69537.json",
+					"name" : "ament_cmake_python_build_cw1_world_spawner_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_coursework_world_spawner_lib::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_coursework_world_spawner_lib-Release-6dda673e83ef98fcbe81.json",
+					"name" : "ament_cmake_python_copy_coursework_world_spawner_lib",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_cw1_world_spawner::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_cw1_world_spawner-Release-8770b600be625d3ee79a.json",
+					"name" : "ament_cmake_python_copy_cw1_world_spawner",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner-Release-66b42beb46ab0abdd217.json",
+					"name" : "cw1_world_spawner",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__cpp-Release-e607d33db5bb7762093b.json",
+					"name" : "cw1_world_spawner__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "cw1_world_spawner__py::@c5dcbe6f2c908ed59181",
+					"jsonFile" : "target-cw1_world_spawner__py-Release-ff837182f32232fe7e07.json",
+					"name" : "cw1_world_spawner__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_generator_c-Release-7d2588c8b0f84f735bc4.json",
+					"name" : "cw1_world_spawner__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_generator_py-Release-891e454eff2a7fb3a5e1.json",
+					"name" : "cw1_world_spawner__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_c-Release-6e5bec65a607280def69.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_c__pyext-Release-5430e87d190e667d26b9.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_cpp-Release-c656f6b7dea9dd31ee2a.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_fastrtps_c-Release-bdceb2277428274355e1.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_fastrtps_c__pyext-Release-a30ec2c612d72d1b94fb.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_fastrtps_cpp-Release-8a2e686adf036248d373.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_introspection_c-Release-7c865ba96b28fe85caea.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_introspection_c__pyext-Release-c8358e767393135ef36c.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner__rosidl_typesupport_introspection_cpp-Release-3cca7a2e93f8467b78b3.json",
+					"name" : "cw1_world_spawner__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "cw1_world_spawner__rs::@aa0a47bc21aaf95acb6a",
+					"jsonFile" : "target-cw1_world_spawner__rs-Release-da276529b961df3cc08a.json",
+					"name" : "cw1_world_spawner__rs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_world_spawner_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_world_spawner_uninstall-Release-8a31fd1b315061aa1027.json",
+					"name" : "cw1_world_spawner_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-e9774bcb5923cd531ab6.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/hashim/Desktop/comp0250_s26_labs/build/cw1_world_spawner",
+		"source" : "/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_world_spawner"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

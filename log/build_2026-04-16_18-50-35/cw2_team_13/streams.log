@@ -1,0 +1,173 @@
+[0.008s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13': CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/home/hashim/Desktop/comp0250_s26_labs/install/panda_description:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13 -- -j20 -l20
+[0.044s] [  2%] Built target cw2_team_13__rs
+[0.047s] [  5%] Built target cw2_team_13__cpp
+[0.047s] [ 13%] Built target cw2_team_13__rosidl_generator_c
+[0.050s] [ 13%] Built target ament_cmake_python_copy_cw2_team_13
+[0.067s] [ 22%] Built target cw2_team_13__rosidl_typesupport_cpp
+[0.067s] [ 30%] Built target cw2_team_13__rosidl_typesupport_fastrtps_c
+[0.067s] [ 38%] Built target cw2_team_13__rosidl_typesupport_introspection_cpp
+[0.067s] [ 47%] Built target cw2_team_13__rosidl_typesupport_fastrtps_cpp
+[0.068s] [ 55%] Built target cw2_team_13__rosidl_typesupport_c
+[0.071s] [ 63%] Built target cw2_team_13__rosidl_typesupport_introspection_c
+[0.078s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13_cw2_class_lib[0m
+[0.087s] [ 63%] Built target cw2_team_13
+[0.095s] [ 66%] [32mBuilding CXX object CMakeFiles/cw2_team_13_cw2_class_lib.dir/src/cw2_class.cpp.o[0m
+[0.103s] [ 69%] Built target cw2_team_13__py
+[0.120s] [ 75%] Built target cw2_team_13__rosidl_generator_py
+[0.135s] [ 80%] Built target cw2_team_13__rosidl_typesupport_introspection_c__pyext
+[0.137s] [ 86%] Built target cw2_team_13__rosidl_typesupport_c__pyext
+[0.139s] [ 91%] Built target cw2_team_13__rosidl_typesupport_fastrtps_c__pyext
+[0.253s] running egg_info
+[0.254s] writing cw2_team_13.egg-info/PKG-INFO
+[0.254s] writing dependency_links to cw2_team_13.egg-info/dependency_links.txt
+[0.254s] writing top-level names to cw2_team_13.egg-info/top_level.txt
+[0.255s] reading manifest file 'cw2_team_13.egg-info/SOURCES.txt'
+[0.256s] writing manifest file 'cw2_team_13.egg-info/SOURCES.txt'
+[0.273s] [ 91%] Built target ament_cmake_python_build_cw2_team_13_egg
+[13.699s] [ 94%] [32m[1mLinking CXX shared library libcw2_team_13_cw2_class_lib.so[0m
+[14.115s] [ 94%] Built target cw2_team_13_cw2_class_lib
+[14.145s] [ 97%] [32m[1mLinking CXX executable cw2_solution_node[0m
+[14.614s] [100%] Built target cw2_solution_node
+[14.626s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13' returned '0': CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/home/hashim/Desktop/comp0250_s26_labs/install/panda_description:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13 -- -j20 -l20
+[14.628s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13': CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/home/hashim/Desktop/comp0250_s26_labs/install/panda_description:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13
+[14.635s] -- Install configuration: "Release"
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/ament_index/resource_index/rosidl_interfaces/cw2_team_13
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg/rosidl_generator_c__visibility_control.h
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__functions.c
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__type_support.h
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__functions.h
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__struct.h
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/example.h
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/environment/library_path.sh
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/environment/library_path.dsv
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13__rosidl_generator_c.so
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__rosidl_typesupport_fastrtps_c.h
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13__rosidl_typesupport_fastrtps_c.so
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg
+[14.636s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__rosidl_typesupport_introspection_c.h
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__type_support.c
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13__rosidl_typesupport_introspection_c.so
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13__rosidl_typesupport_c.so
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg/rosidl_generator_cpp__visibility_control.hpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__traits.hpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__type_support.hpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__struct.hpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__builder.hpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/example.hpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/dds_fastrtps
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__rosidl_typesupport_fastrtps_cpp.hpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13__rosidl_typesupport_fastrtps_cpp.so
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__rosidl_typesupport_introspection_cpp.hpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/include/cw2_team_13/cw2_team_13/srv/detail/example__type_support.cpp
+[14.637s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13__rosidl_typesupport_introspection_cpp.so
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13__rosidl_typesupport_cpp.so
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/environment/pythonpath.sh
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/environment/pythonpath.dsv
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13-0.1.0-py3.10.egg-info
+[14.638s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13-0.1.0-py3.10.egg-info/dependency_links.txt
+[14.638s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13-0.1.0-py3.10.egg-info/PKG-INFO
+[14.638s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13-0.1.0-py3.10.egg-info/SOURCES.txt
+[14.638s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13-0.1.0-py3.10.egg-info/top_level.txt
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/srv
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/srv/_example_s.c
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/srv/_example.py
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/srv/__init__.py
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/libcw2_team_13__rosidl_generator_py.so
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/_cw2_team_13_s.ep.rosidl_typesupport_fastrtps_c.c
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/_cw2_team_13_s.ep.rosidl_typesupport_c.c
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/__init__.py
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/cw2_team_13_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/_cw2_team_13_s.ep.rosidl_typesupport_introspection_c.c
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/cw2_team_13_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[14.638s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/cw2_team_13_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[14.663s] Listing '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13'...
+[14.663s] Listing '/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/srv'...
+[14.665s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/cw2_team_13_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/cw2_team_13_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/local/lib/python3.10/dist-packages/cw2_team_13/cw2_team_13_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13__rosidl_generator_py.so
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/ament_index/resource_index/rust_packages/cw2_team_13
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/rust
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/rust/src
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/rust/src/lib.rs
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/rust/src/srv
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/rust/src/srv/rmw.rs
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/rust/src/srv.rs
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/rust/build.rs
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/rust/Cargo.toml
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/srv/Example.idl
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/srv/Example.srv
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/srv/Example_Request.msg
+[14.666s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/srv/Example_Response.msg
+[14.666s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13_cw2_class_lib.so
+[14.667s] -- Set runtime path of "/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/libcw2_team_13_cw2_class_lib.so" to ""
+[14.667s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/cw2_team_13/cw2_solution_node
+[14.667s] -- Set runtime path of "/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib/cw2_team_13/cw2_solution_node" to ""
+[14.667s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/launch
+[14.667s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/launch/run_solution.launch.py
+[14.667s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/ament_index/resource_index/package_run_dependencies/cw2_team_13
+[14.667s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/ament_index/resource_index/parent_prefix_path/cw2_team_13
+[14.667s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/environment/ament_prefix_path.sh
+[14.667s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/environment/ament_prefix_path.dsv
+[14.667s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/environment/path.sh
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/environment/path.dsv
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/local_setup.bash
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/local_setup.sh
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/local_setup.zsh
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/local_setup.dsv
+[14.668s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.dsv
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/ament_index/resource_index/packages/cw2_team_13
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_generator_cExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_generator_cExport-release.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_typesupport_fastrtps_cExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_typesupport_fastrtps_cExport-release.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13__rosidl_typesupport_introspection_cExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13__rosidl_typesupport_introspection_cExport-release.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13__rosidl_typesupport_cExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13__rosidl_typesupport_cExport-release.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_generator_cppExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_typesupport_fastrtps_cppExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_typesupport_fastrtps_cppExport-release.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13__rosidl_typesupport_introspection_cppExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13__rosidl_typesupport_introspection_cppExport-release.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13__rosidl_typesupport_cppExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13__rosidl_typesupport_cppExport-release.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_generator_pyExport.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/export_cw2_team_13__rosidl_generator_pyExport-release.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/rosidl_cmake-extras.cmake
+[14.668s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/ament_cmake_export_dependencies-extras.cmake
+[14.669s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/ament_cmake_export_include_directories-extras.cmake
+[14.669s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/ament_cmake_export_libraries-extras.cmake
+[14.669s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/ament_cmake_export_targets-extras.cmake
+[14.669s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[14.669s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[14.669s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13Config.cmake
+[14.669s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/cmake/cw2_team_13Config-version.cmake
+[14.669s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/share/cw2_team_13/package.xml
+[14.670s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13' returned '0': CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/home/hashim/Desktop/comp0250_s26_labs/install/panda_description:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13

@@ -1,0 +1,231 @@
+-- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rosidl_default_generators: 1.2.1 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found geometry_msgs: 4.9.1 (/opt/ros/humble/share/geometry_msgs/cmake)
+-- Found sensor_msgs: 4.9.1 (/opt/ros/humble/share/sensor_msgs/cmake)
+-- Found moveit_core: 2.5.9 (/opt/ros/humble/share/moveit_core/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+-- Found parameter_traits: 0.7.1 (/opt/ros/humble/share/parameter_traits/cmake)
+-- Found rclcpp_lifecycle: 16.0.19 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: filesystem 
+-- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found moveit_ros_planning_interface: 2.5.9 (/opt/ros/humble/share/moveit_ros_planning_interface/cmake)
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: date_time filesystem program_options system thread 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread chrono 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread system filesystem regex date_time program_options 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread 
+-- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Found Qhull version 8.0.2
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- Found cw1_world_spawner: 0.1.0 (/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/share/cw1_world_spawner/cmake)
+-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+-- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_team_13/include
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_generator_c[0m
+[  2%] Built target cw1_team_13__rs
+[ 11%] Built target cw1_team_13__rosidl_generator_c
+[ 13%] Built target cw1_team_13__cpp
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_fastrtps_c[0m
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_introspection_c[0m
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_c[0m
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_fastrtps_cpp[0m
+[ 13%] Built target ament_cmake_python_copy_cw1_team_13
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_cpp[0m
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_introspection_cpp[0m
+[ 22%] Built target cw1_team_13__rosidl_typesupport_c
+[ 30%] Built target cw1_team_13__rosidl_typesupport_introspection_c
+[ 38%] Built target cw1_team_13__rosidl_typesupport_fastrtps_c
+[ 47%] Built target cw1_team_13__rosidl_typesupport_fastrtps_cpp
+[ 55%] Built target cw1_team_13__rosidl_typesupport_introspection_cpp
+[ 63%] Built target cw1_team_13__rosidl_typesupport_cpp
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13_cw1_class_lib[0m
+[ 63%] Built target cw1_team_13
+[ 66%] Built target cw1_team_13__py
+[ 72%] Built target cw1_team_13_cw1_class_lib
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_generator_py[0m
+[35m[1mConsolidate compiler generated dependencies of target cw1_solution_node[0m
+[ 77%] Built target cw1_team_13__rosidl_generator_py
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_c__pyext[0m
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_introspection_c__pyext[0m
+[35m[1mConsolidate compiler generated dependencies of target cw1_team_13__rosidl_typesupport_fastrtps_c__pyext[0m
+[ 83%] Built target cw1_team_13__rosidl_typesupport_c__pyext
+[ 88%] Built target cw1_team_13__rosidl_typesupport_introspection_c__pyext
+[ 94%] Built target cw1_team_13__rosidl_typesupport_fastrtps_c__pyext
+[100%] Built target cw1_solution_node
+running egg_info
+writing cw1_team_13.egg-info/PKG-INFO
+writing dependency_links to cw1_team_13.egg-info/dependency_links.txt
+writing top-level names to cw1_team_13.egg-info/top_level.txt
+reading manifest file 'cw1_team_13.egg-info/SOURCES.txt'
+writing manifest file 'cw1_team_13.egg-info/SOURCES.txt'
+[100%] Built target ament_cmake_python_build_cw1_team_13_egg
+-- Install configuration: "Release"
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/ament_index/resource_index/rosidl_interfaces/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg/rosidl_generator_c__visibility_control.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__functions.c
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__type_support.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__functions.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__struct.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/example.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/environment/library_path.sh
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/environment/library_path.dsv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13__rosidl_generator_c.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__rosidl_typesupport_fastrtps_c.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13__rosidl_typesupport_fastrtps_c.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg/rosidl_typesupport_introspection_c__visibility_control.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__rosidl_typesupport_introspection_c.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__type_support.c
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13__rosidl_typesupport_introspection_c.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13__rosidl_typesupport_c.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg/rosidl_generator_cpp__visibility_control.hpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__traits.hpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__type_support.hpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__struct.hpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__builder.hpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/example.hpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/dds_fastrtps
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__rosidl_typesupport_fastrtps_cpp.hpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13__rosidl_typesupport_fastrtps_cpp.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__rosidl_typesupport_introspection_cpp.hpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/include/cw1_team_13/cw1_team_13/srv/detail/example__type_support.cpp
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13__rosidl_typesupport_introspection_cpp.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13__rosidl_typesupport_cpp.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/environment/pythonpath.sh
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/environment/pythonpath.dsv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13-0.1.0-py3.10.egg-info
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13-0.1.0-py3.10.egg-info/dependency_links.txt
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13-0.1.0-py3.10.egg-info/PKG-INFO
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13-0.1.0-py3.10.egg-info/SOURCES.txt
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13-0.1.0-py3.10.egg-info/top_level.txt
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/cw1_team_13_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/cw1_team_13_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/cw1_team_13_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/srv/_example_s.c
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/srv/_example.py
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/srv/__init__.py
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/_cw1_team_13_s.ep.rosidl_typesupport_c.c
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/_cw1_team_13_s.ep.rosidl_typesupport_introspection_c.c
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/libcw1_team_13__rosidl_generator_py.so
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/__init__.py
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/_cw1_team_13_s.ep.rosidl_typesupport_fastrtps_c.c
+Listing '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13'...
+Compiling '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/__init__.py'...
+Listing '/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/srv'...
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/cw1_team_13_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/cw1_team_13_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/local/lib/python3.10/dist-packages/cw1_team_13/cw1_team_13_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13__rosidl_generator_py.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/ament_index/resource_index/rust_packages/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/rust
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/rust/src
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/rust/src/lib.rs
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/rust/src/srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/rust/src/srv/rmw.rs
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/rust/src/srv.rs
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/rust/build.rs
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/rust/Cargo.toml
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/srv/Example.idl
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/srv/Example.srv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/srv/Example_Request.msg
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/srv/Example_Response.msg
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/libcw1_team_13_cw1_class_lib.so
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib/cw1_team_13/cw1_solution_node
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/launch
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/launch/run_solution.launch.py
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/ament_index/resource_index/package_run_dependencies/cw1_team_13
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/ament_index/resource_index/parent_prefix_path/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/environment/ament_prefix_path.sh
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/environment/path.sh
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/environment/path.dsv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/local_setup.bash
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/local_setup.sh
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/local_setup.zsh
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/local_setup.dsv
+-- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.dsv
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/ament_index/resource_index/packages/cw1_team_13
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_generator_cExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_generator_cExport-release.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_typesupport_fastrtps_cExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_typesupport_fastrtps_cExport-release.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13__rosidl_typesupport_introspection_cExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13__rosidl_typesupport_introspection_cExport-release.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13__rosidl_typesupport_cExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13__rosidl_typesupport_cExport-release.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_generator_cppExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_typesupport_fastrtps_cppExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_typesupport_fastrtps_cppExport-release.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13__rosidl_typesupport_introspection_cppExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13__rosidl_typesupport_introspection_cppExport-release.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13__rosidl_typesupport_cppExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13__rosidl_typesupport_cppExport-release.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_generator_pyExport.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/export_cw1_team_13__rosidl_generator_pyExport-release.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/rosidl_cmake-extras.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/ament_cmake_export_targets-extras.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13Config.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/cmake/cw1_team_13Config-version.cmake
+-- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/share/cw1_team_13/package.xml

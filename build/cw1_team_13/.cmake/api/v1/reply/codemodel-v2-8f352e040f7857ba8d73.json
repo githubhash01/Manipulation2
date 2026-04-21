@@ -1,0 +1,276 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-e4dedc14bf6b2421aba6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						18,
+						19,
+						20
+					]
+				},
+				{
+					"build" : "cw1_team_13__py",
+					"jsonFile" : "directory-cw1_team_13__py-Release-3d5df53da7f928234f9f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13/cw1_team_13__py",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "cw1_team_13__rs",
+					"jsonFile" : "directory-cw1_team_13__rs-Release-2ea77db7748d1d220213.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13/cw1_team_13__rs",
+					"targetIndexes" : 
+					[
+						17
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "cw1_team_13",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_cw1_team_13_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_cw1_team_13_egg-Release-9f35130aeef006da79c7.json",
+					"name" : "ament_cmake_python_build_cw1_team_13_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_cw1_team_13::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_cw1_team_13-Release-3e970509946c4ad01cf3.json",
+					"name" : "ament_cmake_python_copy_cw1_team_13",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_solution_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_solution_node-Release-7276f4bd170eb993f71a.json",
+					"name" : "cw1_solution_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13-Release-1b9753c365d30f8f8c5e.json",
+					"name" : "cw1_team_13",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__cpp-Release-4ef8a5ca8b0add600012.json",
+					"name" : "cw1_team_13__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "cw1_team_13__py::@882e07bd25f78f491ae3",
+					"jsonFile" : "target-cw1_team_13__py-Release-35b0ac16f1bc16b8a575.json",
+					"name" : "cw1_team_13__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_generator_c-Release-077511083f37ea1aaeb5.json",
+					"name" : "cw1_team_13__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_generator_py-Release-b5caf6ad43470d2b3a9f.json",
+					"name" : "cw1_team_13__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_c-Release-9efb996acb75500e17f9.json",
+					"name" : "cw1_team_13__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_c__pyext-Release-f2c9b01dd81a07b1943e.json",
+					"name" : "cw1_team_13__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_cpp-Release-2a272fd0c7bdab16bbda.json",
+					"name" : "cw1_team_13__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_fastrtps_c-Release-536f7a12d488dc082141.json",
+					"name" : "cw1_team_13__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_fastrtps_c__pyext-Release-664c3cc1e25b73a30341.json",
+					"name" : "cw1_team_13__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_fastrtps_cpp-Release-76bd4a6a62991e899bd2.json",
+					"name" : "cw1_team_13__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_introspection_c-Release-ad2bc9c5586b80396245.json",
+					"name" : "cw1_team_13__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_introspection_c__pyext-Release-78188260702a8a30f8de.json",
+					"name" : "cw1_team_13__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13__rosidl_typesupport_introspection_cpp-Release-4dfe651dfc9d3cb9f285.json",
+					"name" : "cw1_team_13__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "cw1_team_13__rs::@c3e92bd7c26443c6a4d8",
+					"jsonFile" : "target-cw1_team_13__rs-Release-f7af5be57c6aa1340b14.json",
+					"name" : "cw1_team_13__rs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13_cw1_class_lib::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13_cw1_class_lib-Release-5fa488797f656b4abb7e.json",
+					"name" : "cw1_team_13_cw1_class_lib",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "cw1_team_13_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cw1_team_13_uninstall-Release-637b8999ee3c7a827ba1.json",
+					"name" : "cw1_team_13_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-589df931cae3590d86d2.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/hashim/Desktop/comp0250_s26_labs/build/cw1_team_13",
+		"source" : "/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw1_team_13"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

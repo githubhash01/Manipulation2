@@ -1,0 +1,23 @@
+[33mCMake Warning (dev) at CMakeLists.txt:23 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+[0m
+[01m[K/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/src/cw2_class.cpp:189:42:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Ksensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr cw2::getLatestCloud()[m[K’
+  189 | sensor_msgs::msg::PointCloud2::SharedPtr [01;31m[Kcw2[m[K::getLatestCloud()
+      |                                          [01;31m[K^~~[m[K
+[01m[K/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/src/cw2_class.cpp:189:42:[m[K [01;36m[Knote: [m[Kno functions named ‘[01m[Ksensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr cw2::getLatestCloud()[m[K’
+In file included from [01m[K/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/src/cw2_class.cpp:6[m[K:
+[01m[K/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/include/cw2_class.h:32:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass cw2[m[K’ defined here
+   32 | class [01;36m[Kcw2[m[K
+      |       [01;36m[K^~~[m[K
+gmake[2]: *** [CMakeFiles/cw2_team_13_cw2_class_lib.dir/build.make:76: CMakeFiles/cw2_team_13_cw2_class_lib.dir/src/cw2_class.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:614: CMakeFiles/cw2_team_13_cw2_class_lib.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

@@ -1,0 +1,118 @@
+[0.018s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13': CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/home/hashim/Desktop/comp0250_s26_labs/install/panda_description:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13 -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13
+[0.035s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.232s] -- Found rosidl_default_generators: 1.2.1 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.235s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.239s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.278s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.312s] -- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)
+[0.355s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.357s] -- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.486s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.540s] -- Found geometry_msgs: 4.9.1 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.552s] -- Found sensor_msgs: 4.9.1 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.571s] -- Found visualization_msgs: 4.9.1 (/opt/ros/humble/share/visualization_msgs/cmake)
+[0.593s] -- Found moveit_core: 2.5.9 (/opt/ros/humble/share/moveit_core/cmake)
+[0.610s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+[0.638s] -- Found parameter_traits: 0.7.1 (/opt/ros/humble/share/parameter_traits/cmake)
+[0.646s] -- Found rclcpp_lifecycle: 16.0.19 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+[0.668s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: filesystem 
+[0.706s] -- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+[0.728s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.970s] -- Found moveit_ros_planning_interface: 2.5.9 (/opt/ros/humble/share/moveit_ros_planning_interface/cmake)
+[0.976s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: date_time filesystem program_options system thread 
+[0.990s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread chrono 
+[1.024s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread system filesystem regex date_time program_options 
+[1.047s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread 
+[1.082s] -- Found pcl_ros: 2.4.5 (/opt/ros/humble/share/pcl_ros/cmake)
+[1.126s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[1.163s] -- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+[1.523s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.532s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[1.715s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[1.723s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.730s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[1.888s] -- Found Qhull version 8.0.2
+[2.054s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[2.234s] [33mCMake Warning (dev) at CMakeLists.txt:23 (find_package):
+[2.235s]   Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+[2.235s]   Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+[2.235s]   command to set the policy and suppress this warning.
+[2.235s] 
+[2.235s]   CMake variable PCL_ROOT is set to:
+[2.235s] 
+[2.235s]     /usr
+[2.235s] 
+[2.235s]   For compatibility, CMake is ignoring the variable.
+[2.236s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[2.236s] [0m
+[2.238s] -- Found cw2_world_spawner: 0.1.0 (/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/share/cw2_world_spawner/cmake)
+[2.612s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[2.902s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[3.294s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.329s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[3.357s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[3.357s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[3.357s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[3.549s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[3.558s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.560s] -- Configured cppcheck include dirs: /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/include
+[3.560s] -- Configured cppcheck exclude dirs and/or files: 
+[3.560s] -- Added test 'flake8' to check Python code syntax and style conventions
+[3.561s] -- Added test 'lint_cmake' to check CMake code style
+[3.561s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[3.562s] -- Added test 'uncrustify' to check C / C++ code style
+[3.563s] -- Configured uncrustify additional arguments: 
+[3.563s] -- Added test 'xmllint' to check XML markup files
+[3.564s] -- Configuring done
+[3.702s] -- Generating done
+[3.739s] -- Build files have been written to: /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13
+[3.763s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13' returned '0': CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/home/hashim/Desktop/comp0250_s26_labs/install/panda_description:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13 -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13
+[3.766s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13': CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/home/hashim/Desktop/comp0250_s26_labs/install/panda_description:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13 -- -j20 -l20
+[3.826s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_generator_c[0m
+[3.835s] [  2%] Built target cw2_team_13__rs
+[3.838s] [ 11%] Built target cw2_team_13__rosidl_generator_c
+[3.840s] [ 13%] Built target cw2_team_13__cpp
+[3.847s] [ 13%] Built target ament_cmake_python_copy_cw2_team_13
+[3.852s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_c[0m
+[3.853s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_introspection_c[0m
+[3.855s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_fastrtps_c[0m
+[3.860s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_cpp[0m
+[3.860s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_fastrtps_cpp[0m
+[3.860s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_introspection_cpp[0m
+[3.869s] [ 22%] Built target cw2_team_13__rosidl_typesupport_introspection_c
+[3.869s] [ 30%] Built target cw2_team_13__rosidl_typesupport_c
+[3.876s] [ 38%] Built target cw2_team_13__rosidl_typesupport_cpp
+[3.878s] [ 47%] Built target cw2_team_13__rosidl_typesupport_fastrtps_cpp
+[3.879s] [ 55%] Built target cw2_team_13__rosidl_typesupport_fastrtps_c
+[3.881s] [ 63%] Built target cw2_team_13__rosidl_typesupport_introspection_cpp
+[3.901s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13_cw2_class_lib[0m
+[3.915s] [ 63%] Built target cw2_team_13
+[3.954s] [ 66%] Built target cw2_team_13__py
+[3.956s] [ 69%] [32mBuilding CXX object CMakeFiles/cw2_team_13_cw2_class_lib.dir/src/cw2_class.cpp.o[0m
+[3.969s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_generator_py[0m
+[3.993s] [ 75%] Built target cw2_team_13__rosidl_generator_py
+[4.015s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_introspection_c__pyext[0m
+[4.018s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_fastrtps_c__pyext[0m
+[4.019s] [35m[1mConsolidate compiler generated dependencies of target cw2_team_13__rosidl_typesupport_c__pyext[0m
+[4.031s] [ 80%] Built target cw2_team_13__rosidl_typesupport_introspection_c__pyext
+[4.041s] [ 86%] Built target cw2_team_13__rosidl_typesupport_fastrtps_c__pyext
+[4.045s] [ 91%] Built target cw2_team_13__rosidl_typesupport_c__pyext
+[4.250s] running egg_info
+[4.251s] writing cw2_team_13.egg-info/PKG-INFO
+[4.251s] writing dependency_links to cw2_team_13.egg-info/dependency_links.txt
+[4.251s] writing top-level names to cw2_team_13.egg-info/top_level.txt
+[4.254s] reading manifest file 'cw2_team_13.egg-info/SOURCES.txt'
+[4.255s] writing manifest file 'cw2_team_13.egg-info/SOURCES.txt'
+[4.298s] [ 91%] Built target ament_cmake_python_build_cw2_team_13_egg
+[9.501s] [01m[K/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/src/cw2_class.cpp:189:42:[m[K [01;31m[Kerror: [m[Kno declaration matches ‘[01m[Ksensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr cw2::getLatestCloud()[m[K’
+[9.501s]   189 | sensor_msgs::msg::PointCloud2::SharedPtr [01;31m[Kcw2[m[K::getLatestCloud()
+[9.501s]       |                                          [01;31m[K^~~[m[K
+[9.501s] [01m[K/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/src/cw2_class.cpp:189:42:[m[K [01;36m[Knote: [m[Kno functions named ‘[01m[Ksensor_msgs::msg::PointCloud2_<std::allocator<void> >::SharedPtr cw2::getLatestCloud()[m[K’
+[9.501s] In file included from [01m[K/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/src/cw2_class.cpp:6[m[K:
+[9.501s] [01m[K/home/hashim/Desktop/comp0250_s26_labs/src/courseworks/cw2_team_13/include/cw2_class.h:32:7:[m[K [01;36m[Knote: [m[K‘[01m[Kclass cw2[m[K’ defined here
+[9.501s]    32 | class [01;36m[Kcw2[m[K
+[9.501s]       |       [01;36m[K^~~[m[K
+[13.038s] gmake[2]: *** [CMakeFiles/cw2_team_13_cw2_class_lib.dir/build.make:76: CMakeFiles/cw2_team_13_cw2_class_lib.dir/src/cw2_class.cpp.o] Error 1
+[13.038s] gmake[1]: *** [CMakeFiles/Makefile2:614: CMakeFiles/cw2_team_13_cw2_class_lib.dir/all] Error 2
+[13.038s] gmake: *** [Makefile:146: all] Error 2
+[13.041s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13' returned '2': CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner:/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_tutorial:/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/home/hashim/Desktop/comp0250_s26_labs/install/panda_description:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/cw2_world_spawner/lib:/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw2_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_team_13/lib:/home/hashim/Desktop/comp0250_s26_labs/install/cw1_world_spawner/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/cw2_team_13 -- -j20 -l20

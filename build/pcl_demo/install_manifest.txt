@@ -1,0 +1,17 @@
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/lib/pcl_demo/pcl_demo_node
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/include//pcl_demo/pcl_demo.hpp
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/ament_index/resource_index/package_run_dependencies/pcl_demo
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/ament_index/resource_index/parent_prefix_path/pcl_demo
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/environment/ament_prefix_path.sh
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/environment/ament_prefix_path.dsv
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/environment/path.sh
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/environment/path.dsv
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/local_setup.bash
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/local_setup.sh
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/local_setup.zsh
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/local_setup.dsv
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.dsv
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/ament_index/resource_index/packages/pcl_demo
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/cmake/pcl_demoConfig.cmake
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/cmake/pcl_demoConfig-version.cmake
+/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.xml

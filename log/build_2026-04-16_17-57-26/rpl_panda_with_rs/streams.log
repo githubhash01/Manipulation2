@@ -1,0 +1,61 @@
+[0.014s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/rpl_panda_with_rs -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs
+[0.097s] -- The C compiler identification is GNU 11.4.0
+[0.160s] -- The CXX compiler identification is GNU 11.4.0
+[0.169s] -- Detecting C compiler ABI info
+[0.240s] -- Detecting C compiler ABI info - done
+[0.247s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.247s] -- Detecting C compile features
+[0.248s] -- Detecting C compile features - done
+[0.251s] -- Detecting CXX compiler ABI info
+[0.333s] -- Detecting CXX compiler ABI info - done
+[0.342s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.342s] -- Detecting CXX compile features
+[0.343s] -- Detecting CXX compile features - done
+[0.351s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.535s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.725s] -- Configuring done
+[0.728s] -- Generating done
+[0.730s] -- Build files have been written to: /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs
+[0.737s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/rpl_panda_with_rs -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs
+[0.737s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs -- -j20 -l20
+[0.779s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs -- -j20 -l20
+[0.781s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs
+[0.789s] -- Install configuration: "Release"
+[0.789s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/config
+[0.789s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/config/moveit_controllers.yaml
+[0.789s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/config/ros2_controllers_effort.yaml
+[0.789s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/config/ros2_controllers.yaml
+[0.789s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/config/ros2_controllers_hybrid.yaml
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/launch
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/launch/camera_proc.launch.py
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/launch/display.launch
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/launch/display_real.launch
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/launch/display.launch.py
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/launch/camera_proc.launch
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/launch/display_real.launch.py
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/rviz
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/rviz/urdf.rviz
+[0.790s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/rviz/real_rviz.rviz
+[0.791s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/srdf
+[0.791s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/srdf/panda_with_rs.srdf.xacro
+[0.791s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/urdf
+[0.791s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/urdf/panda_with_rs.urdf
+[0.791s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/urdf/panda_with_rs.xacro
+[0.791s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/urdf/panda_with_rs_PYBULLET.urdf
+[0.791s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/lib/rpl_panda_with_rs/init_panda_pose.py
+[0.791s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/ament_index/resource_index/package_run_dependencies/rpl_panda_with_rs
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/ament_index/resource_index/parent_prefix_path/rpl_panda_with_rs
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/environment/ament_prefix_path.sh
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/environment/ament_prefix_path.dsv
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/environment/path.sh
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/environment/path.dsv
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/local_setup.bash
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/local_setup.sh
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/local_setup.zsh
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/local_setup.dsv
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.dsv
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/ament_index/resource_index/packages/rpl_panda_with_rs
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/cmake/rpl_panda_with_rsConfig.cmake
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/cmake/rpl_panda_with_rsConfig-version.cmake
+[0.792s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/rpl_panda_with_rs/share/rpl_panda_with_rs/package.xml
+[0.795s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs' returned '0': AMENT_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin:/home/hashim/Desktop/comp0250_s26_labs/install/panda_moveit_config:/opt/ros/humble LD_LIBRARY_PATH=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/home/hashim/Downloads/drake/lib /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/rpl_panda_with_rs

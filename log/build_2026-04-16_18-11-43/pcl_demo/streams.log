@@ -1,0 +1,60 @@
+[0.016s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_demo -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo
+[0.023s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.132s] -- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)
+[0.160s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.161s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.166s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.175s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.184s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.211s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.213s] -- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.308s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.349s] -- Found sensor_msgs: 4.9.1 (/opt/ros/humble/share/sensor_msgs/cmake)
+[0.370s] -- Found pcl_conversions: 2.4.5 (/opt/ros/humble/share/pcl_conversions/cmake)
+[0.405s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[0.430s] -- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+[0.704s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[0.710s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[0.818s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[0.825s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[0.831s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[0.976s] -- Found Qhull version 8.0.2
+[1.156s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.451s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.802s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.802s] -- Configured cppcheck include dirs: $<BUILD_INTERFACE:/home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_demo/include>
+[1.803s] -- Configured cppcheck exclude dirs and/or files: 
+[1.803s] -- Added test 'lint_cmake' to check CMake code style
+[1.805s] -- Added test 'uncrustify' to check C / C++ code style
+[1.805s] -- Configured uncrustify additional arguments: 
+[1.805s] -- Added test 'xmllint' to check XML markup files
+[1.806s] -- Configuring done
+[1.911s] -- Generating done
+[1.945s] -- Build files have been written to: /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo
+[2.001s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/labs/pcl_demo -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo
+[2.009s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo -- -j20 -l20
+[2.144s] [35m[1mConsolidate compiler generated dependencies of target pcl_demo_node[0m
+[2.220s] [100%] Built target pcl_demo_node
+[2.251s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo -- -j20 -l20
+[2.258s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo
+[2.272s] -- Install configuration: "Release"
+[2.273s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/lib/pcl_demo/pcl_demo_node
+[2.273s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/include/
+[2.274s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/include//pcl_demo
+[2.274s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/include//pcl_demo/pcl_demo.hpp
+[2.274s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/ament_index/resource_index/package_run_dependencies/pcl_demo
+[2.275s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/ament_index/resource_index/parent_prefix_path/pcl_demo
+[2.275s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/environment/ament_prefix_path.sh
+[2.275s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/environment/ament_prefix_path.dsv
+[2.275s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/environment/path.sh
+[2.276s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/environment/path.dsv
+[2.276s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/local_setup.bash
+[2.277s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/local_setup.sh
+[2.278s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/local_setup.zsh
+[2.281s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/local_setup.dsv
+[2.281s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.dsv
+[2.282s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/ament_index/resource_index/packages/pcl_demo
+[2.282s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/cmake/pcl_demoConfig.cmake
+[2.282s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/cmake/pcl_demoConfig-version.cmake
+[2.283s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/pcl_demo/share/pcl_demo/package.xml
+[2.284s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/pcl_demo

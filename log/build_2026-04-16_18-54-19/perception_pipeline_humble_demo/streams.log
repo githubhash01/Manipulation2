@@ -1,0 +1,38 @@
+[0.018s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo -- -j20 -l20
+[0.048s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo -- -j20 -l20
+[0.050s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo
+[0.072s] -- Install configuration: "Release"
+[0.072s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/launch
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/launch/depth_camera_environment.launch.py
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/launch/perception_pipeline_demo.launch.py
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/config
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/config/sensors_3d.yaml
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/config/sensors_3d_raw.yaml
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/urdf
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/urdf/realsense_d435
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/urdf/realsense_d435/camera.urdf.xacro
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/urdf/realsense_d435/macros.xacro
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/meshes
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/meshes/d435.dae
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/worlds
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/worlds/perception_pipeline_demo.world
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/rviz2
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/rviz2/perception_pipeline.rviz
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/rviz2/depth_camera_environment.rviz
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/lib/perception_pipeline_humble_demo/retime_pointclouds.py
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/ament_index/resource_index/package_run_dependencies/perception_pipeline_humble_demo
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/ament_index/resource_index/parent_prefix_path/perception_pipeline_humble_demo
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/environment/ament_prefix_path.sh
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/environment/ament_prefix_path.dsv
+[0.073s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/environment/path.sh
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/environment/path.dsv
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/local_setup.bash
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/local_setup.sh
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/local_setup.zsh
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/local_setup.dsv
+[0.074s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.dsv
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/ament_index/resource_index/packages/perception_pipeline_humble_demo
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/cmake/perception_pipeline_humble_demoConfig.cmake
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/cmake/perception_pipeline_humble_demoConfig-version.cmake
+[0.074s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/perception_pipeline_humble_demo/share/perception_pipeline_humble_demo/package.xml
+[0.106s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/perception_pipeline_humble_demo

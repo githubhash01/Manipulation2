@@ -1,0 +1,118 @@
+[0.018s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/realsense_gazebo_plugin -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin
+[0.029s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.137s] -- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)
+[0.170s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.172s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.179s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.185s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.193s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.216s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.218s] -- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.316s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.356s] -- Found gazebo_ros: 3.9.0 (/opt/ros/humble/share/gazebo_ros/cmake)
+[0.388s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[0.423s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+[0.425s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.432s] -- Searching for dependencies of ignition-math6
+[0.434s] -- Looking for OGRE...
+[0.439s] -- Found Ogre Ghadamon (1.9.0)
+[0.439s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[0.446s] -- Looking for OGRE_Paging...
+[0.446s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[0.446s] -- Looking for OGRE_Terrain...
+[0.446s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[0.446s] -- Looking for OGRE_Property...
+[0.446s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[0.446s] -- Looking for OGRE_RTShaderSystem...
+[0.446s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[0.446s] -- Looking for OGRE_Volume...
+[0.446s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[0.446s] -- Looking for OGRE_Overlay...
+[0.446s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[0.539s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.540s] -- Looking for ignition-transport8 -- found version 8.2.1
+[0.540s] -- Searching for dependencies of ignition-transport8
+[0.554s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") 
+[0.567s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[0.572s] -- Checking for module 'libzmq >= 4'
+[0.586s] --   Found libzmq , version 4.3.4
+[0.621s] -- Checking for module 'uuid'
+[0.631s] --   Found uuid, version 2.37.2
+[0.657s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[0.657s] -- Searching for dependencies of ignition-msgs5
+[0.672s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.676s] -- Checking for module 'tinyxml2'
+[0.687s] --   Found tinyxml2, version 9.0.0
+[0.715s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[0.716s] -- Looking for ignition-common3 -- found version 3.14.0
+[0.716s] -- Searching for dependencies of ignition-common3
+[0.716s] -- Looking for dlfcn.h - found
+[0.716s] -- Looking for libdl - found
+[0.727s] -- Searching for <ignition-common3> component [graphics]
+[0.728s] -- Looking for ignition-common3-graphics -- found version 3.14.0
+[0.728s] -- Searching for dependencies of ignition-common3-graphics
+[0.728s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.729s] -- Looking for ignition-fuel_tools4 -- found version 4.4.0
+[0.729s] -- Searching for dependencies of ignition-fuel_tools4
+[0.768s] -- Checking for module 'jsoncpp'
+[0.779s] --   Found jsoncpp, version 1.9.5
+[0.809s] -- Checking for module 'libzip'
+[0.821s] --   Found libzip, version 1.7.3
+[0.851s] -- Looking for ignition-common3 -- found version 3.14.0
+[0.852s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.852s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[0.853s] -- Gazebo version: 11.10
+[0.854s] -- Found image_transport: 3.1.12 (/opt/ros/humble/share/image_transport/cmake)
+[0.897s] -- Found point_cloud_transport: 1.0.21 (/opt/ros/humble/share/point_cloud_transport/cmake)
+[0.901s] -- Found camera_info_manager: 3.1.12 (/opt/ros/humble/share/camera_info_manager/cmake)
+[0.915s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.019s] -- Configuring done
+[1.039s] -- Generating done
+[1.045s] -- Build files have been written to: /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin
+[1.056s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/hashim/Desktop/comp0250_s26_labs/src/courseworks/realsense_gazebo_plugin -DCMAKE_INSTALL_PREFIX=/home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin
+[1.058s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin -- -j20 -l20
+[1.120s] [35m[1mConsolidate compiler generated dependencies of target realsense_gazebo_plugin[0m
+[1.191s] [100%] Built target realsense_gazebo_plugin
+[1.211s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin -- -j20 -l20
+[1.214s] Invoking command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin
+[1.229s] -- Install configuration: "Release"
+[1.229s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/lib/librealsense_gazebo_plugin.so
+[1.230s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/include/
+[1.230s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/include//realsense_gazebo_plugin
+[1.230s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/include//realsense_gazebo_plugin/gazebo_ros_realsense.hpp
+[1.231s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/include//realsense_gazebo_plugin/RealSensePlugin.hpp
+[1.231s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models
+[1.231s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models/realsense_camera
+[1.231s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models/realsense_camera/meshes
+[1.231s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models/realsense_camera/meshes/realsense.dae
+[1.232s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models/realsense_camera/materials
+[1.232s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models/realsense_camera/materials/textures
+[1.232s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models/realsense_camera/materials/textures/realsense_diffuse.png
+[1.232s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models/realsense_camera/model.config
+[1.232s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/models/realsense_camera/model.sdf
+[1.232s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/urdf
+[1.233s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/urdf/realsense-D435.macro.xacro
+[1.233s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/urdf/d435_simulation.xacro
+[1.233s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/urdf/multi_d435_simulation.xacro
+[1.233s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/worlds
+[1.233s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/worlds/realsense.world
+[1.233s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/environment/library_path.sh
+[1.234s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/environment/library_path.dsv
+[1.234s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/ament_index/resource_index/package_run_dependencies/realsense_gazebo_plugin
+[1.234s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/ament_index/resource_index/parent_prefix_path/realsense_gazebo_plugin
+[1.234s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/environment/ament_prefix_path.sh
+[1.235s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/environment/ament_prefix_path.dsv
+[1.237s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/environment/path.sh
+[1.237s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/environment/path.dsv
+[1.237s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/local_setup.bash
+[1.237s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/local_setup.sh
+[1.237s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/local_setup.zsh
+[1.238s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/local_setup.dsv
+[1.238s] -- Installing: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.dsv
+[1.238s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/ament_index/resource_index/packages/realsense_gazebo_plugin
+[1.238s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/cmake/ament_cmake_export_include_directories-extras.cmake
+[1.238s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/cmake/ament_cmake_export_libraries-extras.cmake
+[1.238s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/cmake/realsense_gazebo_pluginConfig.cmake
+[1.239s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/cmake/realsense_gazebo_pluginConfig-version.cmake
+[1.239s] -- Up-to-date: /home/hashim/Desktop/comp0250_s26_labs/install/realsense_gazebo_plugin/share/realsense_gazebo_plugin/package.xml
+[1.239s] Invoked command in '/home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/hashim/Desktop/comp0250_s26_labs/build/realsense_gazebo_plugin
