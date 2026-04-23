@@ -10,30 +10,115 @@ solution is contained within the cw2_team_<your_team_number> package */
 #include <memory>
 #include <mutex>
 #include <string>
+#include <vector>
+
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <moveit/robot_trajectory/robot_trajectory.h>
-#include <moveit/trajectory_processing/time_optimal_trajectory_generation.h>  
+#include <moveit/trajectory_processing/time_optimal_trajectory_generation.h>
+
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
+#include <pcl/io/pcd_io.h>
 #include <pcl_conversions/pcl_conversions.h>
+
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
+#include <geometry_msgs/msg/pose.hpp>
+
 #include <tf2_ros/buffer.h>
 #include <tf2_ros/transform_listener.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include <tf2_sensor_msgs/tf2_sensor_msgs.hpp>   // for doTransform on PointCloud2
+
+#include <opencv2/opencv.hpp>
+
+#include <Eigen/Geometry>
 
 #include "cw2_world_spawner/srv/task1_service.hpp"
 #include "cw2_world_spawner/srv/task2_service.hpp"
 #include "cw2_world_spawner/srv/task3_service.hpp"
-#include <Eigen/Geometry>
 
 typedef pcl::PointXYZRGBA PointT;
 typedef pcl::PointCloud<PointT> PointC;
 typedef PointC::Ptr PointCPtr;
 
+///////////////////////////////////////////////////////////////////////////////
+// Free helper types (used by free helper functions defined in cw2_class.cpp)
+///////////////////////////////////////////////////////////////////////////////
+
+struct ClusterInfo
+{
+  int label;
+  int size;
+  cv::Point2f centroid;
+  float height;
+  cv::Vec3f color;
+  std::string type;
+};
+
+struct ClusterResult
+{
+  std::vector<ClusterInfo> clusters;
+  cv::Mat labels;
+};
+
+struct MissionPlan
+{
+  bool valid = false;
+  cv::Point2f objectPose;
+  cv::Point2f goalPose;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// Free helper function declarations (defined in cw2_class.cpp)
+///////////////////////////////////////////////////////////////////////////////
+
+// Default argument values are specified in the definition in cw2_class.cpp.
+geometry_msgs::msg::Pose createPose(
+  float x,
+  float y,
+  float z,
+  float qx,
+  float qy,
+  float qz,
+  float qw);
+
+cv::Mat detectBasketRegion(const cv::Mat &imgFull, const cv::Mat &heightMap);
+
+// Default value for radius is specified in the definition in cw2_class.cpp.
+void filterRobot(cv::Mat &img, cv::Mat &heightMap, int radius);
+
+void makeWhiteBackground(cv::Mat &img);
+
+ClusterResult clusterImage(const cv::Mat &img, const cv::Mat &heightMap);
+
+std::vector<ClusterInfo> classifyClusters(
+  const std::vector<ClusterInfo> &clusters,
+  const cv::Mat &labels,
+  const cv::Mat &basketMask);
+
+MissionPlan planMission(const std::vector<ClusterInfo> &clusters);
+
+///////////////////////////////////////////////////////////////////////////////
+// cw2 class
+///////////////////////////////////////////////////////////////////////////////
+
 class cw2
 {
 public:
+  // Nested result type for pcdToTopdownImageWithHeight
+  struct TopDownResult
+  {
+    cv::Mat image;
+    cv::Mat heightMap;
+    float minX;
+    float minY;
+    float maxX;
+    float maxY;
+    int   gridSize;
+  };
+
   explicit cw2(const rclcpp::Node::SharedPtr &node);
 
   void t1_callback(
@@ -65,6 +150,8 @@ public:
 
   std::mutex cloud_mutex_;
   PointCPtr g_cloud_ptr;
+  // New
+  sensor_msgs::msg::PointCloud2::ConstSharedPtr g_cloud_msg_;
   std::uint64_t g_cloud_sequence_ = 0;
   std::string g_input_pc_frame_id_;
 
@@ -74,18 +161,22 @@ public:
 private:
   bool moveit_initialized_ = false;
   void initMoveit();
-  
+
+  // Motion helpers
   bool moveToTarget(geometry_msgs::msg::Pose target);
   bool openGripper();
   bool closeGripper();
   bool moveCartesian(geometry_msgs::msg::Pose target);
 
-
-
-  // Point Cloud helpers (using existing template members: tf_buffer_, cloud_mutex_, g_cloud_ptr)
+  // Point cloud / image I/O helpers
   void savePointCloudPCD(
     const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud,
     const std::string &filename);
+  void saveImage(
+    const cv::Mat &image,
+    const std::string &filename);
+
+  // Point cloud capture / processing helpers
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr capturePointCloudAtTarget(
     geometry_msgs::msg::Pose target);
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr combinePointClouds(
@@ -94,7 +185,10 @@ private:
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr filterTableFromPointCloud(
     const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud);
 
-
+  // Top-down projection helper (member because cpp defines it as cw2::)
+  TopDownResult pcdToTopdownImageWithHeight(
+    const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud,
+    int gridSize);
 };
 
 #endif  // CW2_CLASS_H_

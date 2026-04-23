@@ -455,7 +455,17 @@ cw2::TopDownResult cw2::pcdToTopdownImageWithHeight(
         }
     }
 
-    return {image, heightMap};
+    return {image, heightMap, minX, minY, maxX, maxY, gridSize};
+}
+
+// Convert a (col, row) pixel coordinate back into world (x, y) in panda_link0 frame.
+cv::Point2f pixelToWorld(const cv::Point2f &pixel, const cw2::TopDownResult &td)
+{
+  const float nx = pixel.x / static_cast<float>(td.gridSize - 1);
+  const float ny = pixel.y / static_cast<float>(td.gridSize - 1);
+  const float wx = td.minX + nx * (td.maxX - td.minX);
+  const float wy = td.minY + ny * (td.maxY - td.minY);
+  return cv::Point2f(wx, wy);
 }
 
 cv::Mat detectBasketRegion(const cv::Mat& imgFull, const cv::Mat& heightMap)
@@ -612,24 +622,28 @@ std::vector<ClusterInfo> classifyClusters(
     const cv::Mat& basketMask)
 {
     if (labels.empty() || basketMask.empty())
-    {
         throw std::runtime_error("labels or basketMask is empty");
-    }
 
     if (labels.type() != CV_32S)
-    {
         throw std::runtime_error("labels must be CV_32S");
-    }
 
     if (basketMask.type() != CV_8UC1)
-    {
         throw std::runtime_error("basketMask must be CV_8UC1");
-    }
 
     if (labels.size() != basketMask.size())
-    {
         throw std::runtime_error("labels and basketMask must have same size");
-    }
+
+    // Make sure basket mask is binary 0/255
+    cv::Mat basketBinary;
+    cv::threshold(basketMask, basketBinary, 0, 255, cv::THRESH_BINARY);
+
+    // Dilated basket mask gives some tolerance for slight projection / mask mismatch
+    cv::Mat basketDilated;
+    cv::Mat kernel = cv::getStructuringElement(
+        cv::MORPH_ELLIPSE,
+        cv::Size(7, 7)
+    );
+    cv::dilate(basketBinary, basketDilated, kernel);
 
     std::vector<ClusterInfo> classified;
     classified.reserve(clusters.size());
@@ -639,24 +653,45 @@ std::vector<ClusterInfo> classifyClusters(
         ClusterInfo out = c;
         int labelId = c.label;
 
-        cv::Mat clusterMask = (labels == labelId);   // 0 / 255, CV_8U
+        cv::Mat clusterMask = (labels == labelId); // CV_8U, 0/255
 
-        // Basket override
+        int clusterArea = cv::countNonZero(clusterMask);
+        if (clusterArea == 0)
+        {
+            out.type = "unknown";
+            classified.push_back(out);
+            continue;
+        }
+
         cv::Mat overlapMask;
-        cv::bitwise_and(clusterMask, basketMask, overlapMask);
+        cv::bitwise_and(clusterMask, basketBinary, overlapMask);
         int overlap = cv::countNonZero(overlapMask);
 
-        if (overlap > 50)
+        cv::Mat overlapDilatedMask;
+        cv::bitwise_and(clusterMask, basketDilated, overlapDilatedMask);
+        int overlapDilated = cv::countNonZero(overlapDilatedMask);
+
+        double basketRatio =
+            static_cast<double>(overlap) / static_cast<double>(clusterArea);
+
+        double basketRatioDilated =
+            static_cast<double>(overlapDilated) / static_cast<double>(clusterArea);
+
+        // Strong basket veto: anything sufficiently overlapping / near basket
+        // must not be allowed to fall through into nought/cross logic.
+        if (
+            overlap > 20 ||
+            overlapDilated > 30 ||
+            basketRatio > 0.10 ||
+            basketRatioDilated > 0.15
+        )
         {
             out.type = "basket";
         }
         else
         {
-            // OpenCV color is BGR, but mean(color) is unchanged by channel order
             float meanColor = (c.color[0] + c.color[1] + c.color[2]) / 3.0f;
 
-            // Python used threshold 0.2 on float [0,1]
-            // Equivalent in uint8 [0,255] is about 51
             if (meanColor < 51.0f)
             {
                 out.type = "obstacle";
@@ -700,13 +735,9 @@ std::vector<ClusterInfo> classifyClusters(
                 double centerMean = cv::mean(center)[0] / 255.0;
 
                 if (centerMean < 0.2)
-                {
                     out.type = "nought";
-                }
                 else
-                {
                     out.type = "cross";
-                }
             }
         }
 
@@ -801,7 +832,108 @@ void cw2::t1_callback(
 {
   // (void)request;
   // (void)response;
+  initMoveit();
 
+  // Step 1: Scan the table
+  auto combined = scanTable();
+  savePointCloudPCD(combined, "/tmp/cw2_scan_combined.pcd");
+
+  // Step 2: Remove the green table
+  auto filtered = filterTableFromPointCloud(combined);
+  savePointCloudPCD(filtered, "/tmp/cw2_scan_filtered.pcd");
+
+  // Step 3: Convert PCD to topdown RGB image both with filtered and full 
+  TopDownResult filtered_result = pcdToTopdownImageWithHeight(filtered, 256);
+  saveImage(filtered_result.image, "/tmp/cw2_topdown.png"); 
+
+  TopDownResult full_result = pcdToTopdownImageWithHeight(combined, 256);
+  saveImage(full_result.image, "/tmp/cw2_full_topdown.png");
+
+  // Step 4: Detect basket region (for later classification)
+  cv::Mat basket_mask = detectBasketRegion(full_result.image, full_result.heightMap);
+  saveImage(basket_mask, "/tmp/cw2_basket_mask.png");
+
+  // Step 5: White background + filter robot
+  filterRobot(filtered_result.image, filtered_result.heightMap, 40);
+  makeWhiteBackground(filtered_result.image);
+  saveImage(filtered_result.image, "/tmp/cw2_processed.png");
+
+  // Step 6: Cluster the image and print info about each cluster
+  ClusterResult cluster_result = clusterImage(filtered_result.image, filtered_result.heightMap);
+  // Print cluster info
+  for (const auto& cluster : cluster_result.clusters)
+  {    RCLCPP_INFO(node_->get_logger(),
+      "Cluster %d: size=%d centroid=(%.1f, %.1f) height=%.3f color=(B=%.1f, G=%.1f, R=%.1f)",
+      cluster.label,
+      cluster.size,
+      cluster.centroid.x,
+      cluster.centroid.y,
+      cluster.height,
+      cluster.color[0],
+      cluster.color[1],
+      cluster.color[2]);
+  }
+
+  // Step 7: Classify clusters and print results
+  std::vector<ClusterInfo> classified = classifyClusters(cluster_result.clusters, cluster_result.labels, basket_mask);
+  for (const auto& cluster : classified)
+  {
+      RCLCPP_INFO(node_->get_logger(),
+          "Cluster %d classified as '%s': size=%d centroid=(%.1f, %.1f) height=%.3f color=(B=%.1f, G=%.1f, R=%.1f)",
+          cluster.label,
+          cluster.type.c_str(),
+          cluster.size,
+          cluster.centroid.x,
+          cluster.centroid.y,
+          cluster.height,
+          cluster.color[0],
+          cluster.color[1],
+          cluster.color[2]);
+  }
+
+  // Step 8: Plan mission 
+  MissionPlan mission = planMission(classified);
+
+
+  // print mission plan
+  if (mission.valid)
+  {    
+    cv::Point2f pick_w  = pixelToWorld(mission.objectPose, filtered_result);
+    cv::Point2f place_w = pixelToWorld(mission.goalPose,   filtered_result);
+    RCLCPP_INFO(node_->get_logger(),
+      "Mission: pick at world (%.3f, %.3f), place at world (%.3f, %.3f)",
+      pick_w.x, pick_w.y, place_w.x, place_w.y);
+
+    geometry_msgs::msg::TransformStamped tf;
+    tf = tf_buffer_.lookupTransform(
+        "panda_link0",
+        "world",
+        tf2::TimePointZero,
+        tf2::durationFromSec(2.0));
+
+    // convert world (x,y) to panda_link0 (x,y) using TF
+    float wx = pick_w.x;
+    float wy = pick_w.y;
+    float wz = 0.75; // fixed height for picking TODO - change this 
+    geometry_msgs::msg::PointStamped pick_world;
+    pick_world.header.frame_id = "world";
+    pick_world.point.x = wx;
+    pick_world.point.y = wy;
+    pick_world.point.z = wz;
+    geometry_msgs::msg::PointStamped pick_panda;
+    tf2::doTransform(pick_world, pick_panda, tf);
+
+    // print pick position in panda_link0 frame
+    RCLCPP_INFO(node_->get_logger(),
+      "Pick position in panda_link0 frame: (%.3f, %.3f, %.3f)",
+      pick_panda.point.x, pick_panda.point.y, pick_panda.point.z);
+
+  }
+  else  {
+      RCLCPP_WARN(node_->get_logger(), "Mission plan is invalid");
+  } 
+
+  
   // Step 1: Print out object position, goal position, shape type from request 
 
   const auto & object_point = request->object_point;
@@ -947,16 +1079,15 @@ void cw2::t3_callback(
   // Step 8: Plan mission 
   MissionPlan mission = planMission(classified);
 
+
   // print mission plan
   if (mission.valid)
   {    
+    cv::Point2f pick_w  = pixelToWorld(mission.objectPose, filtered_result);
+    cv::Point2f place_w = pixelToWorld(mission.goalPose,   filtered_result);
     RCLCPP_INFO(node_->get_logger(),
-        "Mission plan: pick at (%.1f, %.1f) and place at (%.1f, %.1f)",
-        mission.objectPose.x,
-        mission.objectPose.y,
-        mission.goalPose.x,
-        mission.goalPose.y);
-
+      "Mission: pick at world (%.3f, %.3f), place at world (%.3f, %.3f)",
+      pick_w.x, pick_w.y, place_w.x, place_w.y);
   }
   else  {
       RCLCPP_WARN(node_->get_logger(), "Mission plan is invalid");
