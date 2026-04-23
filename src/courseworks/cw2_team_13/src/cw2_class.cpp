@@ -262,123 +262,6 @@ void cw2::saveImage(
   return pcl_cloud;
 }
 
-// pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
-//   geometry_msgs::msg::Pose target)
-// {
-//   moveToTarget(target);
-//   rclcpp::sleep_for(std::chrono::milliseconds(1000));
- 
-//   sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud_msg;
-//   {
-//     std::lock_guard<std::mutex> lock(cloud_mutex_);
-//     cloud_msg = g_cloud_msg_;
-//   }
-//   if (!cloud_msg) return nullptr;
- 
-//   // Look up transform from camera frame to world frame
-//   geometry_msgs::msg::TransformStamped tf;
-//   try {
-//     tf = tf_buffer_.lookupTransform(
-//         "world",
-//         cloud_msg->header.frame_id,
-//         tf2::TimePointZero,
-//         tf2::durationFromSec(2.0));
-//   } catch (const tf2::TransformException &ex) {
-//     RCLCPP_ERROR(node_->get_logger(), "TF lookup failed: %s", ex.what());
-//     return nullptr;
-//   }
- 
-//   // Transform the cloud to world frame
-//   sensor_msgs::msg::PointCloud2 cloud_world;
-//   tf2::doTransform(*cloud_msg, cloud_world, tf);
- 
-//   // Convert to PCL
-//   auto pcl_cloud = std::make_shared<pcl::PointCloud<pcl::PointXYZRGB>>();
-//   pcl::fromROSMsg(cloud_world, *pcl_cloud);
- 
-//   RCLCPP_INFO(node_->get_logger(), "Captured %zu points in world frame", pcl_cloud->size());
-//   return pcl_cloud;
-// }
-
-
-// pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
-//   geometry_msgs::msg::Pose target)
-// {
-//   std::uint64_t old_seq;
-//   {
-//     std::lock_guard<std::mutex> lock(cloud_mutex_);
-//     old_seq = g_cloud_sequence_;
-//   }
-
-//   moveToTarget(target);
-
-//   // Wait for a NEW cloud after the move
-//   const auto start = std::chrono::steady_clock::now();
-//   while (rclcpp::ok()) {
-//     {
-//       std::lock_guard<std::mutex> lock(cloud_mutex_);
-//       if (g_cloud_ptr && !g_cloud_ptr->empty() && g_cloud_sequence_ > old_seq) {
-//         break;
-//       }
-//     }
-
-//     if (std::chrono::steady_clock::now() - start > std::chrono::seconds(2)) {
-//       RCLCPP_ERROR(node_->get_logger(), "Timed out waiting for fresh point cloud");
-//       return nullptr;
-//     }
-
-//     rclcpp::sleep_for(std::chrono::milliseconds(50));
-//   }
-
-//   PointCPtr cloud_rgba;
-//   std::string frame_id;
-//   {
-//     std::lock_guard<std::mutex> lock(cloud_mutex_);
-//     cloud_rgba = std::make_shared<PointC>(*g_cloud_ptr);
-//     frame_id = g_input_pc_frame_id_;
-//   }
-
-//   geometry_msgs::msg::TransformStamped tf_stamped;
-//   try {
-//     tf_stamped = tf_buffer_.lookupTransform(
-//         "world", frame_id,
-//         tf2::TimePointZero, tf2::durationFromSec(2.0));
-//   } catch (const tf2::TransformException &ex) {
-//     RCLCPP_ERROR(node_->get_logger(), "TF lookup failed: %s", ex.what());
-//     return nullptr;
-//   }
-
-//   Eigen::Affine3f transform = Eigen::Affine3f::Identity();
-//   const auto &t = tf_stamped.transform.translation;
-//   const auto &r = tf_stamped.transform.rotation;
-//   transform.translation() << t.x, t.y, t.z;
-//   Eigen::Quaternionf q(r.w, r.x, r.y, r.z);
-//   transform.rotate(q);
-
-//   auto pcl_cloud = std::make_shared<pcl::PointCloud<pcl::PointXYZRGB>>();
-//   pcl_cloud->reserve(cloud_rgba->size());
-
-//   for (const auto &pt : cloud_rgba->points) {
-//     if (!std::isfinite(pt.x) || !std::isfinite(pt.y) || !std::isfinite(pt.z)) {
-//       continue;
-//     }
-
-//     Eigen::Vector3f p = transform * Eigen::Vector3f(pt.x, pt.y, pt.z);
-
-//     pcl::PointXYZRGB rgb_pt;
-//     rgb_pt.x = p.x();
-//     rgb_pt.y = p.y();
-//     rgb_pt.z = p.z();
-//     rgb_pt.r = pt.r;
-//     rgb_pt.g = pt.g;
-//     rgb_pt.b = pt.b;
-//     pcl_cloud->push_back(rgb_pt);
-//   }
-
-//   RCLCPP_INFO(node_->get_logger(), "Captured %zu points in world frame", pcl_cloud->size());
-//   return pcl_cloud;
-// }
-
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::combinePointClouds(
   const std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> &clouds)
 {
@@ -450,54 +333,6 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
   return combinePointClouds(clouds);
 }
 
-// pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
-// {
-//   std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> clouds;
-
-//   // Camera pointing straight down: EEF Z-axis flipped to world -Z.
-//   // Quaternion (x=1, y=0, z=0, w=0) = 180 deg rotation about x-axis.
-//   auto makeDownPose = [](float x, float y, float z) {
-//     return createPose(x, y, z, 1.0f, 0.0f, 0.0f, 0.0f);
-//   };
-
-//   // 3x3 overhead grid covering the full table.
-//   // x: +forward, -backward (Franka convention)
-//   // y: +left, -right
-//   // z: height above panda_link0
-//   const float z = 0.6f;
-//   const float r = 0.4f;  // half-extent of the grid in x and y
-
-//   const std::vector<std::pair<float, float>> grid = {
-//     {-r, -r}, {-r, 0.0f}, {-r, +r},   // back row  (x = -r)
-//     {0.0f, -r}, {0.0f, 0.0f}, {0.0f, +r},  // middle row (x =  0)
-//     {+r, -r}, {+r, 0.0f}, {+r, +r},   // front row (x = +r)
-//   };
-
-//   int idx = 0;
-//   for (const auto &[x, y] : grid) {
-//     auto pose = makeDownPose(x, y, z);
-//     auto cloud = capturePointCloudAtTarget(pose);
-
-//     if (!cloud || cloud->empty()) {
-//       RCLCPP_WARN(node_->get_logger(),
-//         "Scan viewpoint %d (x=%.2f, y=%.2f) failed to capture", idx, x, y);
-//     } else {
-//       RCLCPP_INFO(node_->get_logger(),
-//         "Scan viewpoint %d (x=%.2f, y=%.2f): %zu points",
-//         idx, x, y, cloud->size());
-//       savePointCloudPCD(cloud, "/tmp/cw2_scan_" + std::to_string(idx) + ".pcd");
-//       clouds.push_back(cloud);
-//     }
-//     ++idx;
-//   }
-
-//   if (clouds.empty()) {
-//     RCLCPP_ERROR(node_->get_logger(), "No viewpoints succeeded");
-//     return nullptr;
-//   }
-
-//   return combinePointClouds(clouds);
-// }
 
 // Filters Input Point Cloud to Remove Table 
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::filterTableFromPointCloud(
@@ -626,96 +461,40 @@ cw2::TopDownResult cw2::pcdToTopdownImageWithHeight(
 cv::Mat detectBasketRegion(const cv::Mat& imgFull, const cv::Mat& heightMap)
 {
     if (imgFull.empty() || imgFull.type() != CV_8UC3)
-    {
         throw std::runtime_error("Input image must be CV_8UC3");
-    }
     if (heightMap.empty() || heightMap.type() != CV_32FC1)
-    {
         throw std::runtime_error("Input height map must be CV_32FC1");
-    }
     if (imgFull.size() != heightMap.size())
-    {
         throw std::runtime_error("Image and height map must have same size");
-    }
 
-    // Split channels (BGR order!)
-    std::vector<cv::Mat> channels;
-    cv::split(imgFull, channels);
+    // Convert BGR -> HSV
+    cv::Mat hsv;
+    cv::cvtColor(imgFull, hsv, cv::COLOR_BGR2HSV);
 
-    cv::Mat b = channels[0];
-    cv::Mat g = channels[1];
-    cv::Mat r = channels[2];
+    // Split channels: H(0-180), S(0-255), V(0-255)
+    std::vector<cv::Mat> ch;
+    cv::split(hsv, ch);
+    cv::Mat H = ch[0], S = ch[1], V = ch[2];
 
-    // Color threshold: reddish/brownish
-    cv::Mat maskR, maskG, maskB;
-    cv::threshold(r, maskR, 102, 255, cv::THRESH_BINARY);        // r > 0.4
-    cv::threshold(g, maskG, 89, 255, cv::THRESH_BINARY_INV);     // g < 0.35
-    cv::threshold(b, maskB, 89, 255, cv::THRESH_BINARY_INV);     // b < 0.35
+    // Basket = dark red (low V distinguishes it from bright red rings/crosses)
+    //   reddish hue:   H < 15 OR H > 165  (red wraps around)
+    //   saturated:     S > 80
+    //   dark:          V < 160
+    cv::Mat hueLow, hueHigh, reddish;
+    cv::threshold(H, hueLow,  14, 255, cv::THRESH_BINARY_INV);   // H < 15
+    cv::threshold(H, hueHigh, 165, 255, cv::THRESH_BINARY);      // H > 165
+    reddish = hueLow | hueHigh;
 
-    cv::Mat brownMask = maskR & maskG & maskB;
+    cv::Mat satMask, darkMask;
+    cv::threshold(S, satMask,  80, 255, cv::THRESH_BINARY);       // S > 80
+    cv::threshold(V, darkMask, 160, 255, cv::THRESH_BINARY_INV);  // V < 160
 
-    // Find lowest valid height among brown pixels
-    float minHeight = std::numeric_limits<float>::infinity();
+    cv::Mat basketMask = reddish & satMask & darkMask;
 
-    for (int y = 0; y < heightMap.rows; ++y)
-    {
-        const float* hRow = heightMap.ptr<float>(y);
-        const uchar* mRow = brownMask.ptr<uchar>(y);
-
-        for (int x = 0; x < heightMap.cols; ++x)
-        {
-            if (mRow[x] == 0)
-                continue;
-
-            float h = hRow[x];
-            if (!std::isfinite(h))
-                continue;
-
-            if (h < minHeight)
-                minHeight = h;
-        }
-    }
-
-    if (!std::isfinite(minHeight))
-    {
-        return cv::Mat::zeros(imgFull.size(), CV_8UC1);
-    }
-
-    // Keep only brown pixels close to the minimum height
-    // Tune this margin if needed
-    const float heightMargin = 0.02f;   // 2 cm above lowest brown point
-
-    cv::Mat lowHeightMask = cv::Mat::zeros(heightMap.size(), CV_8UC1);
-
-    for (int y = 0; y < heightMap.rows; ++y)
-    {
-        const float* hRow = heightMap.ptr<float>(y);
-        uchar* outRow = lowHeightMask.ptr<uchar>(y);
-
-        for (int x = 0; x < heightMap.cols; ++x)
-        {
-            float h = hRow[x];
-            if (!std::isfinite(h))
-                continue;
-
-            if (h <= minHeight + heightMargin)
-                outRow[x] = 255;
-        }
-    }
-
-    cv::Mat basketMask = brownMask & lowHeightMask;
-
-    // Optional cleanup
-    cv::morphologyEx(
-        basketMask,
-        basketMask,
-        cv::MORPH_OPEN,
+    // Morphology cleanup: open to kill specks, close to fill the basket
+    cv::morphologyEx(basketMask, basketMask, cv::MORPH_OPEN,
         cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)));
-
-    cv::morphologyEx(
-        basketMask,
-        basketMask,
-        cv::MORPH_CLOSE,
+    cv::morphologyEx(basketMask, basketMask, cv::MORPH_CLOSE,
         cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5)));
 
     return basketMask;
@@ -1126,7 +905,6 @@ void cw2::t3_callback(
   // Step 4: Detect basket region (for later classification)
   cv::Mat basket_mask = detectBasketRegion(full_result.image, full_result.heightMap);
   saveImage(basket_mask, "/tmp/cw2_basket_mask.png");
-
 
   // Step 5: White background + filter robot
   filterRobot(filtered_result.image, filtered_result.heightMap, 40);
