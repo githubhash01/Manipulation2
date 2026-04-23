@@ -64,6 +64,7 @@ void cw2::cloud_callback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr msg
   std::lock_guard<std::mutex> lock(cloud_mutex_);
   g_input_pc_frame_id_ = msg->header.frame_id;
   g_cloud_ptr = std::move(latest_cloud);
+  g_cloud_msg_ = msg;                  // <-- keep the raw msg too
   ++g_cloud_sequence_;
 }
 
@@ -200,58 +201,183 @@ void cw2::savePointCloudPCD(
   RCLCPP_INFO(node_->get_logger(), "Saved %zu points to %s", cloud->size(), filename.c_str());
 }
 
-// Moves to target, captures the cloud in PCL format 
-pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
+// Helper to save OpenCV image (BGR) to disk
+void cw2::saveImage(
+    const cv::Mat& image,
+    const std::string& filename)
+{
+    if (image.empty()) {
+        RCLCPP_WARN(node_->get_logger(), "Empty image, skipping save");
+        return;
+    }
+
+    if (!cv::imwrite(filename, image)) {
+        RCLCPP_WARN(node_->get_logger(), "Failed to save image to %s", filename.c_str());
+        return;
+    }
+
+    RCLCPP_INFO(
+        node_->get_logger(),
+        "Saved image %dx%d to %s",
+        image.cols,
+        image.rows,
+        filename.c_str());
+}
+
+// --- Replacement for capturePointCloudAtTarget ---
+ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
   geometry_msgs::msg::Pose target)
 {
-  // moveCartesian(target);
-  moveToTarget(target);
-  rclcpp::sleep_for(std::chrono::milliseconds(1000));
+  moveCartesian(target);
+   // allow some time for the cloud to update after moving
+  rclcpp::sleep_for(std::chrono::milliseconds(4000)); 
 
-  // Grab cloud from the template's storage (g_cloud_ptr is PointXYZRGBA)
-  PointCPtr cloud_rgba;
-  std::string frame_id;
+  sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud_msg;
   {
     std::lock_guard<std::mutex> lock(cloud_mutex_);
-    if (!g_cloud_ptr || g_cloud_ptr->empty()) return nullptr;
-    cloud_rgba = std::make_shared<PointC>(*g_cloud_ptr);
-    frame_id = g_input_pc_frame_id_;
+    cloud_msg = g_cloud_msg_;
   }
+  if (!cloud_msg) return nullptr;
 
-  // Look up transform using the template's tf_buffer_ (value, not pointer)
-  geometry_msgs::msg::TransformStamped tf_stamped;
+  // Look up transform from camera frame to world frame
+  geometry_msgs::msg::TransformStamped tf;
   try {
-    tf_stamped = tf_buffer_.lookupTransform(
-        "panda_link0", frame_id,
-        tf2::TimePointZero, tf2::durationFromSec(2.0));
+    tf = tf_buffer_.lookupTransform(
+        "world",
+        cloud_msg->header.frame_id,
+        tf2::TimePointZero,
+        tf2::durationFromSec(2.0));
   } catch (const tf2::TransformException &ex) {
     RCLCPP_ERROR(node_->get_logger(), "TF lookup failed: %s", ex.what());
     return nullptr;
   }
 
-  // Apply transform manually and convert RGBA -> RGB
-  Eigen::Affine3f transform = Eigen::Affine3f::Identity();
-  auto &t = tf_stamped.transform.translation;
-  auto &r = tf_stamped.transform.rotation;
-  transform.translation() << t.x, t.y, t.z;
-  Eigen::Quaternionf q(r.w, r.x, r.y, r.z);
-  transform.rotate(q);
+  // Transform the cloud to world frame
+  sensor_msgs::msg::PointCloud2 cloud_world;
+  tf2::doTransform(*cloud_msg, cloud_world, tf);
 
+  // Convert to PCL
   auto pcl_cloud = std::make_shared<pcl::PointCloud<pcl::PointXYZRGB>>();
-  pcl_cloud->reserve(cloud_rgba->size());
-
-  for (const auto &pt : cloud_rgba->points) {
-    if (!std::isfinite(pt.x)) continue;
-    Eigen::Vector3f p = transform * Eigen::Vector3f(pt.x, pt.y, pt.z);
-    pcl::PointXYZRGB rgb_pt;
-    rgb_pt.x = p.x(); rgb_pt.y = p.y(); rgb_pt.z = p.z();
-    rgb_pt.r = pt.r; rgb_pt.g = pt.g; rgb_pt.b = pt.b;
-    pcl_cloud->push_back(rgb_pt);
-  }
-
-  RCLCPP_INFO(node_->get_logger(), "Captured %zu points in world frame", pcl_cloud->size());
+  pcl::fromROSMsg(cloud_world, *pcl_cloud);
   return pcl_cloud;
 }
+
+// pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
+//   geometry_msgs::msg::Pose target)
+// {
+//   moveToTarget(target);
+//   rclcpp::sleep_for(std::chrono::milliseconds(1000));
+ 
+//   sensor_msgs::msg::PointCloud2::ConstSharedPtr cloud_msg;
+//   {
+//     std::lock_guard<std::mutex> lock(cloud_mutex_);
+//     cloud_msg = g_cloud_msg_;
+//   }
+//   if (!cloud_msg) return nullptr;
+ 
+//   // Look up transform from camera frame to world frame
+//   geometry_msgs::msg::TransformStamped tf;
+//   try {
+//     tf = tf_buffer_.lookupTransform(
+//         "world",
+//         cloud_msg->header.frame_id,
+//         tf2::TimePointZero,
+//         tf2::durationFromSec(2.0));
+//   } catch (const tf2::TransformException &ex) {
+//     RCLCPP_ERROR(node_->get_logger(), "TF lookup failed: %s", ex.what());
+//     return nullptr;
+//   }
+ 
+//   // Transform the cloud to world frame
+//   sensor_msgs::msg::PointCloud2 cloud_world;
+//   tf2::doTransform(*cloud_msg, cloud_world, tf);
+ 
+//   // Convert to PCL
+//   auto pcl_cloud = std::make_shared<pcl::PointCloud<pcl::PointXYZRGB>>();
+//   pcl::fromROSMsg(cloud_world, *pcl_cloud);
+ 
+//   RCLCPP_INFO(node_->get_logger(), "Captured %zu points in world frame", pcl_cloud->size());
+//   return pcl_cloud;
+// }
+
+
+// pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
+//   geometry_msgs::msg::Pose target)
+// {
+//   std::uint64_t old_seq;
+//   {
+//     std::lock_guard<std::mutex> lock(cloud_mutex_);
+//     old_seq = g_cloud_sequence_;
+//   }
+
+//   moveToTarget(target);
+
+//   // Wait for a NEW cloud after the move
+//   const auto start = std::chrono::steady_clock::now();
+//   while (rclcpp::ok()) {
+//     {
+//       std::lock_guard<std::mutex> lock(cloud_mutex_);
+//       if (g_cloud_ptr && !g_cloud_ptr->empty() && g_cloud_sequence_ > old_seq) {
+//         break;
+//       }
+//     }
+
+//     if (std::chrono::steady_clock::now() - start > std::chrono::seconds(2)) {
+//       RCLCPP_ERROR(node_->get_logger(), "Timed out waiting for fresh point cloud");
+//       return nullptr;
+//     }
+
+//     rclcpp::sleep_for(std::chrono::milliseconds(50));
+//   }
+
+//   PointCPtr cloud_rgba;
+//   std::string frame_id;
+//   {
+//     std::lock_guard<std::mutex> lock(cloud_mutex_);
+//     cloud_rgba = std::make_shared<PointC>(*g_cloud_ptr);
+//     frame_id = g_input_pc_frame_id_;
+//   }
+
+//   geometry_msgs::msg::TransformStamped tf_stamped;
+//   try {
+//     tf_stamped = tf_buffer_.lookupTransform(
+//         "world", frame_id,
+//         tf2::TimePointZero, tf2::durationFromSec(2.0));
+//   } catch (const tf2::TransformException &ex) {
+//     RCLCPP_ERROR(node_->get_logger(), "TF lookup failed: %s", ex.what());
+//     return nullptr;
+//   }
+
+//   Eigen::Affine3f transform = Eigen::Affine3f::Identity();
+//   const auto &t = tf_stamped.transform.translation;
+//   const auto &r = tf_stamped.transform.rotation;
+//   transform.translation() << t.x, t.y, t.z;
+//   Eigen::Quaternionf q(r.w, r.x, r.y, r.z);
+//   transform.rotate(q);
+
+//   auto pcl_cloud = std::make_shared<pcl::PointCloud<pcl::PointXYZRGB>>();
+//   pcl_cloud->reserve(cloud_rgba->size());
+
+//   for (const auto &pt : cloud_rgba->points) {
+//     if (!std::isfinite(pt.x) || !std::isfinite(pt.y) || !std::isfinite(pt.z)) {
+//       continue;
+//     }
+
+//     Eigen::Vector3f p = transform * Eigen::Vector3f(pt.x, pt.y, pt.z);
+
+//     pcl::PointXYZRGB rgb_pt;
+//     rgb_pt.x = p.x();
+//     rgb_pt.y = p.y();
+//     rgb_pt.z = p.z();
+//     rgb_pt.r = pt.r;
+//     rgb_pt.g = pt.g;
+//     rgb_pt.b = pt.b;
+//     pcl_cloud->push_back(rgb_pt);
+//   }
+
+//   RCLCPP_INFO(node_->get_logger(), "Captured %zu points in world frame", pcl_cloud->size());
+//   return pcl_cloud;
+// }
 
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::combinePointClouds(
   const std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> &clouds)
@@ -268,55 +394,110 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
 {
   std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> clouds;
 
-  /*
-  
-  Scanning pattern (8 views around the table, 45 degrees apart, at 0.7m height):
-  
-        Front
-         ^
-         |
-   Back < > Front
-         |
-         v
-        Back
-  */
-  const float displacement = 0.4; // how far left/right from the center
+  // Orientation: roll=pi, pitch=0, yaw=-pi/4.
+  // The roll flips the EEF so its +Z points world -Z (camera looks down).
+  // The -pi/4 yaw cancels the camera's 45-degree mount offset on panda_link8
+  // so the cloud's axes align with world x/y after transform.
+  auto makeDownPose = [](double x, double y, double z) {
+    tf2::Quaternion q;
+    q.setRPY(M_PI, 0.0, -M_PI / 4.0);
+    geometry_msgs::msg::Pose pose;
+    pose.position.x = x;
+    pose.position.y = y;
+    pose.position.z = z;
+    pose.orientation = tf2::toMsg(q);
+    return pose;
+  };
 
-  auto pose = createPose(displacement, 0.0, 0.7);
+  // 8-cell perimeter grid around the robot base (center omitted to save time;
+  // the robot base would occlude that view anyway).
+  // x: +forward, -backward. y: +left, -right (Franka convention).
+  // Sides pushed further out (0.5) to better reach the table edges.
+  const std::vector<std::pair<double, double>> scan_grid = {
+    { 0.4,  0.4}, { 0.4,  0.0}, { 0.4, -0.4},   // front row
+    { 0.0,  0.5},               { 0.0, -0.5},   // mid row (sides only)
+    {-0.4,  0.4}, {-0.4,  0.0}, {-0.4, -0.4},   // back row
+  };
 
-  // Front middle 
-  clouds.push_back(capturePointCloudAtTarget(pose));
+  const double z = 0.75;
 
-  // Front right
-  pose.position.y = displacement; 
-  clouds.push_back(capturePointCloudAtTarget(pose));
+  int idx = 0;
+  for (const auto &[x, y] : scan_grid) {
+    RCLCPP_INFO(node_->get_logger(),
+      "Scanning cell %d/%zu: [x=%.2f, y=%.2f]",
+      idx + 1, scan_grid.size(), x, y);
 
-  // Middle right
-  pose.position.x = 0.0; 
-  clouds.push_back(capturePointCloudAtTarget(pose));
+    auto pose = makeDownPose(x, y, z);
+    auto cloud = capturePointCloudAtTarget(pose);
 
-  // Back right
-  pose.position.x = -displacement;
-  clouds.push_back(capturePointCloudAtTarget(pose));
+    if (!cloud || cloud->empty()) {
+      RCLCPP_WARN(node_->get_logger(),
+        "Cell at [%.2f, %.2f] unreachable or empty. Moving to next.", x, y);
+    } else {
+      RCLCPP_INFO(node_->get_logger(),
+        "Cell %d (x=%.2f, y=%.2f): %zu points", idx, x, y, cloud->size());
+      savePointCloudPCD(cloud, "/tmp/cw2_scan_" + std::to_string(idx) + ".pcd");
+      clouds.push_back(cloud);
+    }
+    ++idx;
+  }
 
-  // Back middle
-  pose.position.y = 0.0;
-  clouds.push_back(capturePointCloudAtTarget(pose));
-
-  // Back left
-  pose.position.y = -displacement;
-  clouds.push_back(capturePointCloudAtTarget(pose));
-
-  // Middle left
-  pose.position.x = 0.0;
-  clouds.push_back(capturePointCloudAtTarget(pose));
-
-  // Front left
-  pose.position.x = displacement;
-  clouds.push_back(capturePointCloudAtTarget(pose));
+  if (clouds.empty()) {
+    RCLCPP_ERROR(node_->get_logger(), "No viewpoints succeeded");
+    return nullptr;
+  }
 
   return combinePointClouds(clouds);
 }
+
+// pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
+// {
+//   std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> clouds;
+
+//   // Camera pointing straight down: EEF Z-axis flipped to world -Z.
+//   // Quaternion (x=1, y=0, z=0, w=0) = 180 deg rotation about x-axis.
+//   auto makeDownPose = [](float x, float y, float z) {
+//     return createPose(x, y, z, 1.0f, 0.0f, 0.0f, 0.0f);
+//   };
+
+//   // 3x3 overhead grid covering the full table.
+//   // x: +forward, -backward (Franka convention)
+//   // y: +left, -right
+//   // z: height above panda_link0
+//   const float z = 0.6f;
+//   const float r = 0.4f;  // half-extent of the grid in x and y
+
+//   const std::vector<std::pair<float, float>> grid = {
+//     {-r, -r}, {-r, 0.0f}, {-r, +r},   // back row  (x = -r)
+//     {0.0f, -r}, {0.0f, 0.0f}, {0.0f, +r},  // middle row (x =  0)
+//     {+r, -r}, {+r, 0.0f}, {+r, +r},   // front row (x = +r)
+//   };
+
+//   int idx = 0;
+//   for (const auto &[x, y] : grid) {
+//     auto pose = makeDownPose(x, y, z);
+//     auto cloud = capturePointCloudAtTarget(pose);
+
+//     if (!cloud || cloud->empty()) {
+//       RCLCPP_WARN(node_->get_logger(),
+//         "Scan viewpoint %d (x=%.2f, y=%.2f) failed to capture", idx, x, y);
+//     } else {
+//       RCLCPP_INFO(node_->get_logger(),
+//         "Scan viewpoint %d (x=%.2f, y=%.2f): %zu points",
+//         idx, x, y, cloud->size());
+//       savePointCloudPCD(cloud, "/tmp/cw2_scan_" + std::to_string(idx) + ".pcd");
+//       clouds.push_back(cloud);
+//     }
+//     ++idx;
+//   }
+
+//   if (clouds.empty()) {
+//     RCLCPP_ERROR(node_->get_logger(), "No viewpoints succeeded");
+//     return nullptr;
+//   }
+
+//   return combinePointClouds(clouds);
+// }
 
 // Filters Input Point Cloud to Remove Table 
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::filterTableFromPointCloud(
@@ -360,9 +541,475 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::filterTableFromPointCloud(
   return filtered;
 }
 
+// Converts PCD to top-down RGB image and height map
+cw2::TopDownResult cw2::pcdToTopdownImageWithHeight(
+    const pcl::PointCloud<pcl::PointXYZRGB>::Ptr& cloud,
+    int gridSize)
+{
+    if (!cloud || cloud->empty())
+    {
+        throw std::runtime_error("Input cloud is null or empty.");
+    }
 
+    if (gridSize <= 0)
+    {
+        throw std::runtime_error("gridSize must be > 0.");
+    }
 
+    float minX = std::numeric_limits<float>::infinity();
+    float minY = std::numeric_limits<float>::infinity();
+    float maxX = -std::numeric_limits<float>::infinity();
+    float maxY = -std::numeric_limits<float>::infinity();
 
+    // Find XY bounds
+    for (const auto& pt : cloud->points)
+    {
+        if (!std::isfinite(pt.x) || !std::isfinite(pt.y) || !std::isfinite(pt.z))
+            continue;
+
+        minX = std::min(minX, pt.x);
+        minY = std::min(minY, pt.y);
+        maxX = std::max(maxX, pt.x);
+        maxY = std::max(maxY, pt.y);
+    }
+
+    if (!std::isfinite(minX) || !std::isfinite(minY) ||
+        !std::isfinite(maxX) || !std::isfinite(maxY))
+    {
+        throw std::runtime_error("No valid finite points found in cloud.");
+    }
+
+    float scaleX = maxX - minX;
+    float scaleY = maxY - minY;
+
+    if (scaleX == 0.0f) scaleX = 1e-6f;
+    if (scaleY == 0.0f) scaleY = 1e-6f;
+
+    // OpenCV uses BGR by default
+    cv::Mat image(gridSize, gridSize, CV_8UC3, cv::Scalar(0, 0, 0));
+    cv::Mat heightMap(
+        gridSize,
+        gridSize,
+        CV_32FC1,
+        cv::Scalar(-std::numeric_limits<float>::infinity()));
+
+    for (const auto& pt : cloud->points)
+    {
+        if (!std::isfinite(pt.x) || !std::isfinite(pt.y) || !std::isfinite(pt.z))
+            continue;
+
+        float normX = (pt.x - minX) / scaleX;
+        float normY = (pt.y - minY) / scaleY;
+
+        int px = static_cast<int>(normX * (gridSize - 1));
+        int py = static_cast<int>(normY * (gridSize - 1));
+
+        // Clamp just in case of floating-point edge cases
+        px = std::max(0, std::min(px, gridSize - 1));
+        py = std::max(0, std::min(py, gridSize - 1));
+
+        float z = pt.z;
+        float& currentHeight = heightMap.at<float>(py, px);
+
+        if (z > currentHeight)
+        {
+            currentHeight = z;
+
+            // PCL stores color as RGB, OpenCV expects BGR
+            image.at<cv::Vec3b>(py, px) = cv::Vec3b(pt.b, pt.g, pt.r);
+        }
+    }
+
+    return {image, heightMap};
+}
+
+cv::Mat detectBasketRegion(const cv::Mat& imgFull, const cv::Mat& heightMap)
+{
+    if (imgFull.empty() || imgFull.type() != CV_8UC3)
+    {
+        throw std::runtime_error("Input image must be CV_8UC3");
+    }
+    if (heightMap.empty() || heightMap.type() != CV_32FC1)
+    {
+        throw std::runtime_error("Input height map must be CV_32FC1");
+    }
+    if (imgFull.size() != heightMap.size())
+    {
+        throw std::runtime_error("Image and height map must have same size");
+    }
+
+    // Split channels (BGR order!)
+    std::vector<cv::Mat> channels;
+    cv::split(imgFull, channels);
+
+    cv::Mat b = channels[0];
+    cv::Mat g = channels[1];
+    cv::Mat r = channels[2];
+
+    // Color threshold: reddish/brownish
+    cv::Mat maskR, maskG, maskB;
+    cv::threshold(r, maskR, 102, 255, cv::THRESH_BINARY);        // r > 0.4
+    cv::threshold(g, maskG, 89, 255, cv::THRESH_BINARY_INV);     // g < 0.35
+    cv::threshold(b, maskB, 89, 255, cv::THRESH_BINARY_INV);     // b < 0.35
+
+    cv::Mat brownMask = maskR & maskG & maskB;
+
+    // Find lowest valid height among brown pixels
+    float minHeight = std::numeric_limits<float>::infinity();
+
+    for (int y = 0; y < heightMap.rows; ++y)
+    {
+        const float* hRow = heightMap.ptr<float>(y);
+        const uchar* mRow = brownMask.ptr<uchar>(y);
+
+        for (int x = 0; x < heightMap.cols; ++x)
+        {
+            if (mRow[x] == 0)
+                continue;
+
+            float h = hRow[x];
+            if (!std::isfinite(h))
+                continue;
+
+            if (h < minHeight)
+                minHeight = h;
+        }
+    }
+
+    if (!std::isfinite(minHeight))
+    {
+        return cv::Mat::zeros(imgFull.size(), CV_8UC1);
+    }
+
+    // Keep only brown pixels close to the minimum height
+    // Tune this margin if needed
+    const float heightMargin = 0.02f;   // 2 cm above lowest brown point
+
+    cv::Mat lowHeightMask = cv::Mat::zeros(heightMap.size(), CV_8UC1);
+
+    for (int y = 0; y < heightMap.rows; ++y)
+    {
+        const float* hRow = heightMap.ptr<float>(y);
+        uchar* outRow = lowHeightMask.ptr<uchar>(y);
+
+        for (int x = 0; x < heightMap.cols; ++x)
+        {
+            float h = hRow[x];
+            if (!std::isfinite(h))
+                continue;
+
+            if (h <= minHeight + heightMargin)
+                outRow[x] = 255;
+        }
+    }
+
+    cv::Mat basketMask = brownMask & lowHeightMask;
+
+    // Optional cleanup
+    cv::morphologyEx(
+        basketMask,
+        basketMask,
+        cv::MORPH_OPEN,
+        cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)));
+
+    cv::morphologyEx(
+        basketMask,
+        basketMask,
+        cv::MORPH_CLOSE,
+        cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5)));
+
+    return basketMask;
+}
+
+void filterRobot(cv::Mat& img, cv::Mat& heightMap, int radius = 40)
+{
+    if (img.empty() || heightMap.empty())
+        return;
+
+    int h = img.rows;
+    int w = img.cols;
+
+    int cx = w / 2;
+    int cy = h / 2;
+
+    int x0 = std::max(0, cx - radius);
+    int x1 = std::min(w, cx + radius);
+    int y0 = std::max(0, cy - radius);
+    int y1 = std::min(h, cy + radius);
+
+    // Define ROI
+    cv::Rect roi(x0, y0, x1 - x0, y1 - y0);
+
+    // Set image to white (BGR = 255,255,255)
+    img(roi).setTo(cv::Scalar(255, 255, 255));
+
+    // Set height map to -inf
+    heightMap(roi).setTo(-std::numeric_limits<float>::infinity());
+}
+
+void makeWhiteBackground(cv::Mat& img)
+{
+    std::vector<cv::Mat> channels;
+    cv::split(img, channels);
+
+    cv::Mat sum = channels[0] + channels[1] + channels[2];
+
+    cv::Mat mask = (sum == 0);
+
+    img.setTo(cv::Scalar(255, 255, 255), mask);
+}
+
+// NOTE: ClusterInfo and ClusterResult are defined in cw2_class.h
+
+ClusterResult clusterImage(const cv::Mat& img, const cv::Mat& heightMap)
+{
+    CV_Assert(img.type() == CV_8UC3);
+    CV_Assert(heightMap.type() == CV_32FC1);
+    CV_Assert(img.size() == heightMap.size());
+
+    // Foreground = any non-white pixel 
+    cv::Mat gray, binary;
+    cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+    binary = gray < 250;
+
+    cv::Mat labels, stats, centroids;
+    int numLabels = cv::connectedComponentsWithStats(
+        binary, labels, stats, centroids, 8, CV_32S);
+
+    // Accumulators per label
+    std::vector<double> sumH(numLabels, 0.0);
+    std::vector<int>    cntH(numLabels, 0);
+    std::vector<cv::Vec3d> sumC(numLabels, cv::Vec3d(0, 0, 0));
+
+    // Single pass over the image
+    for (int y = 0; y < labels.rows; ++y)
+    {
+        const int*       lrow = labels.ptr<int>(y);
+        const cv::Vec3b* irow = img.ptr<cv::Vec3b>(y);
+        const float*     hrow = heightMap.ptr<float>(y);
+
+        for (int x = 0; x < labels.cols; ++x)
+        {
+            int l = lrow[x];
+            if (l == 0) continue;
+
+            sumC[l][0] += irow[x][0];
+            sumC[l][1] += irow[x][1];
+            sumC[l][2] += irow[x][2];
+
+            if (std::isfinite(hrow[x])) {
+                sumH[l] += hrow[x];
+                cntH[l] += 1;
+            }
+        }
+    }
+
+    std::vector<ClusterInfo> clusters;
+    for (int l = 1; l < numLabels; ++l)
+    {
+        int size = stats.at<int>(l, cv::CC_STAT_AREA);
+        if (size < 50) continue;
+
+        ClusterInfo c;
+        c.label    = l;
+        c.size     = size;
+        c.centroid = cv::Point2f(
+            static_cast<float>(centroids.at<double>(l, 0)),
+            static_cast<float>(centroids.at<double>(l, 1)));
+        c.height   = (cntH[l] > 0) ? static_cast<float>(sumH[l] / cntH[l]) : 0.0f;
+        c.color    = cv::Vec3f(
+            static_cast<float>(sumC[l][0] / size),
+            static_cast<float>(sumC[l][1] / size),
+            static_cast<float>(sumC[l][2] / size));
+        clusters.push_back(c);
+    }
+
+    return {clusters, labels};
+}
+
+std::vector<ClusterInfo> classifyClusters(
+    const std::vector<ClusterInfo>& clusters,
+    const cv::Mat& labels,
+    const cv::Mat& basketMask)
+{
+    if (labels.empty() || basketMask.empty())
+    {
+        throw std::runtime_error("labels or basketMask is empty");
+    }
+
+    if (labels.type() != CV_32S)
+    {
+        throw std::runtime_error("labels must be CV_32S");
+    }
+
+    if (basketMask.type() != CV_8UC1)
+    {
+        throw std::runtime_error("basketMask must be CV_8UC1");
+    }
+
+    if (labels.size() != basketMask.size())
+    {
+        throw std::runtime_error("labels and basketMask must have same size");
+    }
+
+    std::vector<ClusterInfo> classified;
+    classified.reserve(clusters.size());
+
+    for (const auto& c : clusters)
+    {
+        ClusterInfo out = c;
+        int labelId = c.label;
+
+        cv::Mat clusterMask = (labels == labelId);   // 0 / 255, CV_8U
+
+        // Basket override
+        cv::Mat overlapMask;
+        cv::bitwise_and(clusterMask, basketMask, overlapMask);
+        int overlap = cv::countNonZero(overlapMask);
+
+        if (overlap > 50)
+        {
+            out.type = "basket";
+        }
+        else
+        {
+            // OpenCV color is BGR, but mean(color) is unchanged by channel order
+            float meanColor = (c.color[0] + c.color[1] + c.color[2]) / 3.0f;
+
+            // Python used threshold 0.2 on float [0,1]
+            // Equivalent in uint8 [0,255] is about 51
+            if (meanColor < 51.0f)
+            {
+                out.type = "obstacle";
+            }
+            else
+            {
+                std::vector<cv::Point> points;
+                cv::findNonZero(clusterMask, points);
+
+                if (points.empty())
+                {
+                    out.type = "unknown";
+                    classified.push_back(out);
+                    continue;
+                }
+
+                cv::Rect bbox = cv::boundingRect(points);
+                cv::Mat crop = clusterMask(bbox);
+
+                int h = crop.rows;
+                int w = crop.cols;
+
+                int y0 = h / 3;
+                int y1 = 2 * h / 3;
+                int x0 = w / 3;
+                int x1 = 2 * w / 3;
+
+                int centerH = y1 - y0;
+                int centerW = x1 - x0;
+
+                if (centerH <= 0 || centerW <= 0)
+                {
+                    out.type = "unknown";
+                    classified.push_back(out);
+                    continue;
+                }
+
+                cv::Rect centerRect(x0, y0, centerW, centerH);
+                cv::Mat center = crop(centerRect);
+
+                double centerMean = cv::mean(center)[0] / 255.0;
+
+                if (centerMean < 0.2)
+                {
+                    out.type = "nought";
+                }
+                else
+                {
+                    out.type = "cross";
+                }
+            }
+        }
+
+        classified.push_back(out);
+    }
+
+    return classified;
+}
+
+// NOTE: MissionPlan is defined in cw2_class.h
+
+MissionPlan planMission(const std::vector<ClusterInfo>& clusters)
+{
+    std::vector<ClusterInfo> noughts;
+    std::vector<ClusterInfo> crosses;
+    std::vector<ClusterInfo> baskets;
+
+    for (const auto& c : clusters)
+    {
+        if (c.type == "nought")
+        {
+            noughts.push_back(c);
+        }
+        else if (c.type == "cross")
+        {
+            crosses.push_back(c);
+        }
+        else if (c.type == "basket")
+        {
+            baskets.push_back(c);
+        }
+    }
+
+    if (baskets.empty() || (noughts.empty() && crosses.empty()))
+    {
+        // RCLCPP_WARN(node_->get_logger(),
+        //     "planMission: no basket or no nought/cross candidates found");
+        return {};
+    }
+
+    // Largest basket
+    const ClusterInfo* basket = &baskets[0];
+    for (const auto& b : baskets)
+    {
+        if (b.size > basket->size)
+        {
+            basket = &b;
+        }
+    }
+
+    const float bx = basket->centroid.x;
+    const float by = basket->centroid.y;
+
+    // Tie goes to cross
+    const std::vector<ClusterInfo>& candidates =
+        (crosses.size() >= noughts.size()) ? crosses : noughts;
+
+    // Find candidate closest to basket
+    const ClusterInfo* chosen = &candidates[0];
+    float bestDistSq =
+        (chosen->centroid.x - bx) * (chosen->centroid.x - bx) +
+        (chosen->centroid.y - by) * (chosen->centroid.y - by);
+
+    for (const auto& c : candidates)
+    {
+        float dx = c.centroid.x - bx;
+        float dy = c.centroid.y - by;
+        float distSq = dx * dx + dy * dy;
+
+        if (distSq < bestDistSq)
+        {
+            bestDistSq = distSq;
+            chosen = &c;
+        }
+    }
+
+    MissionPlan plan;
+    plan.valid = true;
+    plan.objectPose = chosen->centroid;
+    plan.goalPose = basket->centroid;
+    return plan;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Implementations
@@ -461,21 +1108,85 @@ void cw2::t3_callback(
 {
   initMoveit();
 
-  // Scan the table
+  // Step 1: Scan the table
   auto combined = scanTable();
   savePointCloudPCD(combined, "/tmp/cw2_scan_combined.pcd");
 
-  // Remove the green table
+  // Step 2: Remove the green table
   auto filtered = filterTableFromPointCloud(combined);
   savePointCloudPCD(filtered, "/tmp/cw2_scan_filtered.pcd");
 
-  RCLCPP_INFO(node_->get_logger(), "Saved combined (%zu pts) and filtered (%zu pts) clouds",
-              combined ? combined->size() : 0,
-              filtered ? filtered->size() : 0);
+  // Step 3: Convert PCD to topdown RGB image both with filtered and full 
+  TopDownResult filtered_result = pcdToTopdownImageWithHeight(filtered, 256);
+  saveImage(filtered_result.image, "/tmp/cw2_topdown.png"); 
 
-  // TODO: clustering and shape detection
+  TopDownResult full_result = pcdToTopdownImageWithHeight(combined, 256);
+  saveImage(full_result.image, "/tmp/cw2_full_topdown.png");
+
+  // Step 4: Detect basket region (for later classification)
+  cv::Mat basket_mask = detectBasketRegion(full_result.image, full_result.heightMap);
+  saveImage(basket_mask, "/tmp/cw2_basket_mask.png");
+
+
+  // Step 5: White background + filter robot
+  filterRobot(filtered_result.image, filtered_result.heightMap, 40);
+  makeWhiteBackground(filtered_result.image);
+  saveImage(filtered_result.image, "/tmp/cw2_processed.png");
+
+  // Step 6: Cluster the image and print info about each cluster
+  ClusterResult cluster_result = clusterImage(filtered_result.image, filtered_result.heightMap);
+  // Print cluster info
+  for (const auto& cluster : cluster_result.clusters)
+  {    RCLCPP_INFO(node_->get_logger(),
+      "Cluster %d: size=%d centroid=(%.1f, %.1f) height=%.3f color=(B=%.1f, G=%.1f, R=%.1f)",
+      cluster.label,
+      cluster.size,
+      cluster.centroid.x,
+      cluster.centroid.y,
+      cluster.height,
+      cluster.color[0],
+      cluster.color[1],
+      cluster.color[2]);
+  }
+
+  // Step 7: Classify clusters and print results
+  std::vector<ClusterInfo> classified = classifyClusters(cluster_result.clusters, cluster_result.labels, basket_mask);
+  for (const auto& cluster : classified)
+  {
+      RCLCPP_INFO(node_->get_logger(),
+          "Cluster %d classified as '%s': size=%d centroid=(%.1f, %.1f) height=%.3f color=(B=%.1f, G=%.1f, R=%.1f)",
+          cluster.label,
+          cluster.type.c_str(),
+          cluster.size,
+          cluster.centroid.x,
+          cluster.centroid.y,
+          cluster.height,
+          cluster.color[0],
+          cluster.color[1],
+          cluster.color[2]);
+  }
+
+  // Step 8: Plan mission 
+  MissionPlan mission = planMission(classified);
+
+  // print mission plan
+  if (mission.valid)
+  {    
+    RCLCPP_INFO(node_->get_logger(),
+        "Mission plan: pick at (%.1f, %.1f) and place at (%.1f, %.1f)",
+        mission.objectPose.x,
+        mission.objectPose.y,
+        mission.goalPose.x,
+        mission.goalPose.y);
+
+  }
+  else  {
+      RCLCPP_WARN(node_->get_logger(), "Mission plan is invalid");
+  } 
+
+
   (void)request;
   response->total_num_shapes = 0;
   response->num_most_common_shape = 0;
-  response->most_common_shape_vector.clear();
+  response->most_common_shape_vector.clear(); 
 }
