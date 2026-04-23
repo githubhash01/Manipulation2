@@ -25,6 +25,7 @@ find_package(octomap REQUIRED)
 find_package(octomap_msgs REQUIRED)
 find_package(shape_msgs REQUIRED)
 find_package(cw2_world_spawner REQUIRED)
+find_package(OpenCV REQUIRED)
 
 set(srv_files
   "srv/Example.srv"
@@ -39,6 +40,7 @@ include_directories(
   include
   ${PCL_INCLUDE_DIRS}
   ${OCTOMAP_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 add_library(${PROJECT_NAME}_cw2_class_lib
@@ -68,8 +70,8 @@ ament_target_dependencies(${PROJECT_NAME}_cw2_class_lib
 target_link_libraries(${PROJECT_NAME}_cw2_class_lib
   ${PCL_LIBRARIES}
   ${OCTOMAP_LIBRARIES}
+  ${OpenCV_LIBS}
 )
-
 add_executable(cw2_solution_node src/cw2_node.cpp)
 
 ament_target_dependencies(cw2_solution_node
