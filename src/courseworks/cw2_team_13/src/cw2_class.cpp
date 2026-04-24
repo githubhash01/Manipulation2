@@ -185,6 +185,17 @@ geometry_msgs::msg::Pose createPose(
   return pose;
 }
 
+geometry_msgs::msg::PointStamped createPointStamped(
+  float x, float y, float z, const std::string &frame_id)
+{
+  geometry_msgs::msg::PointStamped ps;
+  ps.header.frame_id = frame_id;
+  ps.point.x = x;
+  ps.point.y = y;
+  ps.point.z = z;
+  return ps;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Point Cloud Helpers 
 ///////////////////////////////////////////////////////////////////////////////
@@ -228,7 +239,7 @@ void cw2::saveImage(
  pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
   geometry_msgs::msg::Pose target)
 {
-  moveCartesian(target);
+  moveToTarget(target);
    // allow some time for the cloud to update after moving
   rclcpp::sleep_for(std::chrono::milliseconds(4000)); 
 
@@ -277,34 +288,13 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::combinePointClouds(
 // Scans Table with 8 Viewpoints 
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
 {
-  std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> clouds;
-
-  // Orientation: roll=pi, pitch=0, yaw=-pi/4.
-  // The roll flips the EEF so its +Z points world -Z (camera looks down).
-  // The -pi/4 yaw cancels the camera's 45-degree mount offset on panda_link8
-  // so the cloud's axes align with world x/y after transform.
-  auto makeDownPose = [](double x, double y, double z) {
-    tf2::Quaternion q;
-    q.setRPY(M_PI, 0.0, -M_PI / 4.0);
-    geometry_msgs::msg::Pose pose;
-    pose.position.x = x;
-    pose.position.y = y;
-    pose.position.z = z;
-    pose.orientation = tf2::toMsg(q);
-    return pose;
-  };
-
-  // 8-cell perimeter grid around the robot base (center omitted to save time;
-  // the robot base would occlude that view anyway).
-  // x: +forward, -backward. y: +left, -right (Franka convention).
-  // Sides pushed further out (0.5) to better reach the table edges.
-  const std::vector<std::pair<double, double>> scan_grid = {
-    { 0.4,  0.4}, { 0.4,  0.0}, { 0.4, -0.4},   // front row
-    { 0.0,  0.5},               { 0.0, -0.5},   // mid row (sides only)
-    {-0.4,  0.4}, {-0.4,  0.0}, {-0.4, -0.4},   // back row
-  };
-
+  std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> clouds; 
   const double z = 0.75;
+  const std::vector<std::pair<double, double>> scan_grid = {
+    { 0.4,  0.4}, { 0.4,  0.0}, { 0.4, -0.4},   
+    { 0.0,  0.5},               { 0.0, -0.5},   
+    {-0.4,  0.4}, {-0.4,  0.0}, {-0.4, -0.4},   
+  };
 
   int idx = 0;
   for (const auto &[x, y] : scan_grid) {
@@ -312,7 +302,7 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
       "Scanning cell %d/%zu: [x=%.2f, y=%.2f]",
       idx + 1, scan_grid.size(), x, y);
 
-    auto pose = makeDownPose(x, y, z);
+    auto pose = createPose(x, y, z, 0.9239, -0.3827, 0.0, 0.0);
     auto cloud = capturePointCloudAtTarget(pose);
 
     if (!cloud || cloud->empty()) {
@@ -335,7 +325,6 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
   return combinePointClouds(clouds);
 }
 
-// Filters Input Point Cloud to Remove Table 
 // Filters Input Point Cloud to Remove Table and Robot
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::filterTableFromPointCloud(
   const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud)
@@ -575,8 +564,6 @@ void makeWhiteBackground(cv::Mat& img)
     img.setTo(cv::Scalar(255, 255, 255), mask);
 }
 
-// NOTE: ClusterInfo and ClusterResult are defined in cw2_class.h
-
 ClusterResult clusterImage(const cv::Mat& img, const cv::Mat& heightMap){
     CV_Assert(img.type() == CV_8UC3);
     CV_Assert(heightMap.type() == CV_32FC1);
@@ -773,13 +760,13 @@ std::vector<ClusterInfo> classifyClusters(
     return classified;
 }
 
-// NOTE: MissionPlan is defined in cw2_class.h
 struct MissionPlanPixels {
   bool valid = false;
   cv::Point2f objectPixel;
   cv::Point2f goalPixel;
   std::string objectType;
 };
+
 MissionPlanPixels planMission(const std::vector<ClusterInfo>& clusters)
 {
     std::vector<ClusterInfo> noughts;
@@ -804,8 +791,6 @@ MissionPlanPixels planMission(const std::vector<ClusterInfo>& clusters)
 
     if (baskets.empty() || (noughts.empty() && crosses.empty()))
     {
-        // RCLCPP_WARN(node_->get_logger(),
-        //     "planMission: no basket or no nought/cross candidates found");
         return {};
     }
 
@@ -853,13 +838,13 @@ MissionPlanPixels planMission(const std::vector<ClusterInfo>& clusters)
     return plan;
 }
 
-MissionPlan cw2::perception_pipeline(){
-  
-  initMoveit();                                        // member — no cw2::
-  auto combined = scanTable();                         // member
+MissionPlan cw2::perception_pipeline()
+{
+  initMoveit();
+  auto combined = scanTable();
   savePointCloudPCD(combined, "/tmp/cw2_scan_combined.pcd");
 
-  auto filtered = filterTableFromPointCloud(combined); // member
+  auto filtered = filterTableFromPointCloud(combined);
   savePointCloudPCD(filtered, "/tmp/cw2_scan_filtered.pcd");
 
   TopDownResult filtered_result = pcdToTopdownImageWithHeight(filtered, 256);
@@ -868,81 +853,77 @@ MissionPlan cw2::perception_pipeline(){
   TopDownResult full_result = pcdToTopdownImageWithHeight(combined, 256);
   saveImage(full_result.image, "/tmp/cw2_full_topdown.png");
 
-  cv::Mat basket_mask = detectBasketRegion(full_result.image, full_result.heightMap);  // free — no cw2::
+  cv::Mat basket_mask = detectBasketRegion(full_result.image, full_result.heightMap);
   saveImage(basket_mask, "/tmp/cw2_basket_mask.png");
 
-  filterRobot(filtered_result.image, filtered_result.heightMap, 40);  // free
-  makeWhiteBackground(filtered_result.image);                          // free
+  filterRobot(filtered_result.image, filtered_result.heightMap, 40);
+  makeWhiteBackground(filtered_result.image);
   saveImage(filtered_result.image, "/tmp/cw2_processed.png");
 
-  ClusterResult cluster_result = clusterImage(filtered_result.image, filtered_result.heightMap);  // free
+  ClusterResult cluster_result = clusterImage(filtered_result.image, filtered_result.heightMap);
 
-  // Print cluster info
-  for (const auto& cluster : cluster_result.clusters)
-  {    RCLCPP_INFO(node_->get_logger(),
+  for (const auto& c : cluster_result.clusters) {
+    RCLCPP_INFO(node_->get_logger(),
       "Cluster %d: size=%d centroid=(%.1f, %.1f) height=%.3f color=(B=%.1f, G=%.1f, R=%.1f)",
-      cluster.label,
-      cluster.size,
-      cluster.centroid.x,
-      cluster.centroid.y,
-      cluster.height,
-      cluster.color[0],
-      cluster.color[1],
-      cluster.color[2]);
+      c.label, c.size, c.centroid.x, c.centroid.y, c.height,
+      c.color[0], c.color[1], c.color[2]);
   }
 
-  // Step 7: Classify clusters and print results
-  std::vector<ClusterInfo> classified = classifyClusters(cluster_result.clusters, cluster_result.labels, basket_mask);
-  for (const auto& cluster : classified)
-  {
-      RCLCPP_INFO(node_->get_logger(),
-          "Cluster %d classified as '%s': size=%d centroid=(%.1f, %.1f) height=%.3f color=(B=%.1f, G=%.1f, R=%.1f)",
-          cluster.label,
-          cluster.type.c_str(),
-          cluster.size,
-          cluster.centroid.x,
-          cluster.centroid.y,
-          cluster.height,
-          cluster.color[0],
-          cluster.color[1],
-          cluster.color[2]);
-  }
+  std::vector<ClusterInfo> classified =
+    classifyClusters(cluster_result.clusters, cluster_result.labels, basket_mask);
 
-  // Step 8: Plan mission 
+  // Find tallest obstacle height (0 if none)
+  float max_obstacle_height = 0.0f;
+  for (const auto& c : classified) {
+    if (c.type == "obstacle" && c.height > max_obstacle_height) {
+      max_obstacle_height = c.height;
+    }
+    RCLCPP_INFO(node_->get_logger(),
+      "Cluster %d classified as '%s': size=%d centroid=(%.1f, %.1f) height=%.3f",
+      c.label, c.type.c_str(), c.size, c.centroid.x, c.centroid.y, c.height);
+  }
+  RCLCPP_INFO(node_->get_logger(),
+    "Max obstacle height: %.3f", max_obstacle_height);
+
   MissionPlanPixels pm = planMission(classified);
   MissionPlan mission;
   if (!pm.valid) {
     RCLCPP_WARN(node_->get_logger(), "Mission plan is invalid");
     return mission;
   }
-  mission.objectType = pm.objectType;
+  mission.objectType         = pm.objectType;
+  mission.maxObstacleHeight  = max_obstacle_height;
 
-  // Pixel -> world xy
   cv::Point2f pick_w  = pixelToWorld(pm.objectPixel, filtered_result);
   cv::Point2f place_w = pixelToWorld(pm.goalPixel,   filtered_result);
 
-  // Build Poses in world frame, then transform to panda_link0
   geometry_msgs::msg::TransformStamped tf;
   try {
     tf = tf_buffer_.lookupTransform(
         "panda_link0", "world",
         tf2::TimePointZero, tf2::durationFromSec(2.0));
   } catch (const tf2::TransformException &ex) {
-    RCLCPP_ERROR(node_->get_logger(), "perception_pipeline TF lookup failed: %s", ex.what());
+    RCLCPP_ERROR(node_->get_logger(),
+      "perception_pipeline TF lookup failed: %s", ex.what());
     return mission;  // valid=false
   }
 
-  geometry_msgs::msg::Pose pick_world  = createPose(pick_w.x,  pick_w.y,  0.0f);
-  geometry_msgs::msg::Pose place_world = createPose(place_w.x, place_w.y, 0.0f);
+  // Build PointStamped in world frame, then transform to panda_link0
+  geometry_msgs::msg::PointStamped pick_world =
+    createPointStamped(pick_w.x, pick_w.y, 0.0f, "world");
+  geometry_msgs::msg::PointStamped place_world =
+    createPointStamped(place_w.x, place_w.y, 0.0f, "world");
 
-  tf2::doTransform(pick_world,  mission.objectPose, tf);
-  tf2::doTransform(place_world, mission.goalPose,   tf);
+  tf2::doTransform(pick_world,  mission.objectPoint, tf);
+  tf2::doTransform(place_world, mission.goalPoint,   tf);
+
   mission.valid = true;
   return mission;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
-// Implementations
+// Callbacks
 ///////////////////////////////////////////////////////////////////////////////
 
 // TODO - implement Task 1 later 
@@ -955,19 +936,13 @@ void cw2::t1_callback(
   
   auto mission = perception_pipeline();
 
-  // Print out the Planned Mission info for debugging
-  if (mission.valid)
-  {
-    // print the planned pick and place poses for debugging
-    RCLCPP_INFO(node_->get_logger(),
-        "Planned Mission: Pick at (%.3f, %.3f, %.3f), Place at (%.3f, %.3f, %.3f)",
-        mission.objectPose.position.x, mission.objectPose.position.y, mission.objectPose.position.z, 
-        mission.goalPose.position.x, mission.goalPose.position.y, mission.goalPose.position.z);
-  }
-  else
-  {
-    RCLCPP_WARN(node_->get_logger(), "Mission plan is invalid");
-  }
+  // Print out Mission Plan for debugging
+  RCLCPP_INFO(node_->get_logger(),
+    "Mission: type=%s pick(%.3f, %.3f, %.3f) place(%.3f, %.3f, %.3f) maxObsH=%.3f",
+    mission.objectType.c_str(),
+    mission.objectPoint.point.x, mission.objectPoint.point.y, mission.objectPoint.point.z,
+    mission.goalPoint.point.x,   mission.goalPoint.point.y,   mission.goalPoint.point.z,
+    mission.maxObstacleHeight);
 
   // Print out Ground Truth Info for debugging
   const auto & object_point = request->object_point;
@@ -1046,81 +1021,8 @@ void cw2::t3_callback(
   const std::shared_ptr<cw2_world_spawner::srv::Task3Service::Request> request,
   std::shared_ptr<cw2_world_spawner::srv::Task3Service::Response> response)
 {
-  // initMoveit();
-
-  // // Step 1: Scan the table
-  // auto combined = scanTable();
-  // savePointCloudPCD(combined, "/tmp/cw2_scan_combined.pcd");
-
-  // // Step 2: Remove the green table
-  // auto filtered = filterTableFromPointCloud(combined);
-  // savePointCloudPCD(filtered, "/tmp/cw2_scan_filtered.pcd");
-
-  // // Step 3: Convert PCD to topdown RGB image both with filtered and full 
-  // TopDownResult filtered_result = pcdToTopdownImageWithHeight(filtered, 256);
-  // saveImage(filtered_result.image, "/tmp/cw2_topdown.png"); 
-
-  // TopDownResult full_result = pcdToTopdownImageWithHeight(combined, 256);
-  // saveImage(full_result.image, "/tmp/cw2_full_topdown.png");
-
-  // // Step 4: Detect basket region (for later classification)
-  // cv::Mat basket_mask = detectBasketRegion(full_result.image, full_result.heightMap);
-  // saveImage(basket_mask, "/tmp/cw2_basket_mask.png");
-
-  // // Step 5: White background + filter robot
-  // filterRobot(filtered_result.image, filtered_result.heightMap, 40);
-  // makeWhiteBackground(filtered_result.image);
-  // saveImage(filtered_result.image, "/tmp/cw2_processed.png");
-
-  // // Step 6: Cluster the image and print info about each cluster
-  // ClusterResult cluster_result = clusterImage(filtered_result.image, filtered_result.heightMap);
-  // // Print cluster info
-  // for (const auto& cluster : cluster_result.clusters)
-  // {    RCLCPP_INFO(node_->get_logger(),
-  //     "Cluster %d: size=%d centroid=(%.1f, %.1f) height=%.3f color=(B=%.1f, G=%.1f, R=%.1f)",
-  //     cluster.label,
-  //     cluster.size,
-  //     cluster.centroid.x,
-  //     cluster.centroid.y,
-  //     cluster.height,
-  //     cluster.color[0],
-  //     cluster.color[1],
-  //     cluster.color[2]);
-  // }
-
-  // // Step 7: Classify clusters and print results
-  // std::vector<ClusterInfo> classified = classifyClusters(cluster_result.clusters, cluster_result.labels, basket_mask);
-  // for (const auto& cluster : classified)
-  // {
-  //     RCLCPP_INFO(node_->get_logger(),
-  //         "Cluster %d classified as '%s': size=%d centroid=(%.1f, %.1f) height=%.3f color=(B=%.1f, G=%.1f, R=%.1f)",
-  //         cluster.label,
-  //         cluster.type.c_str(),
-  //         cluster.size,
-  //         cluster.centroid.x,
-  //         cluster.centroid.y,
-  //         cluster.height,
-  //         cluster.color[0],
-  //         cluster.color[1],
-  //         cluster.color[2]);
-  // }
-
-  // // Step 8: Plan mission 
-  // MissionPlan mission = planMission(classified);
-
-
-  // // print mission plan
-  // if (mission.valid)
-  // {    
-  //   cv::Point2f pick_w  = pixelToWorld(mission.objectPose, filtered_result);
-  //   cv::Point2f place_w = pixelToWorld(mission.goalPose,   filtered_result);
-  //   RCLCPP_INFO(node_->get_logger(),
-  //     "Mission: pick at world (%.3f, %.3f), place at world (%.3f, %.3f)",
-  //     pick_w.x, pick_w.y, place_w.x, place_w.y);
-  // }
-  // else  {
-  //     RCLCPP_WARN(node_->get_logger(), "Mission plan is invalid");
-  // } 
+  auto mission = perception_pipeline();
+  // Waiting for a Task 1 implementation to then do pick and place 
 
 
   (void)request;

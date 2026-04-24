@@ -66,11 +66,10 @@ struct ClusterResult
 struct MissionPlan
 {
   bool valid = false;
-  // cv::Point2f objectPose;
-  // cv::Point2f goalPose;
-  geometry_msgs::msg::Pose objectPose;
-  geometry_msgs::msg::Pose goalPose;
+  geometry_msgs::msg::PointStamped objectPoint;
+  geometry_msgs::msg::PointStamped goalPoint;
   std::string objectType;
+  float maxObstacleHeight; 
 };
 
 ///////////////////////////////////////////////////////////////////////////////
