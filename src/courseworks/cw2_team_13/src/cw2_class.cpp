@@ -64,7 +64,7 @@ void cw2::cloud_callback(const sensor_msgs::msg::PointCloud2::ConstSharedPtr msg
   std::lock_guard<std::mutex> lock(cloud_mutex_);
   g_input_pc_frame_id_ = msg->header.frame_id;
   g_cloud_ptr = std::move(latest_cloud);
-  g_cloud_msg_ = msg;                  // <-- keep the raw msg too
+  g_cloud_msg_ = msg;                  
   ++g_cloud_sequence_;
 }
 
@@ -224,7 +224,7 @@ void cw2::saveImage(
         filename.c_str());
 }
 
-// --- Replacement for capturePointCloudAtTarget ---
+// Capture a Point Cloud at a Given Pose 
  pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
   geometry_msgs::msg::Pose target)
 {
@@ -262,6 +262,7 @@ void cw2::saveImage(
   return pcl_cloud;
 }
 
+// Combines Multiple Point Cloud Scans into a Single Cloud
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::combinePointClouds(
   const std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> &clouds)
 {
@@ -273,6 +274,7 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::combinePointClouds(
   return combined;
 }
 
+// Scans Table with 8 Viewpoints 
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
 {
   std::vector<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> clouds;
@@ -333,46 +335,71 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::scanTable()
   return combinePointClouds(clouds);
 }
 
-
 // Filters Input Point Cloud to Remove Table 
+// Filters Input Point Cloud to Remove Table and Robot
 pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::filterTableFromPointCloud(
   const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud)
 {
   if (!cloud || cloud->empty()) return nullptr;
 
-  // First pass: find table surface Z from green points
+  // --- Pass 1: estimate table Z from green points (unchanged) ---
   double green_z_sum = 0.0;
-  int green_count = 0;
-
+  int    green_count = 0;
   for (const auto &pt : cloud->points) {
     if (!std::isfinite(pt.x)) continue;
     if (pt.g > 100 && pt.r < 100 && pt.b < 100) {
       green_z_sum += pt.z;
-      green_count++;
+      ++green_count;
     }
   }
-
   if (green_count == 0) {
     RCLCPP_WARN(node_->get_logger(), "No green table points found");
     return nullptr;
   }
+  const float table_z_mean = static_cast<float>(green_z_sum / green_count);
+  const float z_threshold  = table_z_mean + 0.04f;
 
-  float table_z_mean = static_cast<float>(green_z_sum / green_count);
-  float z_threshold = table_z_mean + 0.04f;
-  RCLCPP_INFO(node_->get_logger(), "Table Z: %.4f, threshold: %.4f, green pts: %d",
-              table_z_mean, z_threshold, green_count);
+  // --- Robot filter parameters ---
+  // Anything within this XY radius of panda_link0 origin is the robot.
+  // Chosen to swallow the Franka base (~0.2m) plus margin, while staying
+  // well clear of the nearest tile where an object could sit.
+  const float robot_xy_radius = 0.25f;
+  const float robot_xy_radius_sq = robot_xy_radius * robot_xy_radius;
 
-  // Second pass: keep points above table and not green
+  // Permissive "whitish/grey" colour check for limbs poking outside the cylinder.
+  // Franka links render around (200, 200, 200); gripper fingers slightly darker.
+  // We require all three channels high AND roughly equal (low saturation).
+  auto looks_white = [](const pcl::PointXYZRGB &pt) {
+    const int minC = std::min({pt.r, pt.g, pt.b});
+    const int maxC = std::max({pt.r, pt.g, pt.b});
+    return minC > 150 && (maxC - minC) < 30;  // bright and nearly achromatic
+  };
+
+  // --- Pass 2: keep points above the table, not green, not in robot cylinder,
+  //            and (as a fallback) not white/grey. ---
   auto filtered = std::make_shared<pcl::PointCloud<pcl::PointXYZRGB>>();
+  filtered->reserve(cloud->size());
 
+  int dropped_cylinder = 0, dropped_white = 0, dropped_floor = 0, dropped_green = 0;
   for (const auto &pt : cloud->points) {
     if (!std::isfinite(pt.x)) continue;
-    if (pt.z <= z_threshold) continue;
-    if (pt.g > 100 && pt.r < 100 && pt.b < 100) continue;
+
+    if (pt.z <= z_threshold)                { ++dropped_floor;    continue; }
+
+    const float r2 = pt.x * pt.x + pt.y * pt.y;
+    if (r2 < robot_xy_radius_sq)            { ++dropped_cylinder; continue; }
+
+    if (pt.g > 100 && pt.r < 100 && pt.b < 100) { ++dropped_green; continue; }
+    if (looks_white(pt))                    { ++dropped_white;    continue; }
+
     filtered->push_back(pt);
   }
 
-  RCLCPP_INFO(node_->get_logger(), "Z-filtered: %zu points", filtered->size());
+  RCLCPP_INFO(node_->get_logger(),
+    "Filter: table_z=%.3f  kept %zu  | dropped floor=%d cyl=%d green=%d white=%d",
+    table_z_mean, filtered->size(),
+    dropped_floor, dropped_cylinder, dropped_green, dropped_white);
+
   return filtered;
 }
 
@@ -550,8 +577,7 @@ void makeWhiteBackground(cv::Mat& img)
 
 // NOTE: ClusterInfo and ClusterResult are defined in cw2_class.h
 
-ClusterResult clusterImage(const cv::Mat& img, const cv::Mat& heightMap)
-{
+ClusterResult clusterImage(const cv::Mat& img, const cv::Mat& heightMap){
     CV_Assert(img.type() == CV_8UC3);
     CV_Assert(heightMap.type() == CV_32FC1);
     CV_Assert(img.size() == heightMap.size());
@@ -748,7 +774,6 @@ std::vector<ClusterInfo> classifyClusters(
 }
 
 // NOTE: MissionPlan is defined in cw2_class.h
-
 MissionPlan planMission(const std::vector<ClusterInfo>& clusters)
 {
     std::vector<ClusterInfo> noughts;
@@ -821,45 +846,30 @@ MissionPlan planMission(const std::vector<ClusterInfo>& clusters)
     return plan;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-// Implementations
-///////////////////////////////////////////////////////////////////////////////
-
-// TODO - implement Task 1 later 
-void cw2::t1_callback(
-  const std::shared_ptr<cw2_world_spawner::srv::Task1Service::Request> request,
-  std::shared_ptr<cw2_world_spawner::srv::Task1Service::Response> response)
-{
-  // (void)request;
-  // (void)response;
-  initMoveit();
-
-  // Step 1: Scan the table
-  auto combined = scanTable();
+MissionPlan cw2::perception_pipeline(){
+  
+  initMoveit();                                        // member — no cw2::
+  auto combined = scanTable();                         // member
   savePointCloudPCD(combined, "/tmp/cw2_scan_combined.pcd");
 
-  // Step 2: Remove the green table
-  auto filtered = filterTableFromPointCloud(combined);
+  auto filtered = filterTableFromPointCloud(combined); // member
   savePointCloudPCD(filtered, "/tmp/cw2_scan_filtered.pcd");
 
-  // Step 3: Convert PCD to topdown RGB image both with filtered and full 
   TopDownResult filtered_result = pcdToTopdownImageWithHeight(filtered, 256);
-  saveImage(filtered_result.image, "/tmp/cw2_topdown.png"); 
+  saveImage(filtered_result.image, "/tmp/cw2_topdown.png");
 
   TopDownResult full_result = pcdToTopdownImageWithHeight(combined, 256);
   saveImage(full_result.image, "/tmp/cw2_full_topdown.png");
 
-  // Step 4: Detect basket region (for later classification)
-  cv::Mat basket_mask = detectBasketRegion(full_result.image, full_result.heightMap);
+  cv::Mat basket_mask = detectBasketRegion(full_result.image, full_result.heightMap);  // free — no cw2::
   saveImage(basket_mask, "/tmp/cw2_basket_mask.png");
 
-  // Step 5: White background + filter robot
-  filterRobot(filtered_result.image, filtered_result.heightMap, 40);
-  makeWhiteBackground(filtered_result.image);
+  filterRobot(filtered_result.image, filtered_result.heightMap, 40);  // free
+  makeWhiteBackground(filtered_result.image);                          // free
   saveImage(filtered_result.image, "/tmp/cw2_processed.png");
 
-  // Step 6: Cluster the image and print info about each cluster
-  ClusterResult cluster_result = clusterImage(filtered_result.image, filtered_result.heightMap);
+  ClusterResult cluster_result = clusterImage(filtered_result.image, filtered_result.heightMap);  // free
+
   // Print cluster info
   for (const auto& cluster : cluster_result.clusters)
   {    RCLCPP_INFO(node_->get_logger(),
@@ -893,9 +903,6 @@ void cw2::t1_callback(
 
   // Step 8: Plan mission 
   MissionPlan mission = planMission(classified);
-
-
-  // print mission plan
   if (mission.valid)
   {    
     cv::Point2f pick_w  = pixelToWorld(mission.objectPose, filtered_result);
@@ -932,9 +939,26 @@ void cw2::t1_callback(
   else  {
       RCLCPP_WARN(node_->get_logger(), "Mission plan is invalid");
   } 
+  return mission;
+}
 
+///////////////////////////////////////////////////////////////////////////////
+// Implementations
+///////////////////////////////////////////////////////////////////////////////
+
+// TODO - implement Task 1 later 
+void cw2::t1_callback(
+  const std::shared_ptr<cw2_world_spawner::srv::Task1Service::Request> request,
+  std::shared_ptr<cw2_world_spawner::srv::Task1Service::Response> response)
+{
+  // (void)request;
+  // (void)response;
   
-  // Step 1: Print out object position, goal position, shape type from request 
+  auto mission = perception_pipeline();
+
+  // Print out the Planned Mission info for debugging
+  
+  // Print out Ground Truth info from the request for debugging
 
   const auto & object_point = request->object_point;
   const auto & goal_point = request->goal_point;
@@ -942,11 +966,7 @@ void cw2::t1_callback(
 
   RCLCPP_INFO(
     node_->get_logger(),
-    "Task 1 request received");
-
-  RCLCPP_INFO(
-    node_->get_logger(),
-    "object_point: frame='%s', x=%.3f, y=%.3f, z=%.3f",
+    "Ground Truth: Object ='%s', x=%.3f, y=%.3f, z=%.3f",
     object_point.header.frame_id.c_str(),
     object_point.point.x,
     object_point.point.y,
@@ -954,7 +974,7 @@ void cw2::t1_callback(
 
   RCLCPP_INFO(
     node_->get_logger(),
-    "goal_point: frame='%s', x=%.3f, y=%.3f, z=%.3f",
+    "Ground Truth Goal ='%s', x=%.3f, y=%.3f, z=%.3f",
     goal_point.header.frame_id.c_str(),
     goal_point.point.x,
     goal_point.point.y,
@@ -964,7 +984,6 @@ void cw2::t1_callback(
     node_->get_logger(),
     "shape_type: '%s'",
     shape_type.c_str());
-
   
   (void)response;
 

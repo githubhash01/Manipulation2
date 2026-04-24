@@ -185,10 +185,13 @@ private:
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr filterTableFromPointCloud(
     const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud);
 
-  // Top-down projection helper (member because cpp defines it as cw2::)
+  // Top-down projection helper 
   TopDownResult pcdToTopdownImageWithHeight(
     const pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud,
     int gridSize);
+
+  // Full pipeline 
+  MissionPlan perception_pipeline(); 
 };
 
 #endif  // CW2_CLASS_H_
