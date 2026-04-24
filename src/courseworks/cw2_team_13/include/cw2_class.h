@@ -66,8 +66,11 @@ struct ClusterResult
 struct MissionPlan
 {
   bool valid = false;
-  cv::Point2f objectPose;
-  cv::Point2f goalPose;
+  // cv::Point2f objectPose;
+  // cv::Point2f goalPose;
+  geometry_msgs::msg::Pose objectPose;
+  geometry_msgs::msg::Pose goalPose;
+  std::string objectType;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -98,7 +101,7 @@ std::vector<ClusterInfo> classifyClusters(
   const cv::Mat &labels,
   const cv::Mat &basketMask);
 
-MissionPlan planMission(const std::vector<ClusterInfo> &clusters);
+// MissionPlan planMission(const std::vector<ClusterInfo> &clusters);
 
 ///////////////////////////////////////////////////////////////////////////////
 // cw2 class
