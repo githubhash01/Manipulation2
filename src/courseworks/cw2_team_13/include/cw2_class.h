@@ -160,14 +160,90 @@ public:
   std::string pointcloud_topic_;
   bool pointcloud_qos_reliable_ = false;
 
+  // Task 1.
+  bool t1_pickAndPlace(const geometry_msgs::msg::Point & obj,
+                       const geometry_msgs::msg::Point & goal,
+                       const std::string & shape_type);
+  bool openGripper();
+  bool closeGripper(double width);
+  bool moveArmToPose(const geometry_msgs::msg::Pose & target_pose,
+                     const std::string & description = "");
+  bool moveArmCartesian(const std::vector<geometry_msgs::msg::Pose> & waypoints,
+                        double eef_step = 0.005,
+                        double jump_threshold = 0.0,
+                        bool allow_fallback = true);
+  geometry_msgs::msg::Pose makeTopDownPose(double x, double y, double z,
+                                           double yaw = 0.0);
+  void addGroundCollision();
+
+  // Estimates the shape's yaw (folded into [-pi/4, pi/4] since both shapes
+  // are C4-symmetric) and arm-width (snapped to {0.020, 0.030, 0.040} m)
+  // from the latest point cloud, filtering around obj_xy.
+  bool detectShapePose(const geometry_msgs::msg::Point & obj_xy,
+                       const std::string & shape_type,
+                       double & out_yaw,
+                       double & out_size,
+                       double & out_cx,
+                       double & out_cy);
+
+  // Adds a tall conservative collision box at the spawner-reported obj
+  // so MoveIt's joint-space planner routes around the shape during
+  // long approach moves. removeShapeCollision() takes it back out
+  // before the final descent so the gripper can actually reach it.
+  void addShapeCollision(const geometry_msgs::msg::Point & obj,
+                         const std::string & shape_type);
+  void removeShapeCollision();
+
+  // Attaches a worst-case 5*size_s x 5*size_s x 40 mm box to the
+  // panda_hand link at the SHAPE CENTER (= hand frame
+  // (ox_local, -oy_local, EE_TO_FINGER), derived from hand_X = -shape_X
+  // and hand_Y = +shape_Y at grasp time), so the planning scene
+  // matches the physical shape position rather than placing the box
+  // at the fingertip plane.
+  void attachShape(double size_s, double ox_local, double oy_local);
+  // Detaches and removes the held_shape attached collision object.
+  void detachShape();
+
+  // Adds/removes a thin tile slab (z = [0.018, 0.020]) at the centre
+  // of the workspace. Used during the held-shape transit so the
+  // planner refuses paths that drag the held_shape into the tile.
+  // Off during grasp/place descents so it doesn't impose padding-
+  // induced finger collisions.
+  void addTileCollision();
+  void removeTileCollision();
+
+  void addSafetyFloor(double height);
+  void removeSafetyFloor();
+
+  // Models the basket as four thin wall collision objects + a base
+  // slab so the planner refuses paths that sweep the arm through the
+  // basket during the observation transit. Removed at task end so
+  // it doesn't pollute subsequent tasks (the spawner re-randomises
+  // the basket location every task).
+  void addBasketCollision(const geometry_msgs::msg::Point & goal);
+  void removeBasketCollision();
+  // /joint_states subscription, used by the post-grasp finger-width
+  // verify in t1_pickAndPlace. We keep our own copy of the latest
+  // finger positions because reading them through MoveIt right after
+  // closeGripper is unreliable in this Gazebo+MoveIt setup.
+  rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr
+    joint_states_sub_;
+  std::mutex joint_states_mutex_;
+  double finger1_pos_ = 0.04;
+  double finger2_pos_ = 0.04;
+  bool   finger_state_seen_ = false;
+
+  void jointStatesCallback(
+    const sensor_msgs::msg::JointState::ConstSharedPtr msg);
+
 private:
   bool moveit_initialized_ = false;
   void initMoveit();
 
   // Motion helpers
   bool moveToTarget(geometry_msgs::msg::Pose target);
-  bool openGripper();
-  bool closeGripper();
+  // bool openGripper();
+  // bool closeGripper();
   bool moveCartesian(geometry_msgs::msg::Pose target);
 
   // Point cloud / image I/O helpers

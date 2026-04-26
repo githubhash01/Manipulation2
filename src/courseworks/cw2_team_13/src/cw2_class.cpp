@@ -92,6 +92,38 @@ void cw2::initMoveit()
   RCLCPP_INFO(node_->get_logger(), "MoveIt initialized successfully");
 }
 
+void cw2::addSafetyFloor(double height)
+{
+  moveit_msgs::msg::CollisionObject floor;
+  floor.header.frame_id = arm_group_->getPlanningFrame();
+  floor.id = "safety_floor";
+
+  shape_msgs::msg::SolidPrimitive box;
+  box.type = shape_msgs::msg::SolidPrimitive::BOX;
+  box.dimensions.resize(3);
+  // Wide thin slab. 3 m x 3 m covers the whole reachable workspace;
+  // 2 mm thick is enough to be a hard barrier without eating into
+  // the usable z-range above it.
+  box.dimensions[0] = 3.0;
+  box.dimensions[1] = 3.0;
+  box.dimensions[2] = 0.002;
+
+  geometry_msgs::msg::Pose pose;
+  pose.position.z = height;
+  pose.orientation.w = 1.0;
+
+  floor.primitives.push_back(box);
+  floor.primitive_poses.push_back(pose);
+  floor.operation = moveit_msgs::msg::CollisionObject::ADD;
+
+  planning_scene_interface_.applyCollisionObjects({floor});
+}
+
+void cw2::removeSafetyFloor()
+{
+  planning_scene_interface_.removeCollisionObjects({"safety_floor"});
+}
+
 bool cw2::moveToTarget(geometry_msgs::msg::Pose target)
 {
   arm_group_->setPoseTarget(target);
@@ -108,19 +140,19 @@ bool cw2::moveToTarget(geometry_msgs::msg::Pose target)
   return false;
 }
 
-bool cw2::openGripper()
-{
-  hand_group_->setJointValueTarget(std::vector<double>{0.04, 0.04});
-  hand_group_->move();
-  return true;
-}
+// bool cw2::openGripper()
+// {
+//   hand_group_->setJointValueTarget(std::vector<double>{0.04, 0.04});
+//   hand_group_->move();
+//   return true;
+// }
 
-bool cw2::closeGripper()
-{
-  hand_group_->setJointValueTarget(std::vector<double>{0.005, 0.005});
-  hand_group_->move();
-  return true;
-}
+// bool cw2::closeGripper()
+// {
+//   hand_group_->setJointValueTarget(std::vector<double>{0.005, 0.005});
+//   hand_group_->move();
+//   return true;
+// }
 
 bool cw2::moveCartesian(geometry_msgs::msg::Pose target)
 {
@@ -235,11 +267,13 @@ void cw2::saveImage(
         filename.c_str());
 }
 
+
 // Capture a Point Cloud at a Given Pose 
  pcl::PointCloud<pcl::PointXYZRGB>::Ptr cw2::capturePointCloudAtTarget(
   geometry_msgs::msg::Pose target)
 {
-  moveToTarget(target);
+  // moveToTarget(target);
+  moveCartesian(target);
    // allow some time for the cloud to update after moving
   rclcpp::sleep_for(std::chrono::milliseconds(4000)); 
 
@@ -921,74 +955,949 @@ MissionPlan cw2::perception_pipeline()
   return mission;
 }
 
+void cw2::jointStatesCallback(
+  const sensor_msgs::msg::JointState::ConstSharedPtr msg)
+{
+  std::lock_guard<std::mutex> lock(joint_states_mutex_);
+  for (size_t i = 0; i < msg->name.size() && i < msg->position.size(); ++i) {
+    if (msg->name[i] == "panda_finger_joint1") finger1_pos_ = msg->position[i];
+    else if (msg->name[i] == "panda_finger_joint2") finger2_pos_ = msg->position[i];
+  }
+  finger_state_seen_ = true;
+}
+
+// Grasp layout
+//
+// Both shapes come in three arm-widths s = {20, 30, 40} mm and sit in a
+// 5s x 5s bounding box, 40 mm tall.
+//   cross:   grasp the +x arm in shape-local frame, at (+1.5s, 0)
+//   nought:  grasp the +y wall at (0, +2s)
+// In both cases the fingers close along the shape-local y axis, so the
+// hand's finger-open axis must lie along world yaw + pi/2.
+//
+// Yaw is recovered from the 4th-order complex moment of the filtered
+// cloud, M4 = sum (x + j y)^4. For a C4-symmetric mass distribution
+// arg(M4) = 4 theta + phi_shape (mod 2 pi). The cross has mass along
+// its arms so phi_shape = 0; the square nought is dominated by its four
+// outer corners which pull M4 onto the negative real axis, giving
+// phi_shape = pi.
+
+namespace {
+
+constexpr double SHAPE_THICKNESS      = 0.040;   // z extent of the shape
+constexpr double EE_TO_FINGER         = 0.1122;  // panda_link8 -> fingertip
+// EVIDENCE: read directly from
+// panda_description/meshes/collision/finger.stl, which has Z bounds
+// [0.0001, 0.0538] in finger-link frame. Combined with finger_joint1
+// origin at hand_z=0.0584 in hand frame, the actual fingertip sits
+// at hand_z = 0.0584 + 0.0538 = 0.1122 m from link8. The previous
+// 0.1034 placed grasp+place poses 8.8 mm too LOW; visible as the
+// shape clipping through the basket floor on release (the user's
+// 'placed it so deep into the box it broke the physics' symptom).
+constexpr double APPROACH_DIST        = 0.10;    // cartesian descent
+constexpr double SAFE_ALTITUDE        = 0.70;    // transit height for panda_link8
+constexpr double BASKET_FLOOR_OFFSET  = 0.015;   // clearance above goal.z
+// EVIDENCE for raising from 0.005 to 0.015: the held shape can tilt
+// a few degrees during grasp/transit due to slight off-centre
+// finger contact. A 5 deg tilt drops a 30 mm nought's corner by
+// 0.075 * sin(5 deg) = 6.5 mm. With 5 mm of nominal clearance the
+// corner ends up below the basket interior floor (goal.z + 0.0045
+// after settling) and the physics engine resolves the
+// interpenetration by ejecting the shape downward through the
+// floor - the 'shoves the object deep below the bottom of the box'
+// symptom the user reported. 15 mm of nominal clearance covers
+// up to ~11 deg of tilt while still being a soft 0.54 m/s drop.
+constexpr double SHAPE_LINK_Z_OFFSET  = 0.020;   // link-frame offset in the SDF
+
+// ~2 mm of squeeze on the arm, with a sensible lower bound so we never
+// close so far we crush a contact-stop.
+inline double graspCloseWidth(double s)
+{
+  return std::max(0.012, s - 0.004);
+}
+
+// panda_hand is bolted on panda_link8 with a fixed -pi/4 yaw offset, so
+// the world angle of the finger-open axis is link8_yaw - pi/4. Invert
+// that here.
+inline double link8YawForHandY(double phi)
+{
+  return phi + M_PI / 4.0;
+}
+
+}  // namespace
+
+
+bool cw2::detectShapePose(
+  const geometry_msgs::msg::Point & obj_xy,
+  const std::string & shape_type,
+  double & out_yaw,
+  double & out_size,
+  double & out_cx,
+  double & out_cy)
+{
+  // MULTI-FRAME ACCUMULATION: take N consecutive cloud snapshots from
+  // the static observation pose and accumulate ROI-filtered points
+  // from all of them into one combined xy_pts. Per-frame point
+  // jitter and asymmetric sampling biases largely average out, and
+  // the M4 yaw estimate computed over the union has lower variance
+  // than any single-frame estimate.
+  using namespace std::chrono;
+  constexpr int kNumFrames = 5;
+  const std::string planning_frame = arm_group_->getPlanningFrame();
+
+  std::vector<Eigen::Vector2d> xy_pts;
+  xy_pts.reserve(8192);
+
+  std::uint64_t last_seq = 0;
+  {
+    std::lock_guard<std::mutex> lk(cloud_mutex_);
+    last_seq = g_cloud_sequence_;
+  }
+
+  std::string cloud_frame;
+  for (int frame_idx = 0; frame_idx < kNumFrames; ++frame_idx) {
+    // Wait for a NEW frame (sequence advances).
+    const auto deadline = steady_clock::now() + milliseconds(1000);
+    PointCPtr cloud_in;
+    while (steady_clock::now() < deadline) {
+      std::this_thread::sleep_for(milliseconds(30));
+      std::lock_guard<std::mutex> lk(cloud_mutex_);
+      if (g_cloud_sequence_ > last_seq && !g_cloud_ptr->empty()) {
+        cloud_in = g_cloud_ptr;
+        cloud_frame = g_input_pc_frame_id_;
+        last_seq = g_cloud_sequence_;
+        break;
+      }
+    }
+    if (!cloud_in || cloud_in->empty() || cloud_frame.empty()) {
+      RCLCPP_WARN(node_->get_logger(),
+        "detectShapePose: no fresh cloud for frame %d, skipping",
+        frame_idx);
+      continue;
+    }
+
+    geometry_msgs::msg::TransformStamped tfs;
+    try {
+      tfs = tf_buffer_.lookupTransform(
+        planning_frame, cloud_frame, tf2::TimePointZero,
+        tf2::durationFromSec(1.0));
+    } catch (const tf2::TransformException & e) {
+      RCLCPP_WARN(node_->get_logger(),
+        "detectShapePose: tf %s -> %s failed: %s, skipping frame",
+        cloud_frame.c_str(), planning_frame.c_str(), e.what());
+      continue;
+    }
+    const Eigen::Quaterniond Rq(
+      tfs.transform.rotation.w, tfs.transform.rotation.x,
+      tfs.transform.rotation.y, tfs.transform.rotation.z);
+    const Eigen::Vector3d Tt(
+      tfs.transform.translation.x, tfs.transform.translation.y,
+      tfs.transform.translation.z);
+
+    const double z_lo = 0.028;
+    const double z_hi = 0.110;
+    const double roi_r2 = 0.15 * 0.15;
+    for (const auto & p : *cloud_in) {
+      if (!std::isfinite(p.x) || !std::isfinite(p.y) || !std::isfinite(p.z))
+        continue;
+      const Eigen::Vector3d pw =
+        Rq * Eigen::Vector3d(p.x, p.y, p.z) + Tt;
+      if (pw.z() < z_lo || pw.z() > z_hi) continue;
+      const double dx = pw.x() - obj_xy.x;
+      const double dy = pw.y() - obj_xy.y;
+      if (dx * dx + dy * dy > roi_r2) continue;
+      const int r = p.r, g = p.g, b = p.b;
+      if (g > r + 25 && g > b + 25) continue;
+      xy_pts.emplace_back(pw.x(), pw.y());
+    }
+  }
+  if (xy_pts.size() < 30) {
+    RCLCPP_ERROR(node_->get_logger(),
+      "detectShapePose: only %zu points after %d-frame accumulation",
+      xy_pts.size(), kNumFrames);
+    return false;
+  }
+
+  // Cluster mean - kept for diagnostics only. The mean is biased
+  // toward whichever side of the shape has more visible points (the
+  // wrist camera is offset, so this can be 1-2 cm away from the
+  // true centre). We do NOT use it as the M4 pivot anymore.
+  Eigen::Vector2d centroid = Eigen::Vector2d::Zero();
+  for (const auto & q : xy_pts) centroid += q;
+  centroid /= static_cast<double>(xy_pts.size());
+
+  // M4 PIVOT: the spawner-reported obj_xy is the true geometric
+  // centre of the shape (the SDF model origin coincides with the
+  // shape centre after the link transform). Computing the 4th-order
+  // moment around obj_xy instead of the biased cluster mean removes
+  // the centroid-bias coupling from the yaw estimate and makes the
+  // recovered yaw an unbiased measurement of orientation alone.
+  // Earlier behaviour: 5 deg of yaw bias from cluster mean offset
+  // produced ~5 mm of finger-position error at the wall - enough to
+  // straddle one finger past the wall edge. With obj as pivot, only
+  // the per-frame measurement noise remains.
+  const Eigen::Vector2d pivot(obj_xy.x, obj_xy.y);
+
+  // 4th-order complex moment. The nought's corners flip its sign, so
+  // cancel that phase before dividing by 4.
+  std::complex<double> M4(0.0, 0.0);
+  for (const auto & q : xy_pts) {
+    const std::complex<double> z(q.x() - pivot.x(), q.y() - pivot.y());
+    const std::complex<double> z2 = z * z;
+    M4 += z2 * z2;
+  }
+  const double phi_shape = (shape_type == "nought") ? M_PI : 0.0;
+  double yaw = 0.25 * std::arg(M4 * std::polar(1.0, -phi_shape));
+  while (yaw >  M_PI / 4.0) yaw -= M_PI / 2.0;
+  while (yaw < -M_PI / 4.0) yaw += M_PI / 2.0;
+  out_yaw = yaw;
+
+  // Oriented bounding box in the (mean-centroid, detected-yaw) frame.
+  // The mean centroid is biased toward the far-from-camera side because
+  // the wrist camera sits +X +Y of link8 at the observation pose, and
+  // the open gripper shadows the near-camera face of the shape, leaving
+  // more cluster points on the far face. The OBB midpoint, by contrast,
+  // is the average of the EXTREME points along each axis; provided the
+  // far-edge points along all four sides are visible (which they are
+  // for this top-down + small camera offset) the midpoint sits at the
+  // true geometric centre and we can correct the bias one-shot.
+  const double cs = std::cos(-yaw), sn = std::sin(-yaw);
+  double x_lo =  std::numeric_limits<double>::infinity();
+  double x_hi = -std::numeric_limits<double>::infinity();
+  double y_lo =  std::numeric_limits<double>::infinity();
+  double y_hi = -std::numeric_limits<double>::infinity();
+  double max_half = 0.0;
+  for (const auto & q : xy_pts) {
+    const double dx = q.x() - centroid.x(), dy = q.y() - centroid.y();
+    const double rx = cs * dx - sn * dy;
+    const double ry = sn * dx + cs * dy;
+    if (rx < x_lo) x_lo = rx;
+    if (rx > x_hi) x_hi = rx;
+    if (ry < y_lo) y_lo = ry;
+    if (ry > y_hi) y_hi = ry;
+    max_half = std::max(max_half,
+                        std::max(std::fabs(rx), std::fabs(ry)));
+  }
+
+  // Span half-extent (for diagnostics / centroid only). We do NOT use
+  // this for the size snap because the depth sensor strips ~10-15 mm
+  // off each outer edge of the shape, so the OBB extent reads
+  // systematically short (a 30 mm nought lands at obb_half ~ 0.060
+  // when the true outer half is 0.075). max_half below is more
+  // robust because it captures the far extreme from the biased mean,
+  // which roughly cancels the edge stripping for our setup.
+  const double obb_half = std::max(x_hi - x_lo, y_hi - y_lo) / 2.0;
+  const double s_raw = max_half / 2.5;
+  const std::array<double, 3> sizes = {0.020, 0.030, 0.040};
+  double best_size = sizes[0];
+  double best_err = std::fabs(s_raw - sizes[0]);
+  for (size_t i = 1; i < sizes.size(); ++i) {
+    const double e = std::fabs(s_raw - sizes[i]);
+    if (e < best_err) { best_err = e; best_size = sizes[i]; }
+  }
+  if (s_raw > 0.050) best_size = 0.040;
+  out_size = best_size;
+
+  // OBB midpoint (in rotated frame) is the bias offset from mean
+  // centroid to true centre. Rotate it back into world coords and
+  // anchor on the mean centroid to recover the true world centre.
+  const double mid_local_x = 0.5 * (x_lo + x_hi);
+  const double mid_local_y = 0.5 * (y_lo + y_hi);
+  const double cs_b = std::cos(yaw), sn_b = std::sin(yaw);
+  out_cx = centroid.x() + cs_b * mid_local_x - sn_b * mid_local_y;
+  out_cy = centroid.y() + sn_b * mid_local_x + cs_b * mid_local_y;
+
+  RCLCPP_INFO(node_->get_logger(),
+    "detectShapePose[%s]: pts=%zu mean=(%.3f,%.3f) yaw=%.3f "
+    "obb_xlo/hi=(%.3f,%.3f) obb_ylo/hi=(%.3f,%.3f) obb_half=%.3f "
+    "max_half=%.3f raw_s=%.3f -> size=%.3f corr=(%.3f,%.3f)",
+    shape_type.c_str(), xy_pts.size(), centroid.x(), centroid.y(),
+    out_yaw,
+    x_lo, x_hi, y_lo, y_hi,
+    obb_half, max_half, s_raw, out_size,
+    out_cx, out_cy);
+
+  return true;
+}
+
+
+bool cw2::t1_pickAndPlace(
+  const geometry_msgs::msg::Point & obj,
+  const geometry_msgs::msg::Point & goal,
+  const std::string & shape_type)
+{
+
+  detachShape();
+  removeShapeCollision();
+  removeTileCollision();  // also clear any stale tile slab from a
+                          // failed transit that didn't reach removeTileCollision
+  removeBasketCollision();  // and any stale basket walls from a prior task
+  addBasketCollision(goal);
+
+  if (!openGripper()) return false;
+  addShapeCollision(obj, shape_type);
+
+  // Overhead observation pose directly above obj.
+  if (!moveArmToPose(
+      makeTopDownPose(obj.x, obj.y, SAFE_ALTITUDE, 0.0),
+      "safe-above-observation")) {
+    removeShapeCollision();
+    return false;
+  }
+
+  double yaw = 0.0;
+  double size_s = 0.040;
+  double cx = obj.x, cy = obj.y;
+  if (!detectShapePose(obj, shape_type, yaw, size_s, cx, cy)) {
+    RCLCPP_WARN(node_->get_logger(),
+      "perception failed, falling back to yaw=0, size=40mm and obj xy");
+    yaw = 0.0;
+    size_s = 0.040;
+    cx = obj.x;
+    cy = obj.y;
+  }
+  const bool is_cross = (shape_type == "cross");
+  const double ox_local = is_cross ? (1.5 * size_s) : 0.0;
+  const double oy_local = is_cross ? 0.0           : (2.0 * size_s);
+  const double c_y = std::cos(yaw), s_y = std::sin(yaw);
+  const double ox_world = c_y * ox_local - s_y * oy_local;
+  const double oy_world = s_y * ox_local + c_y * oy_local;
+  const double grasp_x = obj.x + ox_world;
+  const double grasp_y = obj.y + oy_world;
+
+  double link8_yaw = link8YawForHandY(yaw + M_PI / 2.0);
+  while (link8_yaw >  M_PI) link8_yaw -= 2.0 * M_PI;
+  while (link8_yaw < -M_PI) link8_yaw += 2.0 * M_PI;
+  if (link8_yaw >  M_PI / 2.0) link8_yaw -= M_PI;
+  if (link8_yaw < -M_PI / 2.0) link8_yaw += M_PI;
+
+  const double transit_yaw = -M_PI / 4.0;
+  const double sc_hx = -ox_local;
+  const double sc_hy =  oy_local;
+  const double inv_sqrt2 = 1.0 / std::sqrt(2.0);
+  const double sc_lx = (sc_hx + sc_hy) * inv_sqrt2;
+  const double sc_ly = (-sc_hx + sc_hy) * inv_sqrt2;
+  const double sc_px = sc_lx;
+  const double sc_py = -sc_ly;
+  const double cs_t = std::cos(transit_yaw);
+  const double sn_t = std::sin(transit_yaw);
+  const double sc_wx = sc_px * cs_t - sc_py * sn_t;
+  const double sc_wy = sc_px * sn_t + sc_py * cs_t;
+  const double place_x = goal.x - sc_wx;
+  const double place_y = goal.y - sc_wy;
+
+  const double grasp_ee_z  = obj.z + SHAPE_LINK_Z_OFFSET
+                              + SHAPE_THICKNESS / 2.0 + EE_TO_FINGER;
+  const double pre_grasp_z = grasp_ee_z + APPROACH_DIST;
+  const double place_ee_z  = goal.z + BASKET_FLOOR_OFFSET
+                              + SHAPE_THICKNESS / 2.0 + EE_TO_FINGER;
+  const double pre_place_z = place_ee_z + APPROACH_DIST;
+  const double safe_z      = std::max({SAFE_ALTITUDE, pre_grasp_z + 0.05,
+                                       pre_place_z + 0.05});
+
+  const double close_w = graspCloseWidth(size_s);
+  const double hand_y_ang = link8_yaw - M_PI / 4.0;
+  const double hyx = std::cos(hand_y_ang);
+  const double hyy = std::sin(hand_y_ang);
+  const double f1x = grasp_x + 0.035 * hyx;
+  const double f1y = grasp_y + 0.035 * hyy;
+  const double f2x = grasp_x - 0.035 * hyx;
+  const double f2y = grasp_y - 0.035 * hyy;
+
+  RCLCPP_INFO(node_->get_logger(),
+    "T1[%s] s=%.3f yaw=%.3f obj=(%.3f,%.3f,%.3f) c=(%.3f,%.3f) "
+    "off=(%.3f,%.3f) grasp=(%.3f,%.3f,%.3f) link8_yaw=%.3f "
+    "open_f1=(%.3f,%.3f) open_f2=(%.3f,%.3f) place=(%.3f,%.3f,%.3f) close=%.3f",
+    shape_type.c_str(), size_s, yaw,
+    obj.x, obj.y, obj.z, cx, cy,
+    ox_world, oy_world,
+    grasp_x, grasp_y, grasp_ee_z, link8_yaw,
+    f1x, f1y, f2x, f2y,
+    place_x, place_y, place_ee_z, close_w);
+
+  if (!moveArmCartesian(
+      {makeTopDownPose(grasp_x, grasp_y, safe_z, link8_yaw)},
+      0.01, 0.0, /*allow_fallback=*/false)) {
+    removeShapeCollision();
+    return false;
+  }
+
+  removeShapeCollision();
+
+  if (!moveArmCartesian(
+      {makeTopDownPose(grasp_x, grasp_y, pre_grasp_z, link8_yaw)},
+      0.005, 0.0, /*allow_fallback=*/false)) return false;
+  if (!moveArmCartesian(
+      {makeTopDownPose(grasp_x, grasp_y, grasp_ee_z, link8_yaw)},
+      0.005, 0.0, /*allow_fallback=*/false)) return false;
+
+  if (!closeGripper(close_w)) return false;
+
+  std::this_thread::sleep_for(std::chrono::milliseconds(200));
+  {
+    double f1 = 0.0, f2 = 0.0;
+    bool seen = false;
+    {
+      std::lock_guard<std::mutex> lk(joint_states_mutex_);
+      f1 = finger1_pos_;
+      f2 = finger2_pos_;
+      seen = finger_state_seen_;
+    }
+    const double total_width = f1 + f2;
+    const double threshold = close_w + 0.002;
+    RCLCPP_INFO(node_->get_logger(),
+      "grasp verify: seen=%d f1=%.4f f2=%.4f width=%.4f close_w=%.4f thr=%.4f",
+      seen, f1, f2, total_width, close_w, threshold);
+    if (seen && total_width < threshold) {
+      RCLCPP_ERROR(node_->get_logger(),
+        "grasp verify FAILED: fingers fully closed (width=%.4f < %.4f) - "
+        "no shape gripped, aborting before lift",
+        total_width, threshold);
+      openGripper();
+      removeBasketCollision();
+      return false;
+    }
+  }
+
+  attachShape(size_s, ox_local, oy_local);
+
+  // Straight up at the grasp yaw.
+  if (!moveArmCartesian(
+      {makeTopDownPose(grasp_x, grasp_y, safe_z, link8_yaw)},
+      0.005, 0.0, /*allow_fallback=*/false)) return false;
+
+  if (!moveArmCartesian(
+      {makeTopDownPose(grasp_x, grasp_y, safe_z, transit_yaw)},
+      0.05, 0.0, /*allow_fallback=*/true)) return false;
+
+  // Long transit from grasp to over-basket via joint-space planning.
+  addTileCollision();
+  const bool transit_ok = moveArmToPose(
+    makeTopDownPose(place_x, place_y, safe_z, transit_yaw),
+    "grasp-to-basket-transit");
+  removeTileCollision();
+  if (!transit_ok) return false;
+
+  // Descend at neutral yaw to drop the shape into the basket.
+  if (!moveArmCartesian(
+      {makeTopDownPose(place_x, place_y, place_ee_z, transit_yaw)},
+      0.005, 0.0, /*allow_fallback=*/false)) return false;
+
+  if (!openGripper()) return false;
+
+  // Shape is now in the basket - detach it from the gripper so the
+  detachShape();
+
+  // Warn-only: if the retreat fails the shape is already dropped.
+  if (!moveArmCartesian(
+      {makeTopDownPose(place_x, place_y, safe_z, transit_yaw)},
+      0.005, 0.0, /*allow_fallback=*/false)) {
+    RCLCPP_WARN(node_->get_logger(), "retreat failed after place");
+  }
+
+  removeBasketCollision();
+  return true;
+}
+
+
+bool cw2::openGripper()
+{
+  hand_group_->setNamedTarget("open");
+  auto result = hand_group_->move();
+  if (result != moveit::core::MoveItErrorCode::SUCCESS) {
+    RCLCPP_ERROR(node_->get_logger(),
+      "openGripper failed (code %d)", static_cast<int>(result.val));
+    return false;
+  }
+  return true;
+}
+
+bool cw2::closeGripper(double width)
+{
+  const double finger_pos = width / 2.0;
+  std::map<std::string, double> targets;
+  targets["panda_finger_joint1"] = finger_pos;
+  targets["panda_finger_joint2"] = finger_pos;
+  hand_group_->setJointValueTarget(targets);
+
+  auto result = hand_group_->move();
+  if (result != moveit::core::MoveItErrorCode::SUCCESS) {
+    // Contact stop is expected when the fingers hit the arm before
+    // reaching the commanded width.
+    RCLCPP_WARN(node_->get_logger(),
+      "closeGripper: code %d (contact stop?), continuing",
+      static_cast<int>(result.val));
+  }
+  return true;
+}
+
+
+bool cw2::moveArmToPose(
+  const geometry_msgs::msg::Pose & target_pose,
+  const std::string & description)
+{
+  arm_group_->setPoseTarget(target_pose);
+
+  moveit::planning_interface::MoveGroupInterface::Plan plan;
+  auto plan_rc = arm_group_->plan(plan);
+  if (plan_rc != moveit::core::MoveItErrorCode::SUCCESS) {
+    RCLCPP_ERROR(node_->get_logger(),
+      "moveArmToPose [%s]: plan failed (%d)",
+      description.c_str(), static_cast<int>(plan_rc.val));
+    arm_group_->clearPoseTargets();
+    return false;
+  }
+
+  auto exec_rc = arm_group_->execute(plan);
+  arm_group_->clearPoseTargets();
+  if (exec_rc != moveit::core::MoveItErrorCode::SUCCESS) {
+    RCLCPP_ERROR(node_->get_logger(),
+      "moveArmToPose [%s]: exec failed (%d)",
+      description.c_str(), static_cast<int>(exec_rc.val));
+    return false;
+  }
+  return true;
+}
+
+bool cw2::moveArmCartesian(
+  const std::vector<geometry_msgs::msg::Pose> & waypoints,
+  double eef_step,
+  double jump_threshold,
+  bool allow_fallback)
+{
+  moveit_msgs::msg::RobotTrajectory trajectory;
+  double fraction = arm_group_->computeCartesianPath(
+    waypoints, eef_step, jump_threshold, trajectory);
+
+  if (fraction < 0.0) {
+    RCLCPP_WARN(node_->get_logger(),
+      "moveArmCartesian: compute error");
+    if (allow_fallback) {
+      return moveArmToPose(waypoints.back(), "cartesian-fallback");
+    }
+    return false;
+  }
+  if (fraction < 0.9) {
+    RCLCPP_WARN(node_->get_logger(),
+      "moveArmCartesian: only %.1f%%", fraction * 100.0);
+    if (allow_fallback) {
+      return moveArmToPose(waypoints.back(), "cartesian-fallback");
+    }
+    return false;
+  }
+
+  moveit::planning_interface::MoveGroupInterface::Plan plan;
+  plan.trajectory_ = trajectory;
+  auto exec_rc = arm_group_->execute(plan);
+  if (exec_rc != moveit::core::MoveItErrorCode::SUCCESS) {
+    RCLCPP_ERROR(node_->get_logger(),
+      "moveArmCartesian: exec failed (%d)",
+      static_cast<int>(exec_rc.val));
+    return false;
+  }
+  return true;
+}
+
+
+geometry_msgs::msg::Pose cw2::makeTopDownPose(
+  double x, double y, double z, double yaw)
+{
+  geometry_msgs::msg::Pose pose;
+  pose.position.x = x;
+  pose.position.y = y;
+  pose.position.z = z;
+
+  // Roll = pi points panda_link8's z axis down; yaw rotates about world z.
+  tf2::Quaternion q;
+  q.setRPY(M_PI, 0.0, yaw);
+  q.normalize();
+  pose.orientation = tf2::toMsg(q);
+  return pose;
+}
+
+
+void cw2::addGroundCollision()
+{
+  moveit_msgs::msg::CollisionObject ground;
+  ground.header.frame_id = arm_group_->getPlanningFrame();
+  ground.id = "ground_plane";
+
+  shape_msgs::msg::SolidPrimitive box;
+  box.type = shape_msgs::msg::SolidPrimitive::BOX;
+  box.dimensions.resize(3);
+  // Subfloor only (z = -0.020 to 0). Earlier we tried extending this
+  // upward to z = +0.020 (covering the tile) so the joint-space
+  // transit couldn't drag the held shape across the tile - but
+  // EVIDENCE from /tmp/cw2.log timestamp 80255.802:
+  //   'ground_plane' ... 'panda_rightfinger' ... constitutes a collision
+  // shows the start state of closeGripper failed because MoveIt's
+  // default robot+object collision padding (~10 mm each, total ~20
+  // mm) brings the expanded finger volume (true finger min z =
+  // link8.z - 0.1122 = 0.031 at grasp pose) into contact with the
+  // expanded ground top. The held-shape-on-tile problem is now
+  // handled separately by the path constraint applied during
+  // transit, NOT by extending the ground.
+  box.dimensions[0] = 3.0;
+  box.dimensions[1] = 3.0;
+  box.dimensions[2] = 0.020;
+
+  geometry_msgs::msg::Pose pose;
+  pose.position.z = -0.010;
+  pose.orientation.w = 1.0;
+
+  ground.primitives.push_back(box);
+  ground.primitive_poses.push_back(pose);
+  ground.operation = moveit_msgs::msg::CollisionObject::ADD;
+
+  planning_scene_interface_.applyCollisionObjects({ground});
+}
+
+
+void cw2::addShapeCollision(
+  const geometry_msgs::msg::Point & obj,
+  const std::string & shape_type)
+{
+  // Bounding box that closely tracks the shape itself. Worst-case
+  // footprint is 5s x 5s at s=0.040 -> 0.20 x 0.20 m. The shape sits
+  // on the tile spanning z = [0.020, 0.060]; we wrap that with a 20
+  // mm margin -> z = [0.000, 0.080], 80 mm tall.
+  //
+  // EVIDENCE for shrinking from 0.25 m to 0.08 m: in the previous
+  // failure log the joint-space planner returned a path whose
+  // panda_rightfinger collided with t1_shape_obstacle at trajectory
+  // indices 25 and 38 of 49, after post-smoothing. That happened
+  // because the column extended to z=0.25 m, which is well into the
+  // natural elbow/finger sweep envelope at 0.10-0.30 m. Capping the
+  // column at z=0.08 means it only blocks links that actually intrude
+  // on the shape's z-range, so smoothed paths can pass freely above.
+  (void)shape_type;  // worst-case sizing covers both shapes
+
+  moveit_msgs::msg::CollisionObject obstacle;
+  obstacle.header.frame_id = arm_group_->getPlanningFrame();
+  obstacle.id = "t1_shape_obstacle";
+
+  shape_msgs::msg::SolidPrimitive box;
+  box.type = shape_msgs::msg::SolidPrimitive::BOX;
+  box.dimensions.resize(3);
+  box.dimensions[0] = 0.20;
+  box.dimensions[1] = 0.20;
+  box.dimensions[2] = 0.08;
+
+  geometry_msgs::msg::Pose pose;
+  pose.position.x = obj.x;
+  pose.position.y = obj.y;
+  // Centre at z=0.040 = mid-shape; column spans [0, 0.080] in world.
+  pose.position.z = 0.040;
+  pose.orientation.w = 1.0;
+
+  obstacle.primitives.push_back(box);
+  obstacle.primitive_poses.push_back(pose);
+  obstacle.operation = moveit_msgs::msg::CollisionObject::ADD;
+
+  planning_scene_interface_.applyCollisionObjects({obstacle});
+}
+
+
+void cw2::removeShapeCollision()
+{
+  planning_scene_interface_.removeCollisionObjects({"t1_shape_obstacle"});
+}
+
+
+void cw2::attachShape(double size_s, double ox_local, double oy_local)
+{
+  // Held shape after closeGripper, modelled in panda_hand frame.
+  // At grasp time the gripper is oriented so hand_Y aligns with
+  // shape +Y (in world) and hand_X aligns with -shape +X (in world);
+  // therefore in hand frame:
+  //   shape_center = (ox_local, -oy_local, EE_TO_FINGER)
+  // i.e. the SHAPE CENTER is offset from the gripper TCP by the
+  // grasp offset, with hand_X having a sign flip relative to
+  // shape_X. Modelling the box at this offset means the planning
+  // scene sees the held shape where it actually is.
+  moveit_msgs::msg::AttachedCollisionObject aco;
+  aco.link_name = "panda_hand";
+  aco.object.id = "held_shape";
+  aco.object.header.frame_id = "panda_hand";
+
+  shape_msgs::msg::SolidPrimitive box;
+  box.type = shape_msgs::msg::SolidPrimitive::BOX;
+  box.dimensions.resize(3);
+  // 5*size_s in each lateral axis (worst-case bounding for either
+  // shape with a few mm of margin), 40 mm thick.
+  box.dimensions[0] = 5.0 * size_s;
+  box.dimensions[1] = 5.0 * size_s;
+  box.dimensions[2] = SHAPE_THICKNESS;
+
+  geometry_msgs::msg::Pose box_pose;
+  // Shape center in hand frame: at link8_yaw = -pi/4 (the place yaw
+  // we use), hand_X = +shape_X and hand_Y = -shape_Y. Shape center is
+  // at shape-frame (-ox_local, -oy_local) relative to the TCP, which
+  // maps to hand-frame (-ox_local, +oy_local, EE_TO_FINGER).
+  box_pose.position.x = -ox_local;
+  box_pose.position.y =  oy_local;
+  box_pose.position.z = EE_TO_FINGER;
+  box_pose.orientation.w = 1.0;
+  aco.object.primitives.push_back(box);
+  aco.object.primitive_poses.push_back(box_pose);
+  aco.object.operation = moveit_msgs::msg::CollisionObject::ADD;
+
+  aco.touch_links = {
+    "panda_hand", "panda_leftfinger", "panda_rightfinger"
+  };
+
+  planning_scene_interface_.applyAttachedCollisionObject(aco);
+}
+
+
+void cw2::detachShape()
+{
+  // Detach AND remove. Detach alone leaves the object floating at the
+  // last hand pose as a non-attached collision object, which would
+  // then block subsequent moves.
+  moveit_msgs::msg::AttachedCollisionObject aco;
+  aco.link_name = "panda_hand";
+  aco.object.id = "held_shape";
+  aco.object.operation = moveit_msgs::msg::CollisionObject::REMOVE;
+  planning_scene_interface_.applyAttachedCollisionObject(aco);
+  planning_scene_interface_.removeCollisionObjects({"held_shape"});
+}
+
+
+void cw2::addTileCollision()
+{
+  moveit_msgs::msg::CollisionObject tile;
+  tile.header.frame_id = arm_group_->getPlanningFrame();
+  tile.id = "tile_top";
+
+  shape_msgs::msg::SolidPrimitive box;
+  box.type = shape_msgs::msg::SolidPrimitive::BOX;
+  box.dimensions.resize(3);
+  // 3 m x 3 m thin slab, 2 mm thick. Span z = [0.018, 0.020] - just
+  // the very top of the tile. With held_shape attached at hand_z =
+  // [0.0922, 0.1322] and MoveIt's default ~10 mm robot+10 mm object
+  // padding, this forces link8.z > ~0.16 m throughout the transit,
+  // which is enough margin to keep the held_shape from dragging.
+  box.dimensions[0] = 3.0;
+  box.dimensions[1] = 3.0;
+  box.dimensions[2] = 0.002;
+
+  geometry_msgs::msg::Pose pose;
+  pose.position.z = 0.019;
+  pose.orientation.w = 1.0;
+
+  tile.primitives.push_back(box);
+  tile.primitive_poses.push_back(pose);
+  tile.operation = moveit_msgs::msg::CollisionObject::ADD;
+
+  planning_scene_interface_.applyCollisionObjects({tile});
+}
+
+
+void cw2::removeTileCollision()
+{
+  planning_scene_interface_.removeCollisionObjects({"tile_top"});
+}
+
+
+void cw2::addBasketCollision(const geometry_msgs::msg::Point & goal)
+{
+  // Basket geometry from cw2_world_spawner/models/basket/model.sdf:
+  //   - base 350 x 350 x 9 mm at model origin
+  //   - 4 walls 9 x 350 x 50 mm (or 350 x 9 x 50 mm) at +/- 0.17050 m
+  //     in X or Y, centred at z = 0.025 in model frame (wall span
+  //     z = [0, 0.050] in model frame)
+  // The model is spawned at goal.xyz, so the basket walls in WORLD
+  // span z = [goal.z, goal.z + 0.050]. We model the four walls as
+  // collision boxes; we do NOT model the base because the place
+  // descent has to land *on* the base, and the base is already
+  // covered by ground_plane padding.
+  const std::string frame = arm_group_->getPlanningFrame();
+  const double inset = 0.17050;     // wall centre offset from basket centre
+  const double wall_t = 0.009;      // wall thickness
+  const double wall_h = 0.050;      // wall height
+  const double wall_l = 0.350;      // wall length
+  const double wall_z = goal.z + 0.025;  // wall centre z
+
+  // EVIDENCE for using a different API: the prior run's log contained
+  //   "Tried to remove world object 'basket_wall_xpos', but it does
+  //    not exist in this scene"
+  // at task end - meaning the previous applyCollisionObjects(vector)
+  // call silently failed to add any walls. With no walls in the
+  // scene the joint-space planner can swing through where the basket
+  // physically sits, and on the third place attempt the user observed
+  // the basket physically shifted. The fix is to add each wall with
+  // its own applyCollisionObject call, then yield briefly to give
+  // the planning scene monitor time to propagate the change before
+  // the next motion-planning request.
+  auto add_wall =
+    [&](const std::string & id, double cx, double cy,
+        double sx, double sy)
+    {
+      moveit_msgs::msg::CollisionObject w;
+      w.header.frame_id = frame;
+      w.id = id;
+      shape_msgs::msg::SolidPrimitive box;
+      box.type = shape_msgs::msg::SolidPrimitive::BOX;
+      box.dimensions.resize(3);
+      box.dimensions[0] = sx;
+      box.dimensions[1] = sy;
+      box.dimensions[2] = wall_h;
+      geometry_msgs::msg::Pose p;
+      p.position.x = cx;
+      p.position.y = cy;
+      p.position.z = wall_z;
+      p.orientation.w = 1.0;
+      w.primitives.push_back(box);
+      w.primitive_poses.push_back(p);
+      w.operation = moveit_msgs::msg::CollisionObject::ADD;
+      planning_scene_interface_.applyCollisionObject(w);
+    };
+
+  add_wall("basket_wall_xpos", goal.x + inset, goal.y, wall_t, wall_l);
+  add_wall("basket_wall_xneg", goal.x - inset, goal.y, wall_t, wall_l);
+  add_wall("basket_wall_ypos", goal.x, goal.y + inset, wall_l, wall_t);
+  add_wall("basket_wall_yneg", goal.x, goal.y - inset, wall_l, wall_t);
+
+  // Yield + verify. Earlier evidence: the prior code used
+  // applyCollisionObjects(vector) and 100 ms wasn't enough - the
+  // walls weren't actually in the scene by the time the next plan()
+  // request ran (warning at task end:
+  //   "Tried to remove world object 'basket_wall_xpos', but it does
+  //    not exist in this scene")
+  // So we wait longer and then poll getKnownObjectNames() until the
+  // walls show up (or 1 s timeout).
+  using namespace std::chrono;
+  std::this_thread::sleep_for(milliseconds(200));
+  const auto deadline = steady_clock::now() + milliseconds(1000);
+  while (steady_clock::now() < deadline) {
+    const auto known = planning_scene_interface_.getKnownObjectNames();
+    int found = 0;
+    for (const auto & n : known) {
+      if (n == "basket_wall_xpos" || n == "basket_wall_xneg" ||
+          n == "basket_wall_ypos" || n == "basket_wall_yneg") {
+        ++found;
+      }
+    }
+    if (found == 4) {
+      RCLCPP_INFO(node_->get_logger(),
+        "addBasketCollision: all 4 basket walls present in planning scene");
+      return;
+    }
+    std::this_thread::sleep_for(milliseconds(50));
+  }
+  RCLCPP_WARN(node_->get_logger(),
+    "addBasketCollision: basket walls did not appear within 1 s; "
+    "subsequent plans may not avoid the basket");
+}
+
+
+void cw2::removeBasketCollision()
+{
+  planning_scene_interface_.removeCollisionObjects({
+    "basket_wall_xpos", "basket_wall_xneg",
+    "basket_wall_ypos", "basket_wall_yneg"
+  });
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Callbacks
 ///////////////////////////////////////////////////////////////////////////////
 
 // TODO - implement Task 1 later 
+// void cw2::t1_callback(
+//   const std::shared_ptr<cw2_world_spawner::srv::Task1Service::Request> request,
+//   std::shared_ptr<cw2_world_spawner::srv::Task1Service::Response> response)
+// {
+//   // (void)request;
+//   // (void)response;
+  
+//   auto mission = perception_pipeline();
+
+//   // Print out Mission Plan for debugging
+//   RCLCPP_INFO(node_->get_logger(),
+//     "Mission: type=%s pick(%.3f, %.3f, %.3f) place(%.3f, %.3f, %.3f) maxObsH=%.3f",
+//     mission.objectType.c_str(),
+//     mission.objectPoint.point.x, mission.objectPoint.point.y, mission.objectPoint.point.z,
+//     mission.goalPoint.point.x,   mission.goalPoint.point.y,   mission.goalPoint.point.z,
+//     mission.maxObstacleHeight);
+
+//   // Print out Ground Truth Info for debugging
+//   const auto & object_point = request->object_point;
+//   const auto & goal_point = request->goal_point;
+//   const std::string & shape_type = request->shape_type;
+
+//   RCLCPP_INFO(
+//     node_->get_logger(),
+//     "Ground Truth: Object ='%s', x=%.3f, y=%.3f, z=%.3f",
+//     object_point.header.frame_id.c_str(),
+//     object_point.point.x,
+//     object_point.point.y,
+//     object_point.point.z);
+
+//   RCLCPP_INFO(
+//     node_->get_logger(),
+//     "Ground Truth Goal ='%s', x=%.3f, y=%.3f, z=%.3f",
+//     goal_point.header.frame_id.c_str(),
+//     goal_point.point.x,
+//     goal_point.point.y,
+//     goal_point.point.z);
+
+//   RCLCPP_INFO(
+//     node_->get_logger(),
+//     "shape_type: '%s'",
+//     shape_type.c_str());
+  
+//   (void)response;
+
+//   std::string frame_id;
+//   std::size_t point_count = 0;
+//   std::uint64_t sequence = 0;
+//   {
+//     std::lock_guard<std::mutex> lock(cloud_mutex_);
+//     frame_id = g_input_pc_frame_id_;
+//     point_count = g_cloud_ptr ? g_cloud_ptr->size() : 0;
+//     sequence = g_cloud_sequence_;
+//   }
+
+//   RCLCPP_WARN(
+//     node_->get_logger(),
+//     "Task 1 is not implemented in cw2_team_13. Latest cloud: seq=%llu frame='%s' points=%zu",
+//     static_cast<unsigned long long>(sequence),
+//     frame_id.c_str(),
+//     point_count);
+// }
+
 void cw2::t1_callback(
-  const std::shared_ptr<cw2_world_spawner::srv::Task1Service::Request> request,
+  const std::shared_ptr<cw2_world_spawner::srv::Task1Service::Request>  request,
   std::shared_ptr<cw2_world_spawner::srv::Task1Service::Response> response)
 {
-  // (void)request;
-  // (void)response;
-  
-  auto mission = perception_pipeline();
-
-  // Print out Mission Plan for debugging
-  RCLCPP_INFO(node_->get_logger(),
-    "Mission: type=%s pick(%.3f, %.3f, %.3f) place(%.3f, %.3f, %.3f) maxObsH=%.3f",
-    mission.objectType.c_str(),
-    mission.objectPoint.point.x, mission.objectPoint.point.y, mission.objectPoint.point.z,
-    mission.goalPoint.point.x,   mission.goalPoint.point.y,   mission.goalPoint.point.z,
-    mission.maxObstacleHeight);
-
-  // Print out Ground Truth Info for debugging
-  const auto & object_point = request->object_point;
-  const auto & goal_point = request->goal_point;
-  const std::string & shape_type = request->shape_type;
-
-  RCLCPP_INFO(
-    node_->get_logger(),
-    "Ground Truth: Object ='%s', x=%.3f, y=%.3f, z=%.3f",
-    object_point.header.frame_id.c_str(),
-    object_point.point.x,
-    object_point.point.y,
-    object_point.point.z);
-
-  RCLCPP_INFO(
-    node_->get_logger(),
-    "Ground Truth Goal ='%s', x=%.3f, y=%.3f, z=%.3f",
-    goal_point.header.frame_id.c_str(),
-    goal_point.point.x,
-    goal_point.point.y,
-    goal_point.point.z);
-
-  RCLCPP_INFO(
-    node_->get_logger(),
-    "shape_type: '%s'",
-    shape_type.c_str());
-  
   (void)response;
 
-  std::string frame_id;
-  std::size_t point_count = 0;
-  std::uint64_t sequence = 0;
-  {
-    std::lock_guard<std::mutex> lock(cloud_mutex_);
-    frame_id = g_input_pc_frame_id_;
-    point_count = g_cloud_ptr ? g_cloud_ptr->size() : 0;
-    sequence = g_cloud_sequence_;
-  }
+  RCLCPP_INFO(node_->get_logger(),
+    "Task 1 start: shape='%s' obj=(%.3f,%.3f,%.3f) goal=(%.3f,%.3f,%.3f)",
+    request->shape_type.c_str(),
+    request->object_point.point.x,
+    request->object_point.point.y,
+    request->object_point.point.z,
+    request->goal_point.point.x,
+    request->goal_point.point.y,
+    request->goal_point.point.z);
 
-  RCLCPP_WARN(
-    node_->get_logger(),
-    "Task 1 is not implemented in cw2_team_13. Latest cloud: seq=%llu frame='%s' points=%zu",
-    static_cast<unsigned long long>(sequence),
-    frame_id.c_str(),
-    point_count);
+  addGroundCollision();
+
+  bool ok = t1_pickAndPlace(
+    request->object_point.point,
+    request->goal_point.point,
+    request->shape_type);
+
+  if (ok) {
+    RCLCPP_INFO(node_->get_logger(), "Task 1 complete.");
+  } else {
+    RCLCPP_ERROR(node_->get_logger(), "Task 1 failed.");
+  }
 }
+
 
 // TODO - implement Task 2 later
 void cw2::t2_callback(
@@ -1023,7 +1932,23 @@ void cw2::t3_callback(
 {
   auto mission = perception_pipeline();
   // Waiting for a Task 1 implementation to then do pick and place 
+  auto pick = mission.objectPoint;
+  auto place = mission.goalPoint;
+  auto obj_type = mission.objectType;
 
+  // Print out the Mission Plan for debugging
+  RCLCPP_INFO(node_->get_logger(),
+    "Mission: type=%s pick(%.3f, %.3f, %.3f) place(%.3f, %.3f, %.3f) maxObsH=%.3f",
+    mission.objectType.c_str(),
+    mission.objectPoint.point.x, mission.objectPoint.point.y, mission.objectPoint.point.z,
+    mission.goalPoint.point.x,   mission.goalPoint.point.y,   mission.goalPoint.point.z,
+    mission.maxObstacleHeight);
+
+  // Call t1 pick and place
+  bool ok = t1_pickAndPlace(pick.point, place.point, obj_type);
+  if (!ok) {
+    RCLCPP_WARN(node_->get_logger(), "t1_pickAndPlace failed for shape '%s'", obj_type.c_str());
+  }
 
   (void)request;
   response->total_num_shapes = 0;
