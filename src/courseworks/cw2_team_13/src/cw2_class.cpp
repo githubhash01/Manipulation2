@@ -995,7 +995,7 @@ constexpr double EE_TO_FINGER         = 0.1122;  // panda_link8 -> fingertip
 // shape clipping through the basket floor on release (the user's
 // 'placed it so deep into the box it broke the physics' symptom).
 constexpr double APPROACH_DIST        = 0.10;    // cartesian descent
-constexpr double SAFE_ALTITUDE        = 0.70;    // transit height for panda_link8
+// constexpr double SAFE_ALTITUDE        = 0.40;    // transit height for panda_link8
 constexpr double BASKET_FLOOR_OFFSET  = 0.015;   // clearance above goal.z
 // EVIDENCE for raising from 0.005 to 0.015: the held shape can tilt
 // a few degrees during grasp/transit due to slight off-centre
@@ -1224,7 +1224,8 @@ bool cw2::detectShapePose(
 bool cw2::t1_pickAndPlace(
   const geometry_msgs::msg::Point & obj,
   const geometry_msgs::msg::Point & goal,
-  const std::string & shape_type)
+  const std::string & shape_type, 
+  double safe_height = 0.40)
 {
 
   detachShape();
@@ -1239,7 +1240,7 @@ bool cw2::t1_pickAndPlace(
 
   // Overhead observation pose directly above obj.
   if (!moveArmToPose(
-      makeTopDownPose(obj.x, obj.y, SAFE_ALTITUDE, 0.0),
+      makeTopDownPose(obj.x, obj.y, safe_height, 0.0),
       "safe-above-observation")) {
     removeShapeCollision();
     return false;
@@ -1292,7 +1293,7 @@ bool cw2::t1_pickAndPlace(
   const double place_ee_z  = goal.z + BASKET_FLOOR_OFFSET
                               + SHAPE_THICKNESS / 2.0 + EE_TO_FINGER;
   const double pre_place_z = place_ee_z + APPROACH_DIST;
-  const double safe_z      = std::max({SAFE_ALTITUDE, pre_grasp_z + 0.05,
+  const double safe_z      = std::max({safe_height, pre_grasp_z + 0.05,
                                        pre_place_z + 0.05});
 
   const double close_w = graspCloseWidth(size_s);
@@ -1944,8 +1945,11 @@ void cw2::t3_callback(
     mission.goalPoint.point.x,   mission.goalPoint.point.y,   mission.goalPoint.point.z,
     mission.maxObstacleHeight);
 
+  // increase the place point z slightly 
+  place.point.z += 0.1;
+
   // Call t1 pick and place
-  bool ok = t1_pickAndPlace(pick.point, place.point, obj_type);
+  bool ok = t1_pickAndPlace(pick.point, place.point, obj_type, 0.70);
   if (!ok) {
     RCLCPP_WARN(node_->get_logger(), "t1_pickAndPlace failed for shape '%s'", obj_type.c_str());
   }
